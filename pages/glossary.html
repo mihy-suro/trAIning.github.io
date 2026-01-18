@@ -10,700 +10,756 @@
         Tento slovníček shrnuje základní pojmy, se kterými se setká každý, kdo chce jazykové modely používat vědomě a smysluplně. Nabízí praktický rámec pro pochopení toho, proč model někdy odpovídá nepřesně a jakým způsobem formulace zadání ovlivňuje výsledek.
       </p>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin: 2rem 0; font-size: 0.9em;">
-        <div>
-          <p><a href="#Prompt" class="link--large">⇣ Prompt</a></p>
-          <p><a href="#PromptEngineering" class="link--large">⇣ Prompt engineering</a></p>
-          <p><a href="#FewShot" class="link--large">⇣ Few-shot / Zero-shot</a></p>
-          <p><a href="#Messages" class="link--large">⇣ System / User / Assistant</a></p>
-        </div>
-        <div>
-          <p><a href="#Temperature" class="link--large">⇣ Temperature</a></p>
-          <p><a href="#Kontext" class="link--large">⇣ Kontextové okno</a></p>
-          <p><a href="#Tokeny" class="link--large">⇣ Tokeny</a></p>
-          <p><a href="#Embeddingy" class="link--large">⇣ Embeddingy</a></p>
-        </div>
-        <div>
-          <p><a href="#Halucinace" class="link--large">⇣ Halucinace</a></p>
-          <p><a href="#Bias" class="link--large">⇣ Předpojatost</a></p>
-          <p><a href="#Reasoning" class="link--large">⇣ Reasoning modely</a></p>
-          <p><a href="#FineTuning" class="link--large">⇣ Fine-tuning</a></p>
-          <p><a href="#RAG" class="link--large">⇣ RAG</a></p>
-        </div>
-      </div>
-
-      <hr>
-
-      <!-- OVLÁDÁNÍ CHOVÁNÍ MODELU -->
-      
-      <!-- Prompt -->
-      <section id="Prompt"> </section>
-      <h1>Prompt</h1>
-      
-      <p>
-        Prompt je vstupní sdělení, kterým člověk formuluje zadání pro generativní umělou inteligenci. Zjednodušeně řečeno jde o to, co uživatel napíše (nebo řekne) do vstupního okénka nástroje jako je ChatGPT. Prompt poskytuje modelu kontext, téma a očekávání, na jejichž základě je vytvořena odpověď. Prompt může mít podobu otázky, instrukce, ukázky, role nebo jejich kombinace a nemusí být omezen pouze na text – může zahrnovat také obraz, zvuk, video nebo jiné vstupy.
-      </p>
-
-      <p>
-        Z pohledu modelu nejde o příkaz v lidském smyslu, ale o popis situace, ze kterého model odvozuje nejpravděpodobnější pokračování. U multimodálních modelů je tento popis vytvářen souhrnně z různých typů vstupů, které se navzájem doplňují a společně vymezují významový rámec zadání. Prompt tak neurčuje výsledek přímo, ale vymezuje prostor, v němž se odpověď pohybuje.
-      </p>
-
-      <p>
-        Lze jej chápat jako zadání úlohy, otevření dialogu nebo metaforicky jako scénář, který určuje, o čem se bude „mluvit" a v jakém tónu, bez ohledu na to, zda je vyjádřen slovy, obrazem nebo zvukem. Kvalita a přesnost promptu mají zásadní vliv na srozumitelnost, relevanci i užitečnost výsledné odpovědi.
-      </p>
-
-      <hr>
-
-      <!-- Prompt Engineering -->
-      <section id="PromptEngineering"> </section>
-      <h1>Prompt engineering</h1>
-      
-      <p>
-        Prompt engineering je praxe navrhování, formulace a úpravy vstupních sdělení (promptů) pro generativní umělou inteligenci tak, aby výstupy modelu byly co nejrelevantnější, přesné a užitečné. Jedná se o vědomé strukturování zadání, které modelu poskytuje kontext, očekávání a kritéria pro odpověď; kvalitní prompt výrazně ovlivňuje srozumitelnost, přesnost a kvalitu generovaného výstupu ve všech podporovaných režimech (text, obraz, zvuk či jiné multimodální vstupy). Prompt engineering lze chápat jako komunikaci s AI na úrovni, která maximalizuje kvalitu a relevanci výsledků, které model generuje.
-      </p>
-
-      <p>
-        Pro praktické techniky, vzory a detailní vysvětlení viz <a href="#prompting">kapitolu o promptování</a>.
-      </p>
-
-      <hr>
-
-      <!-- Few-shot / Zero-shot -->
-      <section id="FewShot"> </section>
-      <h1>Few-shot / Zero-shot</h1>
-      
-      <p>
-        Few-shot a zero-shot jsou techniky používané v práci s generativní umělou inteligencí, které popisují, kolik ukázkových příkladů úlohy je modelu poskytnuto v promptu před jeho vykonáním.
-      </p>
-
-      <p>
-        <b>Zero-shot</b> označuje situaci, kdy model dostane úkol pouze s instrukcemi a kontextem, ale bez jakýchkoli ukázkových příkladů. Model v takovém případě spoléhá na svoji předchozí „znalost" získanou během tréninku, aby úkol vyřešil přímo na základě promptu.
-      </p>
-
-      <p>
-        <b>Few-shot</b> znamená, že prompt obsahuje malý počet konkrétních ukázkových příkladů, které demonstrují, jak úlohu řešit. Tyto příklady modelu usnadňují pochopení formátu, struktury nebo stylu očekávaného výstupu a obvykle zlepšují výsledky ve specifickém kontextu.
-      </p>
-
-      <p>
-        Obě techniky využívají schopnost modelů generalizovat z omezeného kontextu bez nutnosti zásadní úpravy základního modelu. Zero-shot je vhodný pro obecné úkoly bez dostupných příkladů, zatímco few-shot je často efektivnější, když několik příkladů dokáže model lépe „nastavit" na konkrétní úlohu.
-      </p>
-
-      <p>
-        Ve vývojových knihovnách jako <a href="https://github.com/google/langextract" target="_blank" rel="noopener noreferrer">LangExtract</a> se principy few-shot příkladů používají k definování extrakčních úloh a řízení strukturovaného výstupu modelu z nestrukturovaného textu — bez potřeby trénování vlastního modelu. Více viz <a href="#prompting">kapitola o promptování</a>.
-      </p>
-
-      <hr>
-
-      <!-- System / User / Assistant -->
-      <section id="Messages"> </section>
-      <h1>System / User / Assistant</h1>
-      
-      <p>
-        Při práci s ChatGPT a podobnými nástroji se rozhovor interně dělí na tři typy zpráv, kterým se říká role: <b>system</b>, <b>user</b> a <b>assistant</b>. Tyto role pomáhají modelu rozlišit, co je nastavení chování, co je dotaz od člověka a co je odpověď modelu.
-      </p>
-
-      <p>
-        <b>System</b> určuje, jak se má asistent chovat. Patří sem například tón odpovědí, styl psaní nebo obecná pravidla. V běžném používání ChatGPT se tato role projevuje hlavně v nastavení nebo při vytváření vlastního asistenta.
-      </p>
-
-      <p>
-        <b>User</b> je to, co uživatel píše do chatu — otázky, požadavky a úkoly.
-      </p>
-
-      <p>
-        <b>Assistant</b> je odpověď, kterou model vygeneruje.
-      </p>
-
-      <p>
-        Běžný uživatel se o roli assistant nestará a role user odpovídá jednoduše tomu, co píše do okna chatu. Důležitá je především role system, protože umožňuje předem ovlivnit chování asistenta, aniž by bylo nutné to opakovat v každém dotazu.
-      </p>
-
-      <p>
-        V běžném webovém rozhraní ChatGPT jsou tyto role většinou skryté a uživatel s nimi pracuje nepřímo. Při programovém použití (např. v aplikacích nebo vývojových nástrojích) lze role zadávat explicitně, ale pro základní práci s ChatGPT to není nutné.
-      </p>
-
-      <hr>
-
-      <!-- Temperature -->
-      <section id="Temperature"> </section>
-      <h1>Temperature</h1>
-      
-      <p>
-        Temperature (teplota) je parametr jazykového modelu, který ovlivňuje míru náhodnosti a kreativity odpovědí. Určuje, jak „odvážně" model vybírá další slova při generování textu.
-      </p>
-
-      <p>
-        Při <b>nízké teplotě</b> model volí převážně nejpravděpodobnější pokračování, takže odpovědi jsou stabilní, přesné a předvídatelné. To je vhodné pro faktické dotazy, shrnutí, analýzy nebo technické texty.
-      </p>
-      
-      <p>
-        Při <b>vyšší teplotě</b> model připouští méně pravděpodobné varianty, což vede k kreativnějším, rozmanitějším, ale i méně konzistentním odpovědím. To se hodí pro brainstorming, psaní textů nebo generování nápadů.
-      </p>
-
-      <p>
-        V běžném webovém rozhraní ChatGPT uživatel teplotu obvykle nenastavuje přímo. Její vliv lze nepřímo ovlivnit formulací promptu, například pokyny typu „buď kreativní" nebo „odpovídej přesně a stručně".
-      </p>
-      
-      <p>
-        Při použití API nebo vývojových nástrojů lze teplotu nastavovat explicitně jako číselnou hodnotu nebo pomocí posuvníku, typicky podle požadovaného typu výstupu (nízká teplota pro faktické shrnutí, vyšší teplota pro nápady).
-      </p>
-
-      <p>
-        Příkladem nástroje, kde lze teplotu přímo nastavovat a sledovat její vliv na chování modelu, je <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer">Google AI Studio</a>, které umožňuje experimentovat s různými hodnotami a porovnávat výsledky.
-      </p>
-
-      <p>
-        Temperature tedy nemění znalosti modelu, ale způsob, jakým z nich vybírá a kombinuje odpověď.
-      </p>
-
-      <hr>         
-      <!-- Kontextové okno -->
-      <section id="Kontext"> </section>
-      <h1>Kontextové okno</h1>
-      <p>
-      Jedním ze základních, ale často přehlížených omezení velkých jazykových modelů je tzv. 
-      <b>kontextové okno</b>. To určuje, kolik informací je model schopen vzít v úvahu v jednom okamžiku — 
-      tedy kolik textu „vidí", když generuje odpověď. Porozumění tomuto pojmu je zásadní pro efektivní práci s 
-      generativní AI a odpovídá na otázku, proč modely někdy „zapomínají" dříve uvedené informace.
-      </p>
-      <p>
-      Kontextové okno je maximální množství tokenů, které model dokáže zpracovat najednou. Zahrnuje přitom:
-      </p>
-      <ul>
-        <li>zadání (prompt),</li>
-        <li>historie konverzace,</li>
-        <li>generovaný text.</li>
-      </ul>
-      <p>
-        Jakmile je tato kapacita vyčerpána, model starší části kontextu přestává „vidět". Neznamená to, že by je zapomněl 
-        v lidském smyslu — jednoduše už nejsou součástí aktuálního výpočtu.
-      </p>
-
-      <!-- Obrázek Kontextove okno -->
-
-      <figure class="image-card">
-        <div class="image-card__frame">
-        <div class="hotspot-image">
-          <img src="img/context.png" alt="Schéma kontextového okna" loading="lazy" decoding="async"/>
-        </div>
-        </div>
-        <figcaption class="image-card__caption">
-          <h3 class="image-card__title">Rozsah kontextového okna</h3>
-          <p class="image-card__meta">
-            Počet tokenů, které model dokáže zpracovat najednou, je omezený. Různé typy a verze modelů mají různě velká kontextová okna.
-            Kontextové okno zahrnuje nejen vstupní text a vygenerovaný obsah, ale i využití růzých doplňkových nástrojů a funkcí.
-            <br>
-            Obrázek byl převzat z dokumentace 
-            <a href="https://platform.claude.com/docs/en/build-with-claude/context-windows#context-awareness-in-claude-sonnet-4-5-and-haiku-4-5" class="link--subtle">
-            Claude Docs
-            </a>. 
-          </p>
-        </figcaption>
-      </figure>
-
-      <!-- O velikosti kontextu -->
-
-      <p>
-        Kapacitu kontextového okna je třeba mít na paměti při řešení komplexních úloh, které vyžadují
-        zpracování velkého množství informací - dlouhých dokumentů, rozsáhlých konverzací apod. Doporučujeme
-        sledovat aktuální dokumentaci k používanému modelu.
-      </p>
-      <p>
-        Že jste dorazili na hranici kontextového okna poznáte podle toho, že <b>model začne
-        ignorovat</b> dříve uvedené informace nebo pokyny, začne opakovat fráze, nebo odpovědi přestanou navazovat.
-        V takovém případě je potřeba prompt buď zkrátit, nebo úlohu rozdělit na menší části.
-      </p>
-      <p>
-        Abyste kontextové okno nezahltili zbytečnými informacemi, je vhodné pro každý úkol, úlohu nebo dotaz (či jejich sérii)
-        použít <b>nové kontextové okno</b>. Toto kontextové okno může mít různou podobu v závislosti na konkrétním modelu.
-        All-purpose modely jako ChatGPT, Claude nebo Gemini vedou historii dotazů jako seznam konverzací,
-        jejichž název model automaticky generuje na základě prvního dotazu. Specializované modely jako například
-        NotebookLM, které nejsou založeny pouze na klasickém dialogu, pak mohou kontextové okno reprezentovat jako
-        jednotlivé dokumenty, poznámky nebo jiné textové bloky. 
-      </p>
-
-      <!-- Int. Obr: Kontextová okna -->
-      <figure class="image-card">
-        <div class="image-card__frame">
-        <div class="hotspot-image">
-          <img src="img/kontextova_okna.png" alt="Příklad kontextového okna" loading="lazy" decoding="async"/>
-         
-         
-          <!-- Hotspot -->
-          <div class="hotspot" style="left: 10%; top: 10%;">
-            <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
-              <strong>ChatGPT</strong>
-            </div>
-          </div>
-          
-          <!-- Hotspot -->
-          <div class="hotspot" style="left: 40%; top: 5%;">
-            <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
-              <strong>Claude</strong>
-            </div>
-          </div>
-          
-          <!-- Hotspot -->
-          <div class="hotspot" style="left: 50%; top: 73%;">
-            <div class="hotspot__tooltip" role="tooltip" hidden>
-              <strong>NotebookLM</strong><br>
-            </div>
-          </div>
-        </div>
-      </div>
-
-        <figcaption class="image-card__caption">
-          <h3 class="image-card__title">Jak může vypadat seznam kontextových oken</h3>
-          <p class="image-card__meta">
-            Modely, k nimž se přistupuje prostřednictvím webového prohlížeče, ukládají historii
-            konverzací jako seznam jednotlivých chatů nebo dokumentů. Při zahájení nové konverzace vzniká
-            nové kontextové okno, které neobsahuje předchozí dotazy a odpovědi, bere ovšem v potaz
-            uživatelská nastavení a preference, které lze u některých modelů upravit.
-          </p>
-        </figcaption>
-      </figure>
-
-
-      <hr>
-      <!-- Tokeny -->
-      <section id="Tokeny"> </section>
-      <h1>Tokeny</h1>
-      
-      <p>
-        Token je základní jednotka textu, se kterou velké jazykové modely (LLM) pracují. Tokeny nevznikají samy o sobě, ale jsou výsledkem procesu zvaného tokenizace, při němž je vstupní text rozdělen na menší části podle pravidel konkrétního tokenizéru. Token může odpovídat celému slovu, části slova, interpunkčnímu znaménku, mezeře nebo jejich kombinaci.
-      </p>
-
-      <p>
-        Při popisu kapacity kontextového okna jazykových modelů (tedy kolik textu je model schopen najednou zpracovat) se proto běžně používá počet tokenů, nikoli počet znaků nebo slov.
-      </p>
-
-      <h3>Tokenizéry a modely</h3>
-
-      <p>
-        Každý jazykový model je trénován s konkrétním tokenizérem a tento tokenizér je pevnou součástí modelu. Různé modely mohou používat odlišné způsoby tokenizace, a proto stejný text může být různými modely rozdělen na rozdílný počet tokenů. Počty tokenů tedy nejsou mezi modely přímo porovnatelné.
-      </p>
-
-      <p>
-        Tokenizéry jsou obvykle navrženy tak, aby efektivně reprezentovaly běžné jazykové vzory: častá slova nebo jejich části bývají reprezentovány jedním tokenem, zatímco méně časté nebo neobvyklé výrazy se skládají z více tokenů.
-      </p>
-
-      <h3>Jak modely s tokeny pracují</h3>
-
-      <p>
-        Na rozdíl od člověka nebo jednoduchých našeptávačů na klávesnici model nepracuje s textem ve formě slov a vět, ale s posloupností tokenů převedených do číselné podoby. Každý token je reprezentován vektorovou reprezentací (tzv. embeddingem) a model se učí statistické vztahy mezi těmito vektory v rámci celé sekvence.
-      </p>
-
-      <p>
-        Ačkoli je vstupní text rozdělen na tokeny, model při trénování i při generování odpovědí zohledňuje širší kontext celé sekvence, nikoli pouze lokální návaznost jednotlivých tokenů.
-      </p>
-
-      <h3>Vyzkoušejte si tokenizaci</h3>
-
-      <p>
-        Následující příklad ukazuje, jak je krátký český text rozdělen na tokeny pomocí tokenizéru modelu LLaMA 3:
-      </p>
-
-      <!-- Tokenizer Demo -->
-      <div id="tokenizer-demo" class="tokenizer-demo">
-        <textarea class="tokenizer-demo__input" placeholder="Napište nebo vložte text...">Ahoj, jak se máš? Dnes je krásný den!</textarea>
-        
-        <div class="tokenizer-demo__results">
-          <div class="tokenizer-demo__stats">
-            <div class="tokenizer-demo__stat">
-              <span class="tokenizer-demo__stat-value">0</span>
-              <span class="tokenizer-demo__stat-label">tokenů</span>
-            </div>
-            <div class="tokenizer-demo__stat">
-              <span class="tokenizer-demo__stat-value">0</span>
-              <span class="tokenizer-demo__stat-label">znaků</span>
-            </div>
-            <div class="tokenizer-demo__stat">
-              <span class="tokenizer-demo__stat-value">0</span>
-              <span class="tokenizer-demo__stat-label">tokenu na znak</span>
-            </div>
-          </div>
-          <div class="tokenizer-demo__visual"></div>
-          <div class="tokenizer-demo__tokens"></div>
-          <p class="tokenizer-demo__note">Tokeny jsou zde zobrazeny jako barevné bloky. Jiný model by mohl tentýž text rozdělit odlišně a výsledný počet tokenů by se mohl lišit.</p>
-        </div>
-      </div>
-
-      <h3>Kolik tokenů má text?</h3>
-
-      <p>
-        Průměrné anglické slovo odpovídá přibližně 1,3 tokenu, přičemž konkrétní hodnota závisí na použitém tokenizéru a jazyce. Při tomto hrubém odhadu lze uvést, že trilogie Pán prstenů obsahuje zhruba 800 000 tokenů, kompletní dílo Williama Shakespeara asi 1,2 milionu tokenů a série Píseň ledu a ohně přes 2 miliony tokenů. Tyto hodnoty je však nutné chápat pouze orientačně.
-      </p>
-      
-      <hr>
-
-      <!-- Embeddingy -->
-      <section id="Embeddingy"> </section>
-      <h1>Embeddingy</h1>
-      
-      <p>
-        Embeddingy lze chápat jako souřadnice tokenů ve vysokodimenzionálním prostoru, kde je každý token reprezentován vektorem. Poloha vektoru vyjadřuje význam, který mu model v daném kontextu přisuzuje. Tokeny s podobným významem leží blízko sebe, zatímco významově nesouvisející pojmy jsou v prostoru vzdálenější. Model tak s jazykem pracuje jako s geometrickou strukturou vztahů mezi body, nikoli jako s pouhou posloupností slov. Vizualizaci embeddingů v interaktivním prostředí lze vyzkoušet v nástroji 
-        <a href="https://projector.tensorflow.org/" target="_blank" rel="noopener noreferrer">TensorFlow Embedding Projector</a>.
-      </p>
-
-      <p>
-        Význam se v této reprezentaci projevuje geometricky pomocí vzdáleností a směrů mezi vektory. Nejde o explicitní pojmy nebo pravidla, ale o struktury, které se v prostoru vytvářejí na základě učení z velkého množství jazykových dat. Klasickým příkladem je vztah
-      </p>
-      
-      <center><b>král − muž + žena ≈ královna</b>,</center>
-      
-      <p>
-        který ukazuje, že určitý významový rozdíl se v prostoru chová jako konzistentní směr. Podobné směry se objevují i u dalších dvojic slov (např. herec ↔ herečka, princ ↔ princezna) a odpovídají různým aspektům významu, jako je pohlaví, role, míra abstrakce, časové zasazení či emocionální zabarvení. Jednotlivé rozměry samy o sobě nemají jednoduchý výklad, smysl vzniká až jejich kombinací.
-      </p>
-
-      <p>
-        U moderních jazykových modelů navíc není význam tokenu pevně daný. Stejné slovo může mít v různých kontextech odlišnou reprezentaci, například „klíč" ve větě „ztratil jsem klíč od dveří" a ve spojení „houslový klíč". Význam je vždy vyhodnocován vzhledem k okolnímu kontextu, což umožňuje práci s víceznačností a jemnými významovými nuancemi.
-      </p>
-
-      <p>
-        Embeddingy tvoří základ porozumění významu textu a navazujících schopností jazykových modelů, jako je porovnávání podobnosti, práce s kontextem, vyhledávání relevantních informací nebo techniky typu RAG. Bez nich by model pracoval pouze s posloupností symbolů, nikoli s významem.
-      </p>
-
-      <!-- Historické okénko: word2vec -->
-      <div class="collapsible" data-collapsible>
-        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-embeddings-history" id="collapsible-button-embeddings-history">
-        <b>VÍCE:</b> Historické okénko: word2vec
+      <!-- ACCORDION NAVIGATION -->
+      <nav class="glossary-nav" aria-label="Slovníček pojmů">
+        <button class="glossary-nav__btn" data-target="Prompt" aria-expanded="false" aria-controls="Prompt">
+          <span class="glossary-nav__icon">›</span> Prompt
         </button>
-
-        <div class="collapsible__panel" id="collapsible-panel-embeddings-history" role="region" aria-labelledby="collapsible-button-embeddings-history" hidden>
-          <p>
-            Myšlenka reprezentovat slova jako body ve vícerozměrném prostoru se výrazně prosadila kolem roku 2013 
-            díky modelu <b>word2vec</b>, jehož hlavním autorem byl Tomáš Mikolov (tehdy Google Research). 
-            Model ukázal, že pouhým sledováním kontextu slov v rozsáhlých textech lze zachytit významové vztahy 
-            bez ručně definovaných pravidel.
-          </p>
-
-          <p>
-            Modely typu word2vec pracovaly se statickými embeddingy, kde mělo každé slovo jednu pevnou reprezentaci. 
-            Moderní jazykové modely tento princip rozšiřují o kontextové embeddingy, u nichž se význam slova mění podle okolního textu, 
-            ale základní myšlenka zůstává stejná.
-          </p>
-        </div>
-      </div>
-
-      <hr>
-
-      <!-- Reasoning -->
-      <section id="Reasoning"> </section>
-      <h1>Reasoning modely</h1>
-      <p>
-        Některé velké jazykové modely jsou speciálně navrženy pro lepší zvládání logických úloh, 
-        matematických výpočtů a komplexního uvažování. Tyto modely, označované jako <b>reasoning modely</b>, 
-        často zahrnují mechanismy pro provádění mezikroků, kontroly konzistence a ověřování výsledků.
-        Tyto modely jsou navržené tak, aby si lépe poradily s úlohami, které vyžadují vícekrokové uvažování, 
-        práci s pravidly, strukturovanou analýzu nebo kombinaci několika podmínek najednou.
-      </p>
-
-      <p>
-        Rozdíl mezi běžným a reasoning LLM modelem je ve způsobu, jakým model generuje odpověď. 
-        Zatímco běžný LLM se často snaží rychle dospět k výsledku, reasoning model je trénován k tomu, 
-        aby si problém „rozložil", postupoval krok za krokem a jednotlivé části řešení na sebe navazovaly. 
-        To vede k pomalejším, ale obvykle konzistentnějším odpovědím, zejména u složitějších zadání.
-      </p>
-
-      <!-- Příklad aplikace reasoning modelu -->
-
-      <div class="collapsible" data-collapsible>
-        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-pojmy-1" id="collapsible-button-pojmy-1">
-        <b>VÍCE:</b> Konkrétní příklad použití reasoning modelu
+        <button class="glossary-nav__btn" data-target="PromptEngineering" aria-expanded="false" aria-controls="PromptEngineering">
+          <span class="glossary-nav__icon">›</span> Prompt engineering
         </button>
-
-        <div class="collapsible__panel" id="collapsible-panel-pojmy-1" role="region" aria-labelledby="collapsible-button-pojmy-1" hidden>
-          <p>
-            Představme si, že výzkumný tým zvažuje změnu metodiky sběru dat v průběhu běžícího projektu —
-             například přechod z osobních rozhovorů na online dotazníky. 
-             Pokud se na tuto otázku zeptáme běžného jazykového modelu, typická odpověď může znít: 
-             změna může přinést úsporu času a nákladů, ale zároveň riziko nižší návratnosti či zkreslení vzorku. 
-             Odpověď je rozumná, ale zůstává obecná a neřeší, <b>za jakých podmínek</b> by změna byla přijatelná.
-          </p>
-          <p>
-            Reasoning model k témuž zadání přistoupí strukturovaněji. Nejprve si identifikuje klíčové proměnné: 
-            fázi projektu, velikost a charakter vzorku, srovnatelnost starých a nových dat, požadavky na 
-            longitudinalitu a možné systematické zkreslení. Následně začne tyto proměnné kombinovat: pokud 
-            je projekt teprve v počáteční fázi, dopady na konzistenci dat jsou menší; pokud už část dat existuje, 
-            změna metodiky může ohrozit možnost přímého porovnání výsledků. Model tedy postupuje krok za krokem a 
-            kontroluje, zda navrhované řešení neporušuje některé z výchozích podmínek.
-          </p>
-          
-          <p>
-            Výstupem není jednoduché „ano" nebo „ne", ale strukturovaný závěr typu: <i>změna metodiky je 
-            přijatelná pouze za předpokladu X a Y; pokud tyto podmínky nelze splnit, je nutné buď zachovat 
-            původní postup, nebo analyzovat obě datové sady odděleně.</i> Pro výzkumníka je takový výstup cenný
-             ne proto, že by rozhodnutí delegoval na model, ale proto, že model explicitně ukáže logiku 
-             rozhodování, kterou lze dále odborně posoudit.
-          </p>
-
-        </div>
-      </div>
-
-      <p>
-        Jak poznáte, že je model v režimu <i>reasoning</i>? Samotná informace o tom, zda je toho schopen,
-        je uvedena v dokumentaci. Aktivace reasoning režimu pak závisí na konkrétním modelu, přičemž občas 
-        je tato funkce dostupná pouze v placených verzích. Název samotného reasoning režimu pak často zahrnuje 
-        pojem "thinking". 
-      </p>
-
-
-      <div class="collapsible" data-collapsible>
-        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-pojmy-2" id="collapsible-button-pojmy-2">
-        <b>VÍCE:</b> Jak nastavit režim (ChatGPT, Claude, Gemini)
+        <button class="glossary-nav__btn" data-target="FewShot" aria-expanded="false" aria-controls="FewShot">
+          <span class="glossary-nav__icon">›</span> Few-shot / Zero-shot
         </button>
-
-        <div class="collapsible__panel" id="collapsible-panel-pojmy-2" role="region" aria-labelledby="collapsible-button-pojmy-2" hidden>
-           <!-- Obrázek: Reasoning režimy -->
-
-      <figure class="image-card">
-        <div class="image-card__frame">
-          <img src="img/thinkinggpt.png" alt="Aktivace reasoning režimu, ChatGPT" loading="lazy" decoding="async"/>
-         
-        <figcaption class="image-card__caption">
-          <h3 class="image-card__title">Výběr režimu, ChatGPT</h3>
-          <p class="image-card__meta">
-            Výběr režimu se v modelu ChatGPT provádí v levém horním rohu kontextového okna (vzhled k 6. 1. 2026)
-          </p>
-        </figcaption>
-      </figure>
-
-      <figure class="image-card">
-        <div class="image-card__frame">
-          <img src="img/reasoningclaude.png" alt="Aktivace reasoning režimu, Claude" loading="lazy" decoding="async"/>
-         
-        <figcaption class="image-card__caption">
-          <h3 class="image-card__title">Výběr režimu, Claude</h3>
-          <p class="image-card__meta">
-            U modelu Claude lze rozšířené uvažování zapnout kliknutím na ikonku hodin 
-            přímo v okně pro zadávání promptu (vzhled k 6. 1. 2026)
-          </p>
-        </figcaption>
-      </figure>
-
-      <figure class="image-card">
-        <div class="image-card__frame">
-          <img src="img/thinkinggemini.png" alt="Aktivace reasoning režimu, Gemini" loading="lazy" decoding="async"/>
-         
-        <figcaption class="image-card__caption">
-          <h3 class="image-card__title">Výběr režimu, Gemini</h3>
-          <p class="image-card__meta">
-            U modelu Gemini lze režim zvolit přímo v okně pro zadávání promptu (vzhled k 6. 1. 2026) 
-          </p>
-        </figcaption>
-      </figure>
-        </div>
-      </div>
-          
-
-      <h3>Trénování reasoning modelu</h3>
-      <p>Reasoning modely vycházejí ze stejných architektur jako ostatní LLMs, 
-      ale liší se způsobem ladění a typem úloh, 
-      na kterých byly trénovány. Během učení jsou systematicky vystavovány úlohám, 
-      kde není možné uspět jedním „intuitivním" krokem, ale je potřeba:</p>
-      <ul>
-        <li>rozložit problém na menší části,</li>
-        <li>aplikovat zadaná pravidla nebo omezení,,</li>
-        <li>ověřit mezivýsledky,</li>
-        <li>a dospět k závěru na základě dané posloupnosti kroků.</li>
-      </ul>
-
-      <p>
-        Při trénování se často pracuje s příklady, kde je explicitně ukázán postup řešení, 
-        nikoli pouze finální odpověď. Model se tak neučí jen co odpovědět, ale jak k odpovědi dojít. 
-        V praxi to znamená, že je schopen lépe řešit úlohy typu „pokud–pak"
-         nebo kombinovat více podmínek najednou.
-      </p>
-
-      <h3>Uplatnění reasoning modelů</h3>
-
-      <p>
-        Tento typ modelů se uplatňuje při řešení úloh, které nevyžadují pouze (stylisticky) srozumitelný
-        výsledek, ale závisí na správnosti postupu. Hodí se pro řešení analytických úloh, interpretaci 
-        předpisů, metodik nebo pravidel, návrhu rozhodovacích stromů nebo zodpovídání otázek typu 
-        "co by se stalo, kdyby...".
-      </p>
-
-      <p>
-        Reasoning modely odpovědi poskytují pomaleji (občas i v řádu desítek sekund), a to ve prospěch 
-        kvality výstupu. Jsou ovšem oblasti, kde je jejich použití nevhodné nebo nadbytečné. Jedná 
-        se o úlohy, ve kterých jde o kreativní psaní, stylistickou úpravu textu, generování návrhů nebo 
-        shrnutí textu. V těchto případech je rychlejší a efektivnější použít obecný jazykový model.
-      </p>
-
-      <center> <b>I reasoning modely se mohou mýlit! Jejich chyby jsou jen oproti běžným 
-        modelům méně nahodilé.
-      </b></center> <br>
-
-      <hr>
-
-
-
-      <!-- Bias -->
-      <section id="Bias"> </section>
-      <h1>Zkreslení (bias) vyplývající z tréninkových dat</h1>
-
-      <p>
-        Jazykové modely se učí z velkých textových korpusů, které odrážejí svět takový, jaký je — včetně jeho nerovností, stereotypů a 
-        historických zkreslení. Pokud se určitý pohled nebo skupina v datech vyskytuje častěji, model má tendenci jej reprodukovat.
-        <p>To může vést například k:</p>
-
-        <ul>
-          <li><b>Genderovým stereotypům:</b> Pokud model častěji spojuje určité profese s určitým pohlavím (např. „sestra" vs. „lékař"), může tyto stereotypy posilovat.</li>
-          <li><b>Kulturnímu zkreslení:</b> Anglicky psané korpusy dominují, což může vést k preferenci západní perspektivy a menší reprezentaci jiných kultur.</li>
-          <li><b>Historickému kontextu:</b> Data zahrnují texty z různých období, včetně zastaralých pohledů, které dnes nejsou přijatelné.</li>
-          <li><b>Nedostatečnému zastoupení menšin:</b> Menšinové skupiny mohou být v datech podreprezentované, což vede k méně přesnému nebo citlivému výstupu.</li>
-        </ul>
-
-        <p>
-          Ve výzkumném prostředí je proto důležité:
-        </p>
-        <ul>
-          <li>ověřovat výstupy modelu z důvěryhodných zdrojů,</li>
-          <li>být si vědom možných zkreslení při interpretaci výsledků,</li>
-          <li>nepoužívat model jako jediný zdroj informací v citlivých oblastech (např. při hodnocení osob, kulturních kontextů nebo etických dilemat).</li>
-        </ul>
-      </p>
-
-      <hr>
-      <!-- Halucinace -->
-      <section id="Halucinace"> </section> 
-      <h1>Halucinace</h1>
-
-      <p>
-        Halucinace označují situace, kdy generativní umělá inteligence vytváří odpovědi, které znějí přesvědčivě, ale nejsou fakticky správné, nejsou podložené nebo si model část informací vymýšlí. Může jít o neexistující fakta, chybné údaje, smyšlené zdroje nebo mylné závěry.
-      </p>
-
-      <p>
-        Jedním z hlavních důvodů halucinací je to, že jazykový model je navržen tak, aby vždy nějak odpověděl. Pokud nemá dostatek informací, je dotaz nejasný nebo odpověď v datech není jednoznačná, model přesto pokračuje v generování textu a „doplní mezery" tím, co statisticky dává smysl. Model tedy neověřuje pravdivost, ale vybírá nejpravděpodobnější pokračování textu.
-      </p>
-
-      <p>
-        Riziko halucinací se zvyšuje například při dotazech na velmi specifická nebo neověřená fakta, při požadavcích na přesné citace, při vysoké míře kreativity nebo při nedostatku kontextu. Naopak lze je omezit jasným zadáním, připuštěním nejistoty („pokud nevíš, řekni to"), prací se zdroji nebo strukturovanějším promptováním.
-      </p>
-
-      <p>
-        Halucinace nejsou chybou ve smyslu selhání paměti, ale přirozeným důsledkem toho, jak jazykové modely fungují. Proto je vhodné považovat výstupy AI za pomocný nástroj a u důležitých informací je vždy ověřovat.
-      </p>
-
-      <p>
-        Konkrétní techniky, jak riziko halucinací snížit pomocí vhodného promptování, jsou popsány v kapitole <a href="#prompting">o promptování</a>.
-      </p>
-
-      <!-- Perlička z praxe -->
-      <div class="collapsible" data-collapsible>
-        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-halucinace-priklak" id="collapsible-button-halucinace-priklad">
-        <b>VÍCE:</b> Perlička z praxe: troluj pravopis
+        <button class="glossary-nav__btn" data-target="Messages" aria-expanded="false" aria-controls="Messages">
+          <span class="glossary-nav__icon">›</span> System / User / Assistant
         </button>
+        <button class="glossary-nav__btn" data-target="Temperature" aria-expanded="false" aria-controls="Temperature">
+          <span class="glossary-nav__icon">›</span> Temperature
+        </button>
+        <button class="glossary-nav__btn" data-target="Kontext" aria-expanded="false" aria-controls="Kontext">
+          <span class="glossary-nav__icon">›</span> Kontextové okno
+        </button>
+        <button class="glossary-nav__btn" data-target="Tokeny" aria-expanded="false" aria-controls="Tokeny">
+          <span class="glossary-nav__icon">›</span> Tokeny
+        </button>
+        <button class="glossary-nav__btn" data-target="Embeddingy" aria-expanded="false" aria-controls="Embeddingy">
+          <span class="glossary-nav__icon">›</span> Embeddingy
+        </button>
+        <button class="glossary-nav__btn" data-target="Halucinace" aria-expanded="false" aria-controls="Halucinace">
+          <span class="glossary-nav__icon">›</span> Halucinace
+        </button>
+        <button class="glossary-nav__btn" data-target="Bias" aria-expanded="false" aria-controls="Bias">
+          <span class="glossary-nav__icon">›</span> Předpojatost
+        </button>
+        <button class="glossary-nav__btn" data-target="Reasoning" aria-expanded="false" aria-controls="Reasoning">
+          <span class="glossary-nav__icon">›</span> Reasoning modely
+        </button>
+        <button class="glossary-nav__btn" data-target="FineTuning" aria-expanded="false" aria-controls="FineTuning">
+          <span class="glossary-nav__icon">›</span> Fine-tuning
+        </button>
+        <button class="glossary-nav__btn" data-target="RAG" aria-expanded="false" aria-controls="RAG">
+          <span class="glossary-nav__icon">›</span> RAG
+        </button>
+      </nav>
 
-        <div class="collapsible__panel" id="collapsible-panel-halucinace-priklak" role="region" aria-labelledby="collapsible-button-halucinace-priklad" hidden>
-          
-          <h3>Člověk míní, stroj mění</h3>
+      <!-- CONTENT AREA -->
+      <div class="glossary-content-area">
 
-          <!-- Trolli pravopis -->
-          <figure class="image-card">
-            <div class="image-card__frame">
-            <div class="hotspot-image">
-              <img
-                src="img/trol.png"
-                alt="Troluj pravopis"
-                loading="lazy"
-                decoding="async"
-              />
-              
-              <!-- Hotspot -->
-              <div class="hotspot" style="left: 38%; top: 10%;">
-                <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
-                  Při psaní promptu došlo z neznámého důvodu k přeskočení prvních tří písmen ve slově "kontroluj".
+        <!-- PROMPT -->
+        <article id="Prompt" class="glossary-entry" aria-labelledby="Prompt-title">
+          <header class="glossary-entry__header">
+            <h2 id="Prompt-title" class="glossary-entry__title">Prompt</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Prompt je vstupní sdělení, kterým člověk formuluje zadání pro generativní umělou inteligenci. Zjednodušeně řečeno jde o to, co uživatel napíše (nebo řekne) do vstupního okénka nástroje jako je ChatGPT. Prompt poskytuje modelu kontext, téma a očekávání, na jejichž základě je vytvořena odpověď. Prompt může mít podobu otázky, instrukce, ukázky, role nebo jejich kombinace a nemusí být omezen pouze na text – může zahrnovat také obraz, zvuk, video nebo jiné vstupy.
+            </p>
+
+            <p>
+              Z pohledu modelu nejde o příkaz v lidském smyslu, ale o popis situace, ze kterého model odvozuje nejpravděpodobnější pokračování. U multimodálních modelů je tento popis vytvářen souhrnně z různých typů vstupů, které se navzájem doplňují a společně vymezují významový rámec zadání. Prompt tak neurčuje výsledek přímo, ale vymezuje prostor, v němž se odpověď pohybuje.
+            </p>
+
+            <p>
+              Lze jej chápat jako zadání úlohy, otevření dialogu nebo metaforicky jako scénář, který určuje, o čem se bude „mluvit" a v jakém tónu, bez ohledu na to, zda je vyjádřen slovy, obrazem nebo zvukem. Kvalita a přesnost promptu mají zásadní vliv na srozumitelnost, relevanci i užitečnost výsledné odpovědi.
+            </p>
+          </div>
+        </article>
+
+        <!-- PROMPT ENGINEERING -->
+        <article id="PromptEngineering" class="glossary-entry" aria-labelledby="PromptEngineering-title">
+          <header class="glossary-entry__header">
+            <h2 id="PromptEngineering-title" class="glossary-entry__title">Prompt engineering</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Prompt engineering je praxe navrhování, formulace a úpravy vstupních sdělení (promptů) pro generativní umělou inteligenci tak, aby výstupy modelu byly co nejrelevantnější, přesné a užitečné. Jedná se o vědomé strukturování zadání, které modelu poskytuje kontext, očekávání a kritéria pro odpověď; kvalitní prompt výrazně ovlivňuje srozumitelnost, přesnost a kvalitu generovaného výstupu ve všech podporovaných režimech (text, obraz, zvuk či jiné multimodální vstupy). Prompt engineering lze chápat jako komunikaci s AI na úrovni, která maximalizuje kvalitu a relevanci výsledků, které model generuje.
+            </p>
+
+            <p>
+              Pro praktické techniky, vzory a detailní vysvětlení viz <a href="#prompting">kapitolu o promptování</a>.
+            </p>
+          </div>
+        </article>
+
+        <!-- FEW-SHOT / ZERO-SHOT -->
+        <article id="FewShot" class="glossary-entry" aria-labelledby="FewShot-title">
+          <header class="glossary-entry__header">
+            <h2 id="FewShot-title" class="glossary-entry__title">Few-shot / Zero-shot</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Few-shot a zero-shot jsou techniky používané v práci s generativní umělou inteligencí, které popisují, kolik ukázkových příkladů úlohy je modelu poskytnuto v promptu před jeho vykonáním.
+            </p>
+
+            <p>
+              <b>Zero-shot</b> označuje situaci, kdy model dostane úkol pouze s instrukcemi a kontextem, ale bez jakýchkoli ukázkových příkladů. Model v takovém případě spoléhá na svoji předchozí „znalost" získanou během tréninku, aby úkol vyřešil přímo na základě promptu.
+            </p>
+
+            <p>
+              <b>Few-shot</b> znamená, že prompt obsahuje malý počet konkrétních ukázkových příkladů, které demonstrují, jak úlohu řešit. Tyto příklady modelu usnadňují pochopení formátu, struktury nebo stylu očekávaného výstupu a obvykle zlepšují výsledky ve specifickém kontextu.
+            </p>
+
+            <p>
+              Obě techniky využívají schopnost modelů generalizovat z omezeného kontextu bez nutnosti zásadní úpravy základního modelu. Zero-shot je vhodný pro obecné úkoly bez dostupných příkladů, zatímco few-shot je často efektivnější, když několik příkladů dokáže model lépe „nastavit" na konkrétní úlohu.
+            </p>
+
+            <p>
+              Ve vývojových knihovnách jako <a href="https://github.com/google/langextract" target="_blank" rel="noopener noreferrer">LangExtract</a> se principy few-shot příkladů používají k definování extrakčních úloh a řízení strukturovaného výstupu modelu z nestrukturovaného textu — bez potřeby trénování vlastního modelu. Více viz <a href="#prompting">kapitola o promptování</a>.
+            </p>
+          </div>
+        </article>
+
+        <!-- SYSTEM / USER / ASSISTANT -->
+        <article id="Messages" class="glossary-entry" aria-labelledby="Messages-title">
+          <header class="glossary-entry__header">
+            <h2 id="Messages-title" class="glossary-entry__title">System / User / Assistant</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Při práci s ChatGPT a podobnými nástroji se rozhovor interně dělí na tři typy zpráv, kterým se říká role: <b>system</b>, <b>user</b> a <b>assistant</b>. Tyto role pomáhají modelu rozlišit, co je nastavení chování, co je dotaz od člověka a co je odpověď modelu.
+            </p>
+
+            <p>
+              <b>System</b> určuje, jak se má asistent chovat. Patří sem například tón odpovědí, styl psaní nebo obecná pravidla. V běžném používání ChatGPT se tato role projevuje hlavně v nastavení nebo při vytváření vlastního asistenta.
+            </p>
+
+            <p>
+              <b>User</b> je to, co uživatel píše do chatu — otázky, požadavky a úkoly.
+            </p>
+
+            <p>
+              <b>Assistant</b> je odpověď, kterou model vygeneruje.
+            </p>
+
+            <p>
+              Běžný uživatel se o roli assistant nestará a role user odpovídá jednoduše tomu, co píše do okna chatu. Důležitá je především role system, protože umožňuje předem ovlivnit chování asistenta, aniž by bylo nutné to opakovat v každém dotazu.
+            </p>
+
+            <p>
+              V běžném webovém rozhraní ChatGPT jsou tyto role většinou skryté a uživatel s nimi pracuje nepřímo. Při programovém použití (např. v aplikacích nebo vývojových nástrojích) lze role zadávat explicitně, ale pro základní práci s ChatGPT to není nutné.
+            </p>
+          </div>
+        </article>
+
+        <!-- TEMPERATURE -->
+        <article id="Temperature" class="glossary-entry" aria-labelledby="Temperature-title">
+          <header class="glossary-entry__header">
+            <h2 id="Temperature-title" class="glossary-entry__title">Temperature</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Temperature (teplota) je parametr jazykového modelu, který ovlivňuje míru náhodnosti a kreativity odpovědí. Určuje, jak „odvážně" model vybírá další slova při generování textu.
+            </p>
+
+            <p>
+              Při <b>nízké teplotě</b> model volí převážně nejpravděpodobnější pokračování, takže odpovědi jsou stabilní, přesné a předvídatelné. To je vhodné pro faktické dotazy, shrnutí, analýzy nebo technické texty.
+            </p>
+            
+            <p>
+              Při <b>vyšší teplotě</b> model připouští méně pravděpodobné varianty, což vede k kreativnějším, rozmanitějším, ale i méně konzistentním odpovědím. To se hodí pro brainstorming, psaní textů nebo generování nápadů.
+            </p>
+
+            <p>
+              V běžném webovém rozhraní ChatGPT uživatel teplotu obvykle nenastavuje přímo. Její vliv lze nepřímo ovlivnit formulací promptu, například pokyny typu „buď kreativní" nebo „odpovídej přesně a stručně".
+            </p>
+            
+            <p>
+              Při použití API nebo vývojových nástrojů lze teplotu nastavovat explicitně jako číselnou hodnotu nebo pomocí posuvníku, typicky podle požadovaného typu výstupu (nízká teplota pro faktické shrnutí, vyšší teplota pro nápady).
+            </p>
+
+            <p>
+              Příkladem nástroje, kde lze teplotu přímo nastavovat a sledovat její vliv na chování modelu, je <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer">Google AI Studio</a>, které umožňuje experimentovat s různými hodnotami a porovnávat výsledky.
+            </p>
+
+            <p>
+              Temperature tedy nemění znalosti modelu, ale způsob, jakým z nich vybírá a kombinuje odpověď.
+            </p>
+          </div>
+        </article>
+
+        <!-- KONTEXTOVÉ OKNO -->
+        <article id="Kontext" class="glossary-entry" aria-labelledby="Kontext-title">
+          <header class="glossary-entry__header">
+            <h2 id="Kontext-title" class="glossary-entry__title">Kontextové okno</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Jedním ze základních, ale často přehlížených omezení velkých jazykových modelů je tzv. 
+              <b>kontextové okno</b>. To určuje, kolik informací je model schopen vzít v úvahu v jednom okamžiku — 
+              tedy kolik textu „vidí", když generuje odpověď. Porozumění tomuto pojmu je zásadní pro efektivní práci s 
+              generativní AI a odpovídá na otázku, proč modely někdy „zapomínají" dříve uvedené informace.
+            </p>
+            <p>
+              Kontextové okno je maximální množství tokenů, které model dokáže zpracovat najednou. Zahrnuje přitom:
+            </p>
+            <ul>
+              <li>zadání (prompt),</li>
+              <li>historie konverzace,</li>
+              <li>generovaný text.</li>
+            </ul>
+            <p>
+              Jakmile je tato kapacita vyčerpána, model starší části kontextu přestává „vidět". Neznamená to, že by je zapomněl 
+              v lidském smyslu — jednoduše už nejsou součástí aktuálního výpočtu.
+            </p>
+
+            <!-- Obrázek Kontextove okno -->
+            <figure class="image-card">
+              <div class="image-card__frame">
+              <div class="hotspot-image">
+                <img src="img/context.png" alt="Schéma kontextového okna" loading="lazy" decoding="async"/>
+              </div>
+              </div>
+              <figcaption class="image-card__caption">
+                <h3 class="image-card__title">Rozsah kontextového okna</h3>
+                <p class="image-card__meta">
+                  Počet tokenů, které model dokáže zpracovat najednou, je omezený. Různé typy a verze modelů mají různě velká kontextová okna.
+                  Kontextové okno zahrnuje nejen vstupní text a vygenerovaný obsah, ale i využití růzých doplňkových nástrojů a funkcí.
+                  <br>
+                  Obrázek byl převzat z dokumentace 
+                  <a href="https://platform.claude.com/docs/en/build-with-claude/context-windows#context-awareness-in-claude-sonnet-4-5-and-haiku-4-5" class="link--subtle">
+                  Claude Docs
+                  </a>. 
+                </p>
+              </figcaption>
+            </figure>
+
+            <!-- O velikosti kontextu -->
+            <p>
+              Kapacitu kontextového okna je třeba mít na paměti při řešení komplexních úloh, které vyžadují
+              zpracování velkého množství informací - dlouhých dokumentů, rozsáhlých konverzací apod. Doporučujeme
+              sledovat aktuální dokumentaci k používanému modelu.
+            </p>
+            <p>
+              Že jste dorazili na hranici kontextového okna poznáte podle toho, že <b>model začne
+              ignorovat</b> dříve uvedené informace nebo pokyny, začne opakovat fráze, nebo odpovědi přestanou navazovat.
+              V takovém případě je potřeba prompt buď zkrátit, nebo úlohu rozdělit na menší části.
+            </p>
+            <p>
+              Abyste kontextové okno nezahltili zbytečnými informacemi, je vhodné pro každý úkol, úlohu nebo dotaz (či jejich sérii)
+              použít <b>nové kontextové okno</b>. Toto kontextové okno může mít různou podobu v závislosti na konkrétním modelu.
+              All-purpose modely jako ChatGPT, Claude nebo Gemini vedou historii dotazů jako seznam konverzací,
+              jejichž název model automaticky generuje na základě prvního dotazu. Specializované modely jako například
+              NotebookLM, které nejsou založeny pouze na klasickém dialogu, pak mohou kontextové okno reprezentovat jako
+              jednotlivé dokumenty, poznámky nebo jiné textové bloky. 
+            </p>
+
+            <!-- Int. Obr: Kontextová okna -->
+            <figure class="image-card">
+              <div class="image-card__frame">
+              <div class="hotspot-image">
+                <img src="img/kontextova_okna.png" alt="Příklad kontextového okna" loading="lazy" decoding="async"/>
+               
+                <!-- Hotspot -->
+                <div class="hotspot" style="left: 10%; top: 10%;">
+                  <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
+                    <strong>ChatGPT</strong>
+                  </div>
+                </div>
+                
+                <!-- Hotspot -->
+                <div class="hotspot" style="left: 40%; top: 5%;">
+                  <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
+                    <strong>Claude</strong>
+                  </div>
+                </div>
+                
+                <!-- Hotspot -->
+                <div class="hotspot" style="left: 50%; top: 73%;">
+                  <div class="hotspot__tooltip" role="tooltip" hidden>
+                    <strong>NotebookLM</strong><br>
+                  </div>
                 </div>
               </div>
-              
-              <!-- Hotspot -->
-              <div class="hotspot" style="left: 32%; top: 56.5%;">
-                <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
-                  ChatGPT si pokyn "troluj" vyložil chybně a asocioval tento výraz s pojmem "trolling", který označuje záměrné uvádění 
-                  v omyl nebo škodolibé žertování.
-                </div>
-              </div>
-              
-              <!-- Hotspot -->
-              <div class="hotspot" style="left: 71.5%; top: 82%;">
-                <div class="hotspot__tooltip" role="tooltip" hidden>
-                  Výsledek je zcela mimo kontext zadání. Místo kontroly pravopisu model vytvořil text, ve kterém jsou úmyslně
-                  zahrnuté hrubky. 
-                </div>
-              </div>
-
             </div>
+
+              <figcaption class="image-card__caption">
+                <h3 class="image-card__title">Jak může vypadat seznam kontextových oken</h3>
+                <p class="image-card__meta">
+                  Modely, k nimž se přistupuje prostřednictvím webového prohlížeče, ukládají historii
+                  konverzací jako seznam jednotlivých chatů nebo dokumentů. Při zahájení nové konverzace vzniká
+                  nové kontextové okno, které neobsahuje předchozí dotazy a odpovědi, bere ovšem v potaz
+                  uživatelská nastavení a preference, které lze u některých modelů upravit.
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <!-- TOKENY -->
+        <article id="Tokeny" class="glossary-entry" aria-labelledby="Tokeny-title">
+          <header class="glossary-entry__header">
+            <h2 id="Tokeny-title" class="glossary-entry__title">Tokeny</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Token je základní jednotka textu, se kterou velké jazykové modely (LLM) pracují. Tokeny nevznikají samy o sobě, ale jsou výsledkem procesu zvaného tokenizace, při němž je vstupní text rozdělen na menší části podle pravidel konkrétního tokenizéru. Token může odpovídat celému slovu, části slova, interpunkčnímu znaménku, mezeře nebo jejich kombinaci.
+            </p>
+
+            <p>
+              Při popisu kapacity kontextového okna jazykových modelů (tedy kolik textu je model schopen najednou zpracovat) se proto běžně používá počet tokenů, nikoli počet znaků nebo slov.
+            </p>
+
+            <h3>Tokenizéry a modely</h3>
+
+            <p>
+              Každý jazykový model je trénován s konkrétním tokenizérem a tento tokenizér je pevnou součástí modelu. Různé modely mohou používat odlišné způsoby tokenizace, a proto stejný text může být různými modely rozdělen na rozdílný počet tokenů. Počty tokenů tedy nejsou mezi modely přímo porovnatelné.
+            </p>
+
+            <p>
+              Tokenizéry jsou obvykle navrženy tak, aby efektivně reprezentovaly běžné jazykové vzory: častá slova nebo jejich části bývají reprezentovány jedním tokenem, zatímco méně časté nebo neobvyklé výrazy se skládají z více tokenů.
+            </p>
+
+            <h3>Jak modely s tokeny pracují</h3>
+
+            <p>
+              Na rozdíl od člověka nebo jednoduchých našeptávačů na klávesnici model nepracuje s textem ve formě slov a vět, ale s posloupností tokenů převedených do číselné podoby. Každý token je reprezentován vektorovou reprezentací (tzv. embeddingem) a model se učí statistické vztahy mezi těmito vektory v rámci celé sekvence.
+            </p>
+
+            <p>
+              Ačkoli je vstupní text rozdělen na tokeny, model při trénování i při generování odpovědí zohledňuje širší kontext celé sekvence, nikoli pouze lokální návaznost jednotlivých tokenů.
+            </p>
+
+            <h3>Vyzkoušejte si tokenizaci</h3>
+
+            <p>
+              Následující příklad ukazuje, jak je krátký český text rozdělen na tokeny pomocí tokenizéru modelu LLaMA 3:
+            </p>
+
+            <!-- Tokenizer Demo -->
+            <div id="tokenizer-demo" class="tokenizer-demo">
+              <textarea class="tokenizer-demo__input" placeholder="Napište nebo vložte text...">Ahoj, jak se máš? Dnes je krásný den!</textarea>
+              
+              <div class="tokenizer-demo__results">
+                <div class="tokenizer-demo__stats">
+                  <div class="tokenizer-demo__stat">
+                    <span class="tokenizer-demo__stat-value">0</span>
+                    <span class="tokenizer-demo__stat-label">tokenů</span>
+                  </div>
+                  <div class="tokenizer-demo__stat">
+                    <span class="tokenizer-demo__stat-value">0</span>
+                    <span class="tokenizer-demo__stat-label">znaků</span>
+                  </div>
+                  <div class="tokenizer-demo__stat">
+                    <span class="tokenizer-demo__stat-value">0</span>
+                    <span class="tokenizer-demo__stat-label">tokenu na znak</span>
+                  </div>
+                </div>
+                <div class="tokenizer-demo__visual"></div>
+                <div class="tokenizer-demo__tokens"></div>
+                <p class="tokenizer-demo__note">Tokeny jsou zde zobrazeny jako barevné bloky. Jiný model by mohl tentýž text rozdělit odlišně a výsledný počet tokenů by se mohl lišit.</p>
+              </div>
             </div>
-            <figcaption class="image-card__caption">
-              <h3 class="image-card__title">KONtrolujte zadání</h3>
-              <p class="image-card__meta">
-                S mnoha překlepy nebo hrubkami v zadání si modely většinou poradí - testovací data ostatně hrubky také obsahují.
-                Občas se ale podaří vytvořit takové zadání, které model „zmátne" natolik, že začne generovat nesmysly.
-              </p>
-            </figcaption>
-          </figure>
 
-        </div>
-      </div>
+            <h3>Kolik tokenů má text?</h3>
 
-      <hr>
+            <p>
+              Průměrné anglické slovo odpovídá přibližně 1,3 tokenu, přičemž konkrétní hodnota závisí na použitém tokenizéru a jazyce. Při tomto hrubém odhadu lze uvést, že trilogie Pán prstenů obsahuje zhruba 800 000 tokenů, kompletní dílo Williama Shakespeara asi 1,2 milionu tokenů a série Píseň ledu a ohně přes 2 miliony tokenů. Tyto hodnoty je však nutné chápat pouze orientačně.
+            </p>
+          </div>
+        </article>
 
-      <!-- PRÁCE S DATY -->
+        <!-- EMBEDDINGY -->
+        <article id="Embeddingy" class="glossary-entry" aria-labelledby="Embeddingy-title">
+          <header class="glossary-entry__header">
+            <h2 id="Embeddingy-title" class="glossary-entry__title">Embeddingy</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Embeddingy lze chápat jako souřadnice tokenů ve vysokodimenzionálním prostoru, kde je každý token reprezentován vektorem. Poloha vektoru vyjadřuje význam, který mu model v daném kontextu přisuzuje. Tokeny s podobným významem leží blízko sebe, zatímco významově nesouvisející pojmy jsou v prostoru vzdálenější. Model tak s jazykem pracuje jako s geometrickou strukturou vztahů mezi body, nikoli jako s pouhou posloupností slov. Vizualizaci embeddingů v interaktivním prostředí lze vyzkoušet v nástroji 
+              <a href="https://projector.tensorflow.org/" target="_blank" rel="noopener noreferrer">TensorFlow Embedding Projector</a>.
+            </p>
 
-      <!-- Fine-tuning -->
-      <section id="FineTuning"> </section>
-      <h1>Fine-tuning</h1>
-      
-      <p>
-        Fine-tuning je způsob, jak trvale upravit základní jazykový model tak, aby lépe odpovídal konkrétnímu prostředí nebo způsobu práce. Model se dodatečně trénuje na vybraných datech a výsledkem je nová verze modelu, která se chová jinak než původní.
-      </p>
+            <p>
+              Význam se v této reprezentaci projevuje geometricky pomocí vzdáleností a směrů mezi vektory. Nejde o explicitní pojmy nebo pravidla, ale o struktury, které se v prostoru vytvářejí na základě učení z velkého množství jazykových dat. Klasickým příkladem je vztah
+            </p>
+            
+            <center><b>král − muž + žena ≈ královna</b>,</center>
+            
+            <p>
+              který ukazuje, že určitý významový rozdíl se v prostoru chová jako konzistentní směr. Podobné směry se objevují i u dalších dvojic slov (např. herec ↔ herečka, princ ↔ princezna) a odpovídají různým aspektům významu, jako je pohlaví, role, míra abstrakce, časové zasazení či emocionální zabarvení. Jednotlivé rozměry samy o sobě nemají jednoduchý výklad, smysl vzniká až jejich kombinací.
+            </p>
 
-      <p>
-        V prostředí ústavu by fine-tuning znamenal, že se model učí z interních dokumentů (směrnice, příkazy ředitele, metodické pokyny) nebo z příkladů otázek a odpovědí, aby dlouhodobě odpovídal ve správném stylu, používal interní terminologii a „rozuměl" logice organizace. Model si tento způsob chování nese v sobě – není nutné jej znovu nastavovat v každém dotazu.
-      </p>
+            <p>
+              U moderních jazykových modelů navíc není význam tokenu pevně daný. Stejné slovo může mít v různých kontextech odlišnou reprezentaci, například „klíč" ve větě „ztratil jsem klíč od dveří" a ve spojení „houslový klíč". Význam je vždy vyhodnocován vzhledem k okolnímu kontextu, což umožňuje práci s víceznačností a jemnými významovými nuancemi.
+            </p>
 
-      <p>
-        Technicky se fine-tuning provádí na specializovaných platformách (např. IBM watsonx, Google Vertex AI), které vezmou hotový model a vytvoří jeho upravenou variantu. Tím se ale zároveň mění samotný model: pokud se dokumenty změní, je nutné model znovu ladit.
-      </p>
+            <p>
+              Embeddingy tvoří základ porozumění významu textu a navazujících schopností jazykových modelů, jako je porovnávání podobnosti, práce s kontextem, vyhledávání relevantních informací nebo techniky typu RAG. Bez nich by model pracoval pouze s posloupností symbolů, nikoli s významem.
+            </p>
 
-      <p>
-        Fine-tuning je proto vhodný hlavně tam, kde je cílem dlouhodobě změnit chování modelu (styl, jazyk, konzistence), ale méně vhodný pro práci s často se měnícím obsahem nebo tam, kde je nutné přesně doložit zdroj informací. Pro tyto účely se častěji používá <a href="#RAG">RAG</a>, který lze s fine-tuningem kombinovat.
-      </p>
+            <!-- Historické okénko: word2vec -->
+            <div class="collapsible" data-collapsible>
+              <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-embeddings-history" id="collapsible-button-embeddings-history">
+              <b>VÍCE:</b> Historické okénko: word2vec
+              </button>
 
-      <hr>
+              <div class="collapsible__panel" id="collapsible-panel-embeddings-history" role="region" aria-labelledby="collapsible-button-embeddings-history" hidden>
+                <p>
+                  Myšlenka reprezentovat slova jako body ve vícerozměrném prostoru se výrazně prosadila kolem roku 2013 
+                  díky modelu <b>word2vec</b>, jehož hlavním autorem byl Tomáš Mikolov (tehdy Google Research). 
+                  Model ukázal, že pouhým sledováním kontextu slov v rozsáhlých textech lze zachytit významové vztahy 
+                  bez ručně definovaných pravidel.
+                </p>
 
-      <!-- RAG -->
-      <section id="RAG"> </section>
-      <h1>RAG (Retrieval-Augmented Generation)</h1>
-      
-      <p>
-        RAG (Retrieval-Augmented Generation) je přístup, při němž se základní jazykový model nemění. Místo toho model při každém dotazu pracuje s externími dokumenty, které si nejprve vyhledá, a až poté z nich vytvoří odpověď.
-      </p>
+                <p>
+                  Modely typu word2vec pracovaly se statickými embeddingy, kde mělo každé slovo jednu pevnou reprezentaci. 
+                  Moderní jazykové modely tento princip rozšiřují o kontextové embeddingy, u nichž se význam slova mění podle okolního textu, 
+                  ale základní myšlenka zůstává stejná.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
 
-      <p>
-        V ústavním prostředí by RAG znamenal, že směrnice, příkazy ředitele a další dokumenty zůstávají uloženy mimo model. Při dotazu se vždy vyberou jen relevantní části těchto dokumentů a vloží se do kontextu odpovědi. Model tedy odpovídá podle aktuálního znění dokumentů, nikoli podle „paměti".
-      </p>
+        <!-- HALUCINACE -->
+        <article id="Halucinace" class="glossary-entry" aria-labelledby="Halucinace-title">
+          <header class="glossary-entry__header">
+            <h2 id="Halucinace-title" class="glossary-entry__title">Halucinace</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Halucinace označují situace, kdy generativní umělá inteligence vytváří odpovědi, které znějí přesvědčivě, ale nejsou fakticky správné, nejsou podložené nebo si model část informací vymýšlí. Může jít o neexistující fakta, chybné údaje, smyšlené zdroje nebo mylné závěry.
+            </p>
 
-      <p>
-        Technickým základem RAG je vektorová databáze, která ukládá dokumenty ve formě jejich významových reprezentací (viz <a href="#Embeddingy">embeddingy</a>). Díky tomu lze vyhledávat podle významu, nikoli jen podle shody slov, a zároveň se do kontextu modelu dostává jen malý, relevantní výřez textu. Tím RAG řeší i omezenou velikost <a href="#Kontext">kontextového okna</a>.
-      </p>
+            <p>
+              Jedním z hlavních důvodů halucinací je to, že jazykový model je navržen tak, aby vždy nějak odpověděl. Pokud nemá dostatek informací, je dotaz nejasný nebo odpověď v datech není jednoznačná, model přesto pokračuje v generování textu a „doplní mezery" tím, co statisticky dává smysl. Model tedy neověřuje pravdivost, ale vybírá nejpravděpodobnější pokračování textu.
+            </p>
 
-      <p>
-        Zásadní výhodou RAG je, že nad stejnou databází dokumentů lze používat různé jazykové modely. Model lze vyměnit nebo aktualizovat bez nutnosti znovu zpracovávat data, protože znalosti zůstávají mimo model. Dokumenty lze také kdykoli aktualizovat bez zásahu do modelu samotného.
-      </p>
+            <p>
+              Riziko halucinací se zvyšuje například při dotazech na velmi specifická nebo neověřená fakta, při požadavcích na přesné citace, při vysoké míře kreativity nebo při nedostatku kontextu. Naopak lze je omezit jasným zadáním, připuštěním nejistoty („pokud nevíš, řekni to"), prací se zdroji nebo strukturovanějším promptováním.
+            </p>
 
-      <p>
-        RAG je tedy vhodný tam, kde je klíčová přesnost, aktuálnost, dohledatelnost a práce s velkým objemem dokumentů. Pro jednotný styl odpovědí se často kombinuje s <a href="#FineTuning">fine-tuningem</a>, který upraví chování modelu, zatímco RAG dodává konkrétní obsah.
-      </p>
+            <p>
+              Halucinace nejsou chybou ve smyslu selhání paměti, ale přirozeným důsledkem toho, jak jazykové modely fungují. Proto je vhodné považovat výstupy AI za pomocný nástroj a u důležitých informací je vždy ověřovat.
+            </p>
 
-      <p>
-        Praktickým příkladem nástroje využívajícího RAG je <a href="https://notebooklm.google/" target="_blank" rel="noopener noreferrer">Google NotebookLM</a>, který umožňuje nahrát vlastní dokumenty a následně se nad nimi ptát. Model vychází z dodaných dokumentů, nikoli z obecné znalostní báze, čímž názorně demonstruje základní princip RAG.
-      </p>
+            <p>
+              Konkrétní techniky, jak riziko halucinací snížit pomocí vhodného promptování, jsou popsány v kapitole <a href="#prompting">o promptování</a>.
+            </p>
 
+            <!-- Perlička z praxe -->
+            <div class="collapsible" data-collapsible>
+              <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-halucinace-priklak" id="collapsible-button-halucinace-priklad">
+              <b>VÍCE:</b> Perlička z praxe: troluj pravopis
+              </button>
 
+              <div class="collapsible__panel" id="collapsible-panel-halucinace-priklak" role="region" aria-labelledby="collapsible-button-halucinace-priklad" hidden>
+                
+                <h3>Člověk míní, stroj mění</h3>
 
+                <!-- Trolli pravopis -->
+                <figure class="image-card">
+                  <div class="image-card__frame">
+                  <div class="hotspot-image">
+                    <img
+                      src="img/trol.png"
+                      alt="Troluj pravopis"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    
+                    <!-- Hotspot -->
+                    <div class="hotspot" style="left: 38%; top: 10%;">
+                      <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
+                        Při psaní promptu došlo z neznámého důvodu k přeskočení prvních tří písmen ve slově "kontroluj".
+                      </div>
+                    </div>
+                    
+                    <!-- Hotspot -->
+                    <div class="hotspot" style="left: 32%; top: 56.5%;">
+                      <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
+                        ChatGPT si pokyn "troluj" vyložil chybně a asocioval tento výraz s pojmem "trolling", který označuje záměrné uvádění 
+                        v omyl nebo škodolibé žertování.
+                      </div>
+                    </div>
+                    
+                    <!-- Hotspot -->
+                    <div class="hotspot" style="left: 71.5%; top: 82%;">
+                      <div class="hotspot__tooltip" role="tooltip" hidden>
+                        Výsledek je zcela mimo kontext zadání. Místo kontroly pravopisu model vytvořil text, ve kterém jsou úmyslně
+                        zahrnuté hrubky. 
+                      </div>
+                    </div>
+
+                  </div>
+                  </div>
+                  <figcaption class="image-card__caption">
+                    <h3 class="image-card__title">KONtrolujte zadání</h3>
+                    <p class="image-card__meta">
+                      S mnoha překlepy nebo hrubkami v zadání si modely většinou poradí - testovací data ostatně hrubky také obsahují.
+                      Občas se ale podaří vytvořit takové zadání, které model „zmátne" natolik, že začne generovat nesmysly.
+                    </p>
+                  </figcaption>
+                </figure>
+
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- BIAS -->
+        <article id="Bias" class="glossary-entry" aria-labelledby="Bias-title">
+          <header class="glossary-entry__header">
+            <h2 id="Bias-title" class="glossary-entry__title">Zkreslení (bias) vyplývající z tréninkových dat</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Jazykové modely se učí z velkých textových korpusů, které odrážejí svět takový, jaký je — včetně jeho nerovností, stereotypů a 
+              historických zkreslení. Pokud se určitý pohled nebo skupina v datech vyskytuje častěji, model má tendenci jej reprodukovat.
+            </p>
+            
+            <p>To může vést například k:</p>
+
+            <ul>
+              <li><b>Genderovým stereotypům:</b> Pokud model častěji spojuje určité profese s určitým pohlavím (např. „sestra" vs. „lékař"), může tyto stereotypy posilovat.</li>
+              <li><b>Kulturnímu zkreslení:</b> Anglicky psané korpusy dominují, což může vést k preferenci západní perspektivy a menší reprezentaci jiných kultur.</li>
+              <li><b>Historickému kontextu:</b> Data zahrnují texty z různých období, včetně zastaralých pohledů, které dnes nejsou přijatelné.</li>
+              <li><b>Nedostatečnému zastoupení menšin:</b> Menšinové skupiny mohou být v datech podreprezentované, což vede k méně přesnému nebo citlivému výstupu.</li>
+            </ul>
+
+            <p>
+              Ve výzkumném prostředí je proto důležité:
+            </p>
+            <ul>
+              <li>ověřovat výstupy modelu z důvěryhodných zdrojů,</li>
+              <li>být si vědom možných zkreslení při interpretaci výsledků,</li>
+              <li>nepoužívat model jako jediný zdroj informací v citlivých oblastech (např. při hodnocení osob, kulturních kontextů nebo etických dilemat).</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- REASONING MODELY -->
+        <article id="Reasoning" class="glossary-entry" aria-labelledby="Reasoning-title">
+          <header class="glossary-entry__header">
+            <h2 id="Reasoning-title" class="glossary-entry__title">Reasoning modely</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Některé velké jazykové modely jsou speciálně navrženy pro lepší zvládání logických úloh, 
+              matematických výpočtů a komplexního uvažování. Tyto modely, označované jako <b>reasoning modely</b>, 
+              často zahrnují mechanismy pro provádění mezikroků, kontroly konzistence a ověřování výsledků.
+              Tyto modely jsou navržené tak, aby si lépe poradily s úlohami, které vyžadují vícekrokové uvažování, 
+              práci s pravidly, strukturovanou analýzu nebo kombinaci několika podmínek najednou.
+            </p>
+
+            <p>
+              Rozdíl mezi běžným a reasoning LLM modelem je ve způsobu, jakým model generuje odpověď. 
+              Zatímco běžný LLM se často snaží rychle dospět k výsledku, reasoning model je trénován k tomu, 
+              aby si problém „rozložil", postupoval krok za krokem a jednotlivé části řešení na sebe navazovaly. 
+              To vede k pomalejším, ale obvykle konzistentnějším odpovědím, zejména u složitějších zadání.
+            </p>
+
+            <!-- Příklad aplikace reasoning modelu -->
+            <div class="collapsible" data-collapsible>
+              <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-pojmy-1" id="collapsible-button-pojmy-1">
+              <b>VÍCE:</b> Konkrétní příklad použití reasoning modelu
+              </button>
+
+              <div class="collapsible__panel" id="collapsible-panel-pojmy-1" role="region" aria-labelledby="collapsible-button-pojmy-1" hidden>
+                <p>
+                  Představme si, že výzkumný tým zvažuje změnu metodiky sběru dat v průběhu běžícího projektu —
+                   například přechod z osobních rozhovorů na online dotazníky. 
+                   Pokud se na tuto otázku zeptáme běžného jazykového modelu, typická odpověď může znít: 
+                   změna může přinést úsporu času a nákladů, ale zároveň riziko nižší návratnosti či zkreslení vzorku. 
+                   Odpověď je rozumná, ale zůstává obecná a neřeší, <b>za jakých podmínek</b> by změna byla přijatelná.
+                </p>
+                <p>
+                  Reasoning model k témuž zadání přistoupí strukturovaněji. Nejprve si identifikuje klíčové proměnné: 
+                  fázi projektu, velikost a charakter vzorku, srovnatelnost starých a nových dat, požadavky na 
+                  longitudinalitu a možné systematické zkreslení. Následně začne tyto proměnné kombinovat: pokud 
+                  je projekt teprve v počáteční fázi, dopady na konzistenci dat jsou menší; pokud už část dat existuje, 
+                  změna metodiky může ohrozit možnost přímého porovnání výsledků. Model tedy postupuje krok za krokem a 
+                  kontroluje, zda navrhované řešení neporušuje některé z výchozích podmínek.
+                </p>
+                
+                <p>
+                  Výstupem není jednoduché „ano" nebo „ne", ale strukturovaný závěr typu: <i>změna metodiky je 
+                  přijatelná pouze za předpokladu X a Y; pokud tyto podmínky nelze splnit, je nutné buď zachovat 
+                  původní postup, nebo analyzovat obě datové sady odděleně.</i> Pro výzkumníka je takový výstup cenný
+                   ne proto, že by rozhodnutí delegoval na model, ale proto, že model explicitně ukáže logiku 
+                   rozhodování, kterou lze dále odborně posoudit.
+                </p>
+
+              </div>
+            </div>
+
+            <p>
+              Jak poznáte, že je model v režimu <i>reasoning</i>? Samotná informace o tom, zda je toho schopen,
+              je uvedena v dokumentaci. Aktivace reasoning režimu pak závisí na konkrétním modelu, přičemž občas 
+              je tato funkce dostupná pouze v placených verzích. Název samotného reasoning režimu pak často zahrnuje 
+              pojem "thinking". 
+            </p>
+
+            <div class="collapsible" data-collapsible>
+              <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-pojmy-2" id="collapsible-button-pojmy-2">
+              <b>VÍCE:</b> Jak nastavit režim (ChatGPT, Claude, Gemini)
+              </button>
+
+              <div class="collapsible__panel" id="collapsible-panel-pojmy-2" role="region" aria-labelledby="collapsible-button-pojmy-2" hidden>
+                 <!-- Obrázek: Reasoning režimy -->
+
+                <figure class="image-card">
+                  <div class="image-card__frame">
+                    <img src="img/thinkinggpt.png" alt="Aktivace reasoning režimu, ChatGPT" loading="lazy" decoding="async"/>
+                   
+                  <figcaption class="image-card__caption">
+                    <h3 class="image-card__title">Výběr režimu, ChatGPT</h3>
+                    <p class="image-card__meta">
+                      Výběr režimu se v modelu ChatGPT provádí v levém horním rohu kontextového okna (vzhled k 6. 1. 2026)
+                    </p>
+                  </figcaption>
+                </figure>
+
+                <figure class="image-card">
+                  <div class="image-card__frame">
+                    <img src="img/reasoningclaude.png" alt="Aktivace reasoning režimu, Claude" loading="lazy" decoding="async"/>
+                   
+                  <figcaption class="image-card__caption">
+                    <h3 class="image-card__title">Výběr režimu, Claude</h3>
+                    <p class="image-card__meta">
+                      U modelu Claude lze rozšířené uvažování zapnout kliknutím na ikonku hodin 
+                      přímo v okně pro zadávání promptu (vzhled k 6. 1. 2026)
+                    </p>
+                  </figcaption>
+                </figure>
+
+                <figure class="image-card">
+                  <div class="image-card__frame">
+                    <img src="img/thinkinggemini.png" alt="Aktivace reasoning režimu, Gemini" loading="lazy" decoding="async"/>
+                   
+                  <figcaption class="image-card__caption">
+                    <h3 class="image-card__title">Výběr režimu, Gemini</h3>
+                    <p class="image-card__meta">
+                      U modelu Gemini lze režim zvolit přímo v okně pro zadávání promptu (vzhled k 6. 1. 2026) 
+                    </p>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+                
+
+            <h3>Trénování reasoning modelu</h3>
+            <p>Reasoning modely vycházejí ze stejných architektur jako ostatní LLMs, 
+            ale liší se způsobem ladění a typem úloh, 
+            na kterých byly trénovány. Během učení jsou systematicky vystavovány úlohám, 
+            kde není možné uspět jedním „intuitivním" krokem, ale je potřeba:</p>
+            <ul>
+              <li>rozložit problém na menší části,</li>
+              <li>aplikovat zadaná pravidla nebo omezení,,</li>
+              <li>ověřit mezivýsledky,</li>
+              <li>a dospět k závěru na základě dané posloupnosti kroků.</li>
+            </ul>
+
+            <p>
+              Při trénování se často pracuje s příklady, kde je explicitně ukázán postup řešení, 
+              nikoli pouze finální odpověď. Model se tak neučí jen co odpovědět, ale jak k odpovědi dojít. 
+              V praxi to znamená, že je schopen lépe řešit úlohy typu „pokud–pak"
+               nebo kombinovat více podmínek najednou.
+            </p>
+
+            <h3>Uplatnění reasoning modelů</h3>
+
+            <p>
+              Tento typ modelů se uplatňuje při řešení úloh, které nevyžadují pouze (stylisticky) srozumitelný
+              výsledek, ale závisí na správnosti postupu. Hodí se pro řešení analytických úloh, interpretaci 
+              předpisů, metodik nebo pravidel, návrhu rozhodovacích stromů nebo zodpovídání otázek typu 
+              "co by se stalo, kdyby...".
+            </p>
+
+            <p>
+              Reasoning modely odpovědi poskytují pomaleji (občas i v řádu desítek sekund), a to ve prospěch 
+              kvality výstupu. Jsou ovšem oblasti, kde je jejich použití nevhodné nebo nadbytečné. Jedná 
+              se o úlohy, ve kterých jde o kreativní psaní, stylistickou úpravu textu, generování návrhů nebo 
+              shrnutí textu. V těchto případech je rychlejší a efektivnější použít obecný jazykový model.
+            </p>
+
+            <center> <b>I reasoning modely se mohou mýlit! Jejich chyby jsou jen oproti běžným 
+              modelům méně nahodilé.
+            </b></center> <br>
+          </div>
+        </article>
+
+        <!-- FINE-TUNING -->
+        <article id="FineTuning" class="glossary-entry" aria-labelledby="FineTuning-title">
+          <header class="glossary-entry__header">
+            <h2 id="FineTuning-title" class="glossary-entry__title">Fine-tuning</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              Fine-tuning je způsob, jak trvale upravit základní jazykový model tak, aby lépe odpovídal konkrétnímu prostředí nebo způsobu práce. Model se dodatečně trénuje na vybraných datech a výsledkem je nová verze modelu, která se chová jinak než původní.
+            </p>
+
+            <p>
+              V prostředí ústavu by fine-tuning znamenal, že se model učí z interních dokumentů (směrnice, příkazy ředitele, metodické pokyny) nebo z příkladů otázek a odpovědí, aby dlouhodobě odpovídal ve správném stylu, používal interní terminologii a „rozuměl" logice organizace. Model si tento způsob chování nese v sobě – není nutné jej znovu nastavovat v každém dotazu.
+            </p>
+
+            <p>
+              Technicky se fine-tuning provádí na specializovaných platformách (např. IBM watsonx, Google Vertex AI), které vezmou hotový model a vytvoří jeho upravenou variantu. Tím se ale zároveň mění samotný model: pokud se dokumenty změní, je nutné model znovu ladit.
+            </p>
+
+            <p>
+              Fine-tuning je proto vhodný hlavně tam, kde je cílem dlouhodobě změnit chování modelu (styl, jazyk, konzistence), ale méně vhodný pro práci s často se měnícím obsahem nebo tam, kde je nutné přesně doložit zdroj informací. Pro tyto účely se častěji používá <a href="#RAG">RAG</a>, který lze s fine-tuningem kombinovat.
+            </p>
+          </div>
+        </article>
+
+        <!-- RAG -->
+        <article id="RAG" class="glossary-entry" aria-labelledby="RAG-title">
+          <header class="glossary-entry__header">
+            <h2 id="RAG-title" class="glossary-entry__title">RAG (Retrieval-Augmented Generation)</h2>
+            <button class="glossary-entry__close" aria-label="Zavřít">×</button>
+          </header>
+          <div class="glossary-entry__body">
+            <p>
+              RAG (Retrieval-Augmented Generation) je přístup, při němž se základní jazykový model nemění. Místo toho model při každém dotazu pracuje s externími dokumenty, které si nejprve vyhledá, a až poté z nich vytvoří odpověď.
+            </p>
+
+            <p>
+              V ústavním prostředí by RAG znamenal, že směrnice, příkazy ředitele a další dokumenty zůstávají uloženy mimo model. Při dotazu se vždy vyberou jen relevantní části těchto dokumentů a vloží se do kontextu odpovědi. Model tedy odpovídá podle aktuálního znění dokumentů, nikoli podle „paměti".
+            </p>
+
+            <p>
+              Technickým základem RAG je vektorová databáze, která ukládá dokumenty ve formě jejich významových reprezentací (viz <a href="#Embeddingy">embeddingy</a>). Díky tomu lze vyhledávat podle významu, nikoli jen podle shody slov, a zároveň se do kontextu modelu dostává jen malý, relevantní výřez textu. Tím RAG řeší i omezenou velikost <a href="#Kontext">kontextového okna</a>.
+            </p>
+
+            <p>
+              Zásadní výhodou RAG je, že nad stejnou databází dokumentů lze používat různé jazykové modely. Model lze vyměnit nebo aktualizovat bez nutnosti znovu zpracovávat data, protože znalosti zůstávají mimo model. Dokumenty lze také kdykoli aktualizovat bez zásahu do modelu samotného.
+            </p>
+
+            <p>
+              RAG je tedy vhodný tam, kde je klíčová přesnost, aktuálnost, dohledatelnost a práce s velkým objemem dokumentů. Pro jednotný styl odpovědí se často kombinuje s <a href="#FineTuning">fine-tuningem</a>, který upraví chování modelu, zatímco RAG dodává konkrétní obsah.
+            </p>
+
+            <p>
+              Praktickým příkladem nástroje využívajícího RAG je <a href="https://notebooklm.google/" target="_blank" rel="noopener noreferrer">Google NotebookLM</a>, který umožňuje nahrát vlastní dokumenty a následně se nad nimi ptát. Model vychází z dodaných dokumentů, nikoli z obecné znalostní báze, čímž názorně demonstruje základní princip RAG.
+            </p>
+          </div>
+        </article>
+
+      </div><!-- /.glossary-content-area -->
 
     </div>
   </div>

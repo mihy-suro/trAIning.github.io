@@ -1,0 +1,262 @@
+/* ==========================================================================
+   GLOSSARY ACCORDION STYLES
+   Accordion-style navigation for glossary terms
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Navigation Grid
+   -------------------------------------------------------------------------- */
+.glossary-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.glossary-nav__btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-light, #f8f9fa);
+  border: 2px solid var(--color-border, #dee2e6);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text, #333);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.glossary-nav__btn:hover {
+  background: var(--color-primary-light, #e7f1ff);
+  border-color: var(--color-primary, #0066cc);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
+}
+
+.glossary-nav__btn:focus {
+  outline: 3px solid var(--color-primary, #0066cc);
+  outline-offset: 2px;
+}
+
+.glossary-nav__btn[aria-expanded="true"] {
+  background: var(--color-primary, #0066cc);
+  border-color: var(--color-primary, #0066cc);
+  color: white;
+}
+
+.glossary-nav__btn[aria-expanded="true"]:hover {
+  background: var(--color-primary-dark, #004d99);
+}
+
+.glossary-nav__icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.glossary-nav__btn[aria-expanded="true"] .glossary-nav__icon {
+  transform: rotate(90deg);
+}
+
+/* --------------------------------------------------------------------------
+   Content Area
+   -------------------------------------------------------------------------- */
+.glossary-content-area {
+  position: relative;
+  min-height: 0;
+  margin-top: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   Entry Cards
+   -------------------------------------------------------------------------- */
+.glossary-entry {
+  display: none;
+  opacity: 0;
+  background: var(--color-bg-white, #ffffff);
+  border: 1px solid var(--color-border, #dee2e6);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: opacity 0.3s ease;
+}
+
+.glossary-entry.is-active {
+  display: block;
+  opacity: 1;
+  animation: glossarySlideIn 0.3s ease;
+}
+
+@keyframes glossarySlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.glossary-entry__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.glossary-entry__title {
+  margin: 0;
+}
+
+.glossary-entry__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--color-border, #dee2e6);
+  border-radius: 4px;
+  font-size: 1.25rem;
+  color: var(--color-text-muted, #999);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.glossary-entry__close:hover {
+  background: var(--color-bg-light, #f5f5f5);
+  color: var(--color-text, #333);
+}
+
+.glossary-entry__close:focus {
+  outline: 2px solid var(--color-primary, #0066cc);
+  outline-offset: 2px;
+}
+
+.glossary-entry__body {
+  line-height: 1.7;
+}
+
+.glossary-entry__body h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+  color: var(--color-heading, #222);
+}
+
+.glossary-entry__body p {
+  margin-bottom: 1rem;
+}
+
+.glossary-entry__body ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.glossary-entry__body li {
+  margin-bottom: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Internal Components (collapsibles, images, etc.)
+   -------------------------------------------------------------------------- */
+.glossary-entry .collapsible {
+  margin: 1.5rem 0;
+}
+
+.glossary-entry .image-card {
+  margin: 1.5rem 0;
+}
+
+.glossary-entry .tokenizer-demo {
+  margin: 1.5rem 0;
+}
+
+/* --------------------------------------------------------------------------
+   Navigation Indicator (shows which term is active)
+   -------------------------------------------------------------------------- */
+.glossary-nav__btn::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: transparent;
+  border-radius: 50%;
+  margin-right: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.glossary-nav__btn[aria-expanded="true"]::before {
+  background: white;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .glossary-nav {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .glossary-nav__btn {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  .glossary-entry {
+    padding: 1.25rem;
+  }
+  
+  .glossary-entry__title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glossary-nav {
+    grid-template-columns: 1fr;
+  }
+  
+  .glossary-entry__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .glossary-entry__close {
+    align-self: flex-end;
+    margin-top: -2.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Print Styles
+   -------------------------------------------------------------------------- */
+@media print {
+  .glossary-nav {
+    display: none;
+  }
+  
+  .glossary-entry {
+    display: block !important;
+    opacity: 1 !important;
+    page-break-inside: avoid;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .glossary-entry__close {
+    display: none;
+  }
+}
