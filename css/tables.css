@@ -1,0 +1,231 @@
+/* ============================================
+   TABLE STYLES
+   Professional, accessible tables for data presentation
+   ============================================ */
+
+/* Basic table container */
+.table-wrapper {
+  width: 100%;
+  margin: 24px 0;
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(3, 8, 21, 0.06);
+}
+
+/* Base table styles */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Table header */
+.data-table thead {
+  background: var(--brand-dark);
+  color: #ffffff;
+}
+
+.data-table th {
+  padding: 16px 20px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 2px solid var(--brand-yellow);
+}
+
+/* Table body */
+.data-table tbody tr {
+  border-bottom: 1px solid rgba(3, 8, 21, 0.08);
+  transition: background-color 0.15s ease;
+}
+
+.data-table tbody tr:hover {
+  background: rgba(255, 193, 7, 0.08);
+}
+
+.data-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.data-table td {
+  padding: 14px 20px;
+  color: #030815;
+}
+
+/* Zebra striping (optional) */
+.data-table--striped tbody tr:nth-child(even) {
+  background: rgba(3, 8, 21, 0.02);
+}
+
+.data-table--striped tbody tr:nth-child(even):hover {
+  background: rgba(255, 193, 7, 0.08);
+}
+
+/* Compact variant */
+.data-table--compact th,
+.data-table--compact td {
+  padding: 10px 16px;
+}
+
+/* Emphasis variant (light background) */
+.data-table--emphasis {
+  background: #f8f9fa;
+}
+
+.data-table--emphasis thead {
+  background: var(--brand-dark);
+}
+
+/* Centered content */
+.data-table td.text-center,
+.data-table th.text-center {
+  text-align: center;
+}
+
+.data-table td.text-right,
+.data-table th.text-right {
+  text-align: right;
+}
+
+/* Numeric columns */
+.data-table td.numeric {
+  font-family: 'Courier New', monospace;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Status badges in tables */
+.table-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.table-badge--success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.table-badge--warning {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.table-badge--danger {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.table-badge--info {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+/* Table caption */
+.data-table caption {
+  padding: 12px 20px;
+  text-align: left;
+  font-weight: 600;
+  color: #030815;
+  background: #f8f9fa;
+  border-bottom: 1px solid rgba(3, 8, 21, 0.12);
+}
+
+/* Sortable columns (if you add JS later) */
+.data-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-right: 32px;
+}
+
+.data-table th.sortable::after {
+  content: '⇅';
+  position: absolute;
+  right: 12px;
+  opacity: 0.5;
+  font-size: 0.8em;
+}
+
+.data-table th.sortable:hover::after {
+  opacity: 1;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .data-table {
+    font-size: 0.85rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 10px 12px;
+  }
+
+  .data-table th {
+    font-size: 0.8rem;
+  }
+
+  /* Stack columns on very small screens */
+  .data-table--stack tbody,
+  .data-table--stack tr,
+  .data-table--stack td {
+    display: block;
+    width: 100%;
+  }
+
+  .data-table--stack thead {
+    display: none;
+  }
+
+  .data-table--stack td {
+    text-align: left;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid rgba(3, 8, 21, 0.08);
+  }
+
+  .data-table--stack td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 12px;
+    font-weight: 600;
+    color: var(--brand-dark);
+  }
+
+  .data-table--stack tr {
+    margin-bottom: 16px;
+    border: 1px solid rgba(3, 8, 21, 0.12);
+    border-radius: 8px;
+  }
+}
+
+/* Table with borders (alternative style) */
+.data-table--bordered {
+  border: 1px solid rgba(3, 8, 21, 0.12);
+}
+
+.data-table--bordered th,
+.data-table--bordered td {
+  border: 1px solid rgba(3, 8, 21, 0.08);
+}
+
+/* Accessibility improvements */
+.data-table th[scope="row"] {
+  font-weight: 600;
+  background: rgba(3, 8, 21, 0.02);
+}
+
+/* Focus styles for keyboard navigation */
+.data-table tbody tr:focus-within {
+  outline: 2px solid var(--brand-yellow);
+  outline-offset: -2px;
+}

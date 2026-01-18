@@ -1,0 +1,315 @@
+:root {
+  --small-border: 10px; /* radius */
+  --large-border: 16px; /* radius */
+  --header-height: 50px; /* tweak to your actual header height */
+  --tooltip-bg: #24292f;
+  --tooltip-fg: #ffffff;
+  --tooltip-border: rgba(0, 0, 0, 0.2);
+  --tooltip-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  --trigger-bg: #ffffff;
+  --trigger-border: #000000;
+  --brand-dark: #030815;
+  --brand-blue: #185aa5;
+  --brand-light: #e0e0e0;
+  --brand-white: #f7f7f7;
+  --brand-yellow: #ffd60a; /* warm, readable yellow */
+}
+
+body {
+  margin: 0;
+  font-family: "Funnel Display", sans-serif;
+  background: var(--brand-white);
+}
+
+/* Sticky header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* sit above content */
+  min-height: var(--header-height);
+  background: var(--brand-dark);
+  color: var(--brand-white);
+  padding: 24px 32px 20px 32px;
+  font-size: 2em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+}
+
+/* Layout the header content: title on the left, search on the right */
+.header-content {
+  font-family: "Funnel Display", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+
+/* Main layout: sidebar + content */
+main {
+  display: flex;
+  min-height: calc(100vh - 70px);
+}
+nav.menu {
+  position: sticky;
+  top: calc(var(--header-height) + 76px); /* gap below header */
+  background: var(--brand-dark);
+  box-shadow: 0 2px 8px rgba(47, 45, 45, 0.04);
+  padding: 16px 16px;
+  margin: 0px 0 0 4rem;
+  height: auto;
+  align-self: flex-start;
+  border-radius: var(--large-border);
+  min-width: 210px;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+/*
+nav.menu h3 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-size: 1.2em;
+  color: #224488;
+}
+*/
+
+nav.menu ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* replaces li margin-bottom for more consistent spacing */
+}
+
+nav.menu li {
+  /* remove margin-bottom to rely on gap */
+  margin: 0;
+}
+
+nav.menu a {
+  display: block;               /* let the anchor fill the line */
+  text-decoration: none;
+  padding: 12px 12px;            /* consistent padding */
+  color: var(--brand-white);
+  font-weight: bold;
+  font-size: 1.05em;
+  line-height: 1.25;
+  border: 1px solid transparent; /* reserve space for hover border */
+  border-radius: var(--small-border);
+  box-sizing: border-box;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+nav.menu a:hover,
+nav.menu a:focus {
+  background-color: var(--brand-light);
+  color: var(--brand-dark);
+  /*border-color: var(--brand-white);*/
+  outline: none;
+}
+
+nav a::after {
+  display: none; /* Disable animated underline in menu */
+}
+
+
+nav.menu a:active {
+  background-color: var(--brand-light);
+  color: var(--brand-dark);
+}
+
+nav.menu a:focus-visible {
+  box-shadow: 0 0 0 3px rgba(180, 200, 235, 0.55);
+}
+
+/* CONTENT COMPONENTS */
+
+
+/* Main content area */
+/*
+.content {
+  font-family: "Source Serif 4", serif;
+  flex: 1;
+  padding: 32px;
+  background: #fff;
+  margin: 32px 32px 24px 32px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  border-radius: 10px;
+}
+*/
+.content {
+  font-family: "Source Serif 4", serif;
+  flex: 1;
+  padding: 32px;
+  margin: 0px 32px 24px 32px;
+}
+
+
+hr {
+  height:4px; 
+  background-color:black;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--brand-blue);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+section {
+  scroll-margin-top: 90px; /* Adjust this value to match your header height */
+}
+
+/* Base content section ("sub-space") */
+.section {
+  /* Layout */
+  display: block;
+  
+  margin: 0 10rem 1rem 0;
+  border-radius: 12px;
+  max-width: 1200px;
+
+  /* Visuals */
+  background: #ffffff;                /* default white to match .content */
+  border: 1px solid rgba(3, 8, 21, 0.08);
+  box-shadow: 0 1px 4px rgba(3, 8, 21, 0.05);
+
+  /* Typography harmony */
+  font-family: inherit;
+  color: #030815;
+}
+
+.section b{
+  color: var(--brand-blue);
+
+}
+
+/* A subtle header inside a section */
+.section__title {
+  font-family: "Funnel Display", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 2rem 0px 0 5rem;
+  font-weight: 700;
+  font-size: 1.75rem;
+  line-height: 2;
+  color: var(--brand-blue);
+}
+
+
+/* Body content */
+.section__body {
+  margin-top: 8px;
+  padding: 0rem 12rem 2rem 12rem;
+}
+
+/* Variants: adjust background/border subtly for separation */
+
+/* Muted grey card – slight contrast from white */
+.section--muted {
+  background: #f9f9f9;
+  border-color: rgba(3, 8, 21, 0.1);
+}
+
+/* Light grey card (using your #e0e0e0, softened) */
+.section--light {
+  background: #ededed;               /* close to #e0e0e0 but with better text contrast */
+  border-color: rgba(3, 8, 21, 0.15);
+}
+
+/* White variant – white card with */
+.section--white {
+  position: relative;
+  background: #ffffff;
+  border-color: rgba(3, 8, 21, 0.12);
+}
+
+
+/* Dark-tinted card – very subtle dark tint (keep text readable) */
+.section--tint {
+  background: #f3f4f7;               /* tint inspired by #030815 */
+  border-color: rgba(3, 8, 21, 0.15);
+}
+
+/* Optional small label chip in the corner */
+.section__label {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  line-height: 1;
+  border: 1px solid rgba(3, 8, 21, 0.12);
+  background: #ffffff;
+  color: #030815;
+}
+
+/* Label placement helpers */
+.section__label--top-right {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+/* Small note card variant */
+.section--note {
+  /* Size */
+  max-width: 30rem;           /* ~576px; adjust as needed */
+  width: 100%;
+  margin-inline: auto;        /* center within container */
+  padding-left: 3rem;
+  padding-right: 3rem;
+  /* Visuals (yellow note) */
+  background: #FFFCC1;        
+  border-color: var(--brand-dark);
+  border-width: 2px;
+  box-shadow: 0 5px 4px rgba(255, 252, 252, 0.7);
+}
+
+/* Optional: inline note card if you want it to sit within text flow */
+.section--note-inline {
+  display: inline-block;
+  max-width: 24rem;
+  margin: 0.25rem 0.5rem;
+  vertical-align: middle;
+}
+
+.section__title--note {
+  font-size: 1.2rem;
+  color: var(--brand-dark);
+  gap: 0rem !important;
+  margin: 1rem 0px 0 0rem !important;
+}
+
+.section__title--light {
+  color: var(--brand-dark);
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 900px) {
+  main {
+    flex-direction: column;
+  }
+  nav.menu {
+    margin: 20px 16px 0 16px;
+    max-width: 100%;
+    min-width: unset;
+  }
+  .content {
+    margin: 20px 16px 0 16px;
+    padding: 22px;
+  }
+}
+
+/* Reduce motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .section,
+  .section__title { transition: none; }
+}

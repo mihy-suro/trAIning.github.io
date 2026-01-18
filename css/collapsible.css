@@ -1,0 +1,61 @@
+/* Collapsible component */
+.collapsible {
+  border: 1px solid var(--brand-dark);
+  border-radius: var(--small-border);
+  background: white;
+  max-width: 800px;
+}
+
+.collapsible__toggle {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: 0;
+  font-family: "Funnel Display", sans-serif;
+  text-align: left;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.collapsible__toggle:focus-visible {
+  outline: 2px solid var(--brand-yellow);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.collapsible__toggle::before {
+  content: "▸";
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+
+.collapsible__toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.collapsible__panel {
+  overflow: hidden;
+  padding: 0 1rem;
+  border-top: 1px solid var(--brand-dark);
+  font-family: Source Serif 4, serif;
+}
+
+.collapsible__panel b{
+  color: var(--brand-dark);
+}
+
+/* Optional: smoother content appearance */
+
+.collapsible__panel > * {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.collapsible__panel[data-open="true"] > * {
+  opacity: 1;
+  transform: translateY(0);
+}

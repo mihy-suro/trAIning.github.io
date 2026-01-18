@@ -1,0 +1,63 @@
+/* Read More component */
+.read-more {
+  max-width: 100%;
+  margin: 1rem 0 2rem;
+}
+
+.read-more__text {
+  line-height: 1.6;
+  margin: 0 0 0.5rem;
+}
+
+/* Hide checkbox */
+.read-more__toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Style the label as a button */
+.read-more__button {
+  font-family: "Funnel Display", sans-serif;
+  display: inline-block;
+  border: 1px solid var(--brand-dark);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--brand-dark);
+  padding: 0.4rem 0.7rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.read-more__button:hover {
+  background: var(--brand-white);
+}
+
+.read-more__button:focus-visible {
+  outline: 2px solid var(--brand-dark);
+  outline-offset: 2px;
+}
+
+/* Hide content by default */
+.read-more__content {
+  display: none;
+  margin-top: 1rem;
+}
+
+/* Show content when checkbox is checked */
+.read-more__toggle:checked ~ .read-more__content {
+  display: block;
+}
+
+/* Variant styles */
+.read-more--muted .read-more__button {
+  border-color: var(--clr-border, #d1d5db);
+  background: var(--clr-muted, #f9fafb);
+  color: var(--clr-text, #374151);
+}
+
+.read-more--muted .read-more__button:hover {
+  background: var(--clr-surface, #fff);
+  border-color: var(--clr-accent, #2563eb);
+}

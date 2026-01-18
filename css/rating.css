@@ -1,0 +1,42 @@
+/* Rating pill styles */
+
+/* Visually-hidden helper for screen readers */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.rating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;                    /* space between icons */
+  padding: 6px 10px;           /* pill padding */
+  border-radius: 9999px;       /* pill shape */
+  background: linear-gradient(180deg, #ffffff 0%, var(--brand-white) 100%);
+  border: 1px solid rgba(16,24,40,0.06);
+  box-shadow: 0 1px 2px rgba(16,24,40,0.04);
+  user-select: none;           /* not selectable by default */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The container will hold exactly 5 icons; we keep their container inline so they flow with text */
+.rating-pill img {
+  display: block;
+  width: 28px;    /* default; overridden by inline width/height attributes set by JS or markup */
+  height: 28px;
+  object-fit: contain;
+  pointer-events: none; /* ensure they're static/non-interactive */
+}
+
+/* Optional: tighter pill for very small icons */
+.rating-pill[data-size="20"] {
+  gap: 6px;
+  padding: 4px 8px;
+}

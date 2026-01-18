@@ -1,0 +1,349 @@
+<!-- BASICS -->
+<section id="basics">
+  <div class="section section--muted">
+    <h2 class="section__title">Jak LLMs fungují</h2>
+     <div class="section__body">
+
+      <!-- Intro -->
+
+        <p>
+          Velké jazykové modely (LLMs, Large Language Models) představují jednu z nejpokročilejších a nejrychleji se vyvíjejících oblastí <i>umělé inteligence</i>. 
+          Abychom porozuměli tomu, co vlastně „umí" (nebo "neumí") a jak jejich výstupy vznikají, je dobré prozkoumat několik základních principů: 
+          jak se tyto modely učí, jak reprezentují text a jakým způsobem generují odpovědi.
+        </p>
+
+        <p><a href="#AIIntro" class="link--large">⇣ AI, machine learning a generativní modely</a></p>
+        <p><a href="#NeuronovaSit" class="link--large">⇣ Co je neuronová síť</a></p>
+        <p><a href="#Transformery" class="link--large">⇣ Transformery a Attention</a></p>
+        <p><a href="#JakSeUci" class="link--large">⇣ Jak se LLMs učí</a></p>
+        <p><a href="#ZakladniTrenink" class="link--large">⇣ Základní jazykový trénink</a></p>
+        <p><a href="#Reinforcement" class="link--large">⇣ Reinforcement learning</a></p>
+        <p><a href="#JakChapeText" class="link--large">⇣ Jak LLM "chápe" text</a></p>
+
+        <section id="AIIntro">  </section>
+        <h1>AI, machine learning a generativní modely</h1>
+        <p>
+          <b>Umělá inteligence (AI)</b> je zastřešující pojem pro systémy, které vykazují schopnosti podobné lidskému uvažování či rozhodování.
+          <br><br>
+          <b>Machine learning (ML)</b> neboli strojové učení představuje podmnožinu AI, kde se systémy učí z dat, aby zlepšily své výkony na základě zkušeností
+          bez explicitního programování každého kroku.
+          <br><br>
+          <b>Generativní modely</b>, mezi něž patří i LLMs, jsou speciální třída ML modelů, které se neomezují pouze na predikci nebo klasifikaci, 
+          ale <i>generují nový obsah:</i> text, obrázky, zvuk nebo kód.
+          LLMs jsou tedy konkrétním typem generativní AI, která se specializuje na práci s přirozeným jazykem.
+        </p>
+
+        <!-- Co je neuronová síť -->
+        <section id="NeuronovaSit"> </section> 
+        <h1>Co je neuronová síť</h1>
+        <p>
+          Základem současných jazykových modelů jsou <b>neuronové sítě</b> – matematické struktury inspirované fungováním neuronů v mozku, 
+          i když velmi zjednodušené. Pro implementaci velkých jazykových modelů se využívají tzv. <i>hluboké</i> neuronové sítě
+          (deep neural networks). Jsou „hluboké" proto, že obsahují mnoho a mnoho vrstev, což jim umožňuje zachytit i velice složité vzory 
+          v datech, jako například:
+        </p>
+        <ul>
+          <li>gramatiku a syntaxi,</li>
+          <li>semantické vztahy mezi slovy a frázemi,</li>
+          <li>kontextové informace napříč větami a odstavci.</li>
+        </ul>
+
+        <!-- Reference -->
+
+        <div class="reference-card reference-card--muted">
+        <h3 class="reference-card__title">Více o hlubokých sítích</h3>
+        <p class="reference-card__description">
+          Pokud máte zájem dozvědět se víc o tzv. hlubokém učení (deep learning) a neuronových sítích, doporučujeme
+          tohoto průvodce od společnosti IBM.
+        </p>
+        <a href="https://www.ibm.com/think/topics/deep-learning" class="reference-card__link" target="_blank" rel="noopener noreferrer">
+        What is deep learning?
+        </a>
+      </div>
+
+      <!-- Int. Obr: Schema neuronové sítě -->
+        <figure class="image-card">
+          <div class="image-card__frame">
+          <div class="hotspot-image">
+            <img src="img/neuron_network.png" alt="Schéma neuronové sítě" loading="lazy" decoding="async"/>
+            
+            <!-- Hotspot -->
+            <div class="hotspot" style="left: 24%; top: 10%;">
+              <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
+                <strong>Data, ze kterých se model učí</strong><br>
+                Číselné reprezentace textu, obrazu nebo jiných vstupů, které síť přijímá jako základ pro další zpracování.
+              </div>
+            </div>
+            
+            <!-- Hotspot -->
+            <div class="hotspot" style="left: 47%; top: 10%;">
+              <div class="hotspot__tooltip hotspot__tooltip--below" role="tooltip" hidden>
+                <strong>Výpočetní vrstvy</strong><br>
+                V této části síť krok za krokem kombinuje vstupní data pomocí uzlů a vah. Postupně se učí rozpoznávat 
+                důležité rysy a vztahy v datech – od jednoduchých vzorců až po složitější souvislosti, které nejsou 
+                na první pohled patrné.
+              </div>
+            </div>
+            
+            <!-- Hotspot -->
+            <div class="hotspot" style="left: 91%; top: 80%;">
+              <div class="hotspot__tooltip" role="tooltip" hidden>
+                <strong>Výstup modelu</strong><br>
+                Při trénování se výstupy průběžně porovnávají s referenčními trénovacími daty. 
+                Na základě rozdílu mezi předpovědí a skutečnými hodnotami se upravují váhy tak, aby model postupně 
+                dokázal samostatně predikovat správný výstup.
+              </div>
+            </div>
+          </div>
+          </div>
+          <figcaption class="image-card__caption">
+            <h3 class="image-card__title">Schematické znázornění neuronové sítě.</h3>
+            <p class="image-card__meta">
+              
+              Neuronové sítě jsou složeny z vrstev (h<sub>i</sub>) „neuronů" (uzlů). Jednotlivé uzly jsou propojeny váhami (w<sub>ij</sub>),
+              které reprezentují sílu spojení mezi neurony. Vstupní data (x<sub>i</sub>) procházejí sítí vrstvu po vrstvě,
+              přičemž každý neuron aplikuje na své vstupy váhy a nelineární
+
+              <span class="info" data-info>
+                <span class="info__trigger info__word" tabindex="0" role="button" aria-label="Více informací o aktivační funkci">
+                  aktivační funkci
+                </span>
+                <span class="info__tooltip" role="tooltip" hidden>
+                  Aktivační funkce zavádí nelinearitu do modelu, což umožňuje síti zachytit složitější vzory v datech. Mezi běžné aktivační funkce patří ReLU (Rectified Linear Unit), sigmoidní funkce a tanh.
+                </span>
+              </span>, aby vytvořil výstup.
+              Během tréninku se váhy těchto spojení mezi neurony upravují tak, aby síť dokázala co nejlépe predikovat požadovaný výstup.
+
+            </p>
+          </figcaption>
+        </figure>
+
+      <!-- Transformer -->
+
+      <p>
+        Možná jste se dávno předtím, než velké jazykové modely přišly na scénu, setkali s chatboty - například
+        těmi, co se objevují na webových stránkách různých e-shopů a slibují rychlou odpověď na zákaznické dotazy.
+        Tyto starší nástroje také představují typ umělé inteligence, na rozdíl od velkých jazykových modelů
+        jsou však velice
+
+
+      <!-- Info chatboti -->  
+      <span class="info" data-info>
+        <span class="info__trigger info__word" tabindex="0" role="button" aria-label="Customer service chatboti">
+        jednoduché a tematicky omezené
+        </span>
+        <span class="info__tooltip" role="tooltip" hidden>
+           V současné době jsou k dispozici velice sofistikované chatboty pro zákaznickou podporu, 
+           které využívají pokročilé jazykové modely. Na tomto místě máme na mysli starší generaci chatbotů,
+           se kterou jsme se setkávali před rozšířením LLMs.
+        </span>
+      </span>.
+        
+        V textu místo komplexních kontextuálních vazeb hledají klíčová slova,
+        aby na jejich základě vybraly předem připravené odpovědi.
+      </p>
+      <p>
+        Zásadní průlom v této oblasti přinesla architektura <b>transformer</b>, která umožňuje modelu vstřebat různé části textu najednou. 
+        To je důležité pro porozumění kontextu – nejen sousedním slovům, ale i vzdáleným souvislostem v textu.
+      </p>
+
+        <p>
+          Mimochodem, právě slovo <i>transformer</i> stojí za písmenem "T" ve zkratce <b>GPT</b>.
+          GPT (Generative Pre-trained Transformer) označuje rodinu generativních modelů založených na architektuře 
+          transformerů. Zkratka vyjadřuje způsob jejich fungování: </p>
+          <ul>
+            <li><b>generative</b> – model vytváří nový obsah,</li>
+            <li><b>pre-trained</b> – je předtrénován na rozsáhlých datech,</li>
+            <li><b>transformer</b> – využívá mechanismus attention pro práci s kontextem.</li>
+          </ul>
+        <p>
+          "GPT" tedy neoznačuje jeden konkrétní model (např. ChatGPT), ale skupinu příbuzných modelů, 
+          které se navzájem liší velikostí, schopnostmi i oblastmi použití. V principu se jedná o specifickou podmnožinu
+          velkých jazykových modelů (LLMs).
+        </p>
+
+        <section id="Transformery"> </section>
+        <!-- Transformery a Attention -->
+        <div class="collapsible" data-collapsible>
+          <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-basics-1" id="collapsible-button-basics-1">
+          <b>VÍCE:</b> Transformery a Attention
+          </button>
+
+          <div class="collapsible__panel" id="collapsible-panel-basics-1" role="region" aria-labelledby="collapsible-button-basics-1" hidden>
+            <p>
+            Transformery jsou typ neuronových sítí, které tvoří základ většiny současných generativních modelů, 
+            zejména jazykových modelů. Na rozdíl od starších přístupů nezpracovávají data postupně krok za krokem, 
+            ale <b>pracují s celým vstupem najednou</b>. Díky tomu dokážou efektivně zachytit širší kontext a lépe se 
+            uplatňují při práci s dlouhými texty, obrazy nebo komplexními daty.
+            </p>
+            <p>
+            Klíčovým prvkem transformerů je mechanismus attention (pozornosti). Ten umožňuje modelu určit, 
+            které části vstupu jsou v daném kontextu nejdůležitější. Například při zpracování věty si model dokáže 
+            „všimnout", ke kterým slovům se vztahuje zájmeno, nebo které pojmy spolu významově souvisejí, 
+            i když jsou ve větě od sebe vzdálené.
+            </p>
+            <p>
+            V praxi to znamená, že model dokáže zachytit vztahy napříč celým vstupem. 
+            U textu to může být porozumění tomu, že pojem uvedený na začátku odstavce je klíčový i pro závěr textu. 
+            U obrazových dat může attention zvýraznit oblasti obrazu, které jsou důležité pro rozpoznání objektu, 
+            například tvar buňky nebo specifický strukturální detail.
+            </p>
+            <p>
+            Attention přiřazuje jednotlivým částem vstupu váhy podle jejich relevance a z těchto vážených 
+            informací vytváří vnitřní reprezentaci dat. Během trénování se model učí, kam směřovat svou pozornost, 
+            a tuto schopnost pak využívá při generování textu, shrnování dokumentů nebo predikci dalších kroků – 
+            bez nutnosti explicitně definovaných pravidel.
+            </p>
+
+          </div>
+        </div>
+
+        <!-- Jak se učí -->
+        <section id="JakSeUci"> </section>
+        <h1>Jak se LLMs učí</h1>
+         <p>LLMs se učí z obrovských množství textů – knih, odborných článků, encyklopedií, webových stránek, článků, 
+          technických dokumentací, veřejných diskuzí a dalších zdrojů. </p>
+
+        <p>
+          Různí poskytovatelé modelů (OpenAI, Anthropic, Google, Meta aj.) používají odlišné kombinace zdrojů a postupy 
+          jejich filtrování. Společným cílem je získat co nejširší, jazykově bohatý a relativně kvalitní vzorek textu, 
+          který umožní modelu naučit se obecné jazykové struktury i specializované styly.
+        </p>
+        <p>
+          Je velice důležité mít na pamět, že model sám o sobě:
+        </p>
+
+        <ul>
+          <li>při odpovídání nečerpá z původní databáze zdrojů,</li>
+          <li>si jednotlivé dokumenty použité pro trénování "nepamatuje",</li>
+          <li>nevyhledává informace během odpovídání, pokud není výslovně propojen s vyhledávačem.</li>
+        </ul>
+
+        <!-- První fáze -->
+        <section id="ZakladniTrenink"> </section>
+        <h2><b>První fáze:</b> Základní jazykový trénink</h2>
+        Na začátku je model <b>předtrénován</b> na rozsáhlém korpusu textů. Během tohoto tréninku model:</p>
+          <ol>
+            <li>Dostane text rozdělený na malé jednotky -
+              <span class="info" data-info>
+                <span class="info__trigger info__word" tabindex="0" role="button" aria-label="Více informací o tokenech">
+                  tokeny
+                </span>
+                <span class="info__tooltip" role="tooltip" hidden>
+                  Token není vždy celé slovo – může to být i část slova, interpunkční znaménko nebo speciální znak. Například v angličtině je „international" 
+                      často rozděleno na inter + national, zatímco běžná slova jako „cat" bývají jeden token.
+                </span>
+              </span>.
+            </li>
+            <li>Na základě těchto tokenů se učí předpovídat následující token v sekvenci.</li>
+            <li>Postupnou optimalizací milionů až miliard parametrů si vytváří interní reprezentaci jazykových vzorů.</li>
+          </ol>
+
+        <p>
+        Důležité je, že model se <b>neučí</b> fakta v běžném slova smyslu – neukládá si je jako položky v databázi. Místo toho se učí statistické závislosti: 
+        jaká slova a věty obvykle následují po jiných. Díky tomu dokáže generovat text, který působí informovaně a konzistentně.
+        </p>
+        <p>
+          Výsledkem této první fáze je model, která zná jazyk, ovšem <b>neví, jak komunikovat s člověkem.</b>
+        </p>
+
+        <!-- Druhá fáze -->
+        <section id="Finetuning"> </section> 
+        <h2><b>Druhá fáze:</b> Doladění a interakce</h2>
+        <p>
+        Aby byl model prakticky použitelný, je potřeba ho naučit, jak odpovídat na otázky a plnit instrukce. 
+        K tomu slouží tzv. fine-tuning, často založený na ručně připravených datech. Typicky se používají:
+        </p>
+
+        <ul>
+          <li>vzorové otázky a odpovědi,</li>
+          <li>předepsané dialogy,</li>
+          <li>instrukce typu "shrň", "vysvětli", "porovnej", "navrhni".</li>
+        </ul>
+
+        <p>Model se tak učí nejen co říkat, ale i <i>jakým způsobem</i>. Tato fáze je klíčová pro to, aby
+        LLMs působili jako asistenti reagující na zadání, a ne jako náhodné generátory textu.</p>
+
+        <!-- Třetí fáze -->
+        <section id="Reinforcement"> </section> 
+        <h2>Reinforcement learning</h2>
+        <p>
+        Některé modely procházejí ještě další fází zvanou <b>reinforcement learning from human feedback (RLHF)</b>,
+        neboli učení z lidské zpětné vazby. Tato fáze probíhá zhruba takto:
+        </p>
+
+        <ol>
+          <li>Model vygeneruje více možných odpovědí na danou otázku nebo úkol.</li>
+          <li>Lidé (hodnotitelé) tyto odpovědi porovnají a označí ty, které jsou užitečnější, přesnější,
+            srozumitelnější a stylisticky vhodnější.
+          </li>
+          <li>Model se učí preferovat lépe hodnocené odpovědi.</li>
+        </ol>
+
+        <p>
+          Tímto způsobem se model učí, které odpovědi jsou pro lidského uživatele nejpřínosnější, 
+          a zlepšuje svou schopnost generovat relevantní a kvalitní výstupy.
+        </p>
+
+        <!-- Umění dialogu -->
+        <h2>Umění dialogu</h2>
+        <p>
+          Na základě <b>vzorových konverzací</b> se model učí vést plynulý dialog. V těchto konverzacích je jasně
+          vyznačeno, kdo je <i>uživatel</i> a kdo <i>asistent</i>. Model se učí upřesňovat odpovědi, reagovat na doplňující
+          otázky a navazovat na předchozí kontext.
+        </p>
+
+        <h2>Co se model neučí</h2>
+        <p>
+          Jazykové modely dokáží působit velice přesvědčivě a informovaně. Je ovšem důležité uvědomit si, že se modely:
+        </p>
+        <ul>
+          <li>neučí logiku ve smyslu formálních pravidel nebo deduktivního uvažování,</li>
+          <li>neučí metodologii výzkumu,</li>
+          <li>neučí se fakta jako položky v databázi,</li>
+          <li>neučí se ověřovat fakta,</li>
+          <li>neučí se rozlišovat pravdu a nepravdu jako takovou.</li>
+        </ul>
+
+        <!-- Jak chápe text -->
+        <section id="JakChapeText"> </section>
+        <h1>Jak LLM "chápe" text</h1>
+        <p>Aby mohl model pracovat s textem, potřebuje převést slova do matematické formy. Každý token se proto transformuje do <b>vektorové reprezentace</b> – číselného „otisku", 
+          který nese informaci o významu a kontextu. Tyto vektory existují v prostoru o vysoké dimenzi (např. 1 024 nebo 4 096 rozměrů). </p>
+        <p>V tomto prostoru platí několik zajímavých vlastností:</p>
+
+        <ul>
+          <li>Blízká slova mají podobný význam.</li>
+          <li>Rozdíly vektoru mohou reprezentovat vztahy:<br>
+              <i>vektor(král) – vektor(muži) + vektor(žena) ≈ vektor(královna)</i></li>
+          <li>Model „rozumí" jazyku tím, že operuje v tomto vektorovém prostoru a hledá další pravděpodobné pokračování textu.</li>
+        </ul>
+
+        <p>
+          LLMs negenerují věty podle plánovaného významu. Prostě predikují další token podle pravděpodobností.
+          Přestože to zní mechanicky, kombinace vysoké dimenzionality, velkých dat a sofistikované architektury vede ke zdánlivě „chápavému" chování.
+        </p>
+
+        <!-- Vzdálenosti slov v prostoru - Notecard-->
+        <div class="section section--note">
+          <h3 class="section__title section__title--note">Vzdálenosti slov v prostoru</h3>
+
+          <p>U moderních LLMs se dá měřit „podobnost" slov jako vzdálenost mezi jejich vektory. Například vektorově jsou si blízko páry jako:</p>
+          <ul>
+            <li>král — královna,</li>
+            <li>auto — vozidlo,</li>
+            <li>učitel — škola,</li>
+            <li>lékař — nemocnice.</li>
+          </ul>
+          <p>A naopak velmi vzdálené jsou třeba:</p>
+          <ul>
+            <li>kočka — kvark,</li>
+            <li>matematika — banán.</li>
+          </ul>
+        
+        </div>
+
+    </div>
+
+  </div>
+</section>

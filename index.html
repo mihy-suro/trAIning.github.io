@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Praktické rady pro práci s genAI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Import fonts via Google API -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/rating.css">
+  <link rel="stylesheet" href="css/images.css">
+  <link rel="stylesheet" href="css/readmore.css">
+  <link rel="stylesheet" href="css/findbar.css">
+  <link rel="stylesheet" href="css/collapsible.css">
+  <link rel="stylesheet" href="css/infobubble.css">
+  <link rel="stylesheet" href="css/hotspot.css">
+  <link rel="stylesheet" href="css/reference.css">
+  <link rel="stylesheet" href="css/tables.css">
+  <link rel="stylesheet" href="css/links.css">
+  <link rel="stylesheet" href="css/technique-explorer.css">
+  <link rel="stylesheet" href="css/tokenizer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap&subset=latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap&subset=latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+
+  <!-- Import JavaScript files -->
+  <script type="module" src="lib/llama3-tokenizer.js"></script>
+  <script src="js/search.js" defer></script>
+  <script src="js/collapsible.js" defer></script>
+  <script src="js/read-more.js" defer></script>
+  <script src="js/info-bubble.js" defer></script>
+  <script src="js/hotspot.js" defer></script>
+  <script src="js/rating.js" defer></script>
+  <script src="js/technique-explorer.js" defer></script>
+  <script src="js/tokenizer.js" defer></script>
+  <script src="js/page-loader.js" defer></script>
+</head>
+
+<body>
+  <!-- Page header -->
+  <header>
+    <div class="header-content">
+      <!-- Site title -->
+      <div class="brand">trAIning: praktické rady pro práci s genAI</div>
+
+      <!-- In-page search form -->
+      <form id="find-form" role="search" class="find" onsubmit="return false;">
+        <label for="site-search" class="visually-hidden">Vyhledat na této stránce</label>
+        <input id="site-search" type="search" placeholder="Vyhledat na této stránce…" autocomplete="off" />
+        <div class="find-controls">
+          <span id="find-count" aria-live="polite">0/0</span>
+          <button type="button" id="find-prev" title="Předchozí (Shift+Enter)" aria-label="Předchozí výsledek">‹</button>
+          <button type="button" id="find-next" title="Další (Enter)" aria-label="Další výsledek">›</button>
+          <button type="button" id="find-clear" title="Vymazat (Esc)" aria-label="Vymazat vyhledávání">✕</button>
+        </div>
+      </form>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Side menu -->
+    <nav class="menu">
+      <ul>
+        <li><a href="#introduction">♟ Úvod</a></li>
+        <li><a href="#basics">🧩 Jak jazykové modely fungují</a></li>
+        <li><a href="#glossary">📊 Základní pojmy</a></li>
+        <li><a href="#prompting">✒️ Jak na kvalitní prompt</a></li>
+        <li><a href="#usage">💻 Jak jazykové modely využít</a></li>
+        <li><a href="#safety">🦺 Bezpečnost a etika</a></li>
+        <li><a href="#models">📓 Přehled vybraných modelů</a></li>
+        <li><a href="#usecases">📋 Kazuistika</a></li>
+        <li><a href="#resources">🧮 Doporučené zdroje</a></li>
+      </ul>
+    </nav>
+
+    <!-- Obsah se načítá dynamicky pomocí page-loader.js -->
+    <div class="content">
+      <!-- Loading placeholder -->
+      <div id="loading-indicator" class="section section--white">
+        <div class="section__body" style="text-align: center; padding: 4rem;">
+          <p>Načítání obsahu...</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

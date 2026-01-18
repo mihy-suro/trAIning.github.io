@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Technique Explorer - Split view with detail panel
+   ========================================================================== */
+
+.technique-explorer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Levá část - seznam technik */
+.technique-list {
+  border: 1px solid var(--clr-border, #e0e0e0);
+  border-radius: 8px;
+  background: var(--clr-surface, #fff);
+  overflow: hidden;
+}
+
+.technique-list__header {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--clr-text-muted, #6b7280);
+  padding: 0.75rem 1rem;
+  background: var(--clr-muted, #f9fafb);
+  border-bottom: 1px solid var(--clr-border, #e0e0e0);
+}
+
+.technique-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--clr-border, #e0e0e0);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.technique-item:last-child {
+  border-bottom: none;
+}
+
+.technique-item:hover {
+  background-color: var(--clr-muted, #f5f5f5);
+}
+
+.technique-item.is-active {
+  background-color: var(--clr-accent-light, #e8f4fd);
+  border-left: 3px solid var(--clr-accent, #2563eb);
+  padding-left: calc(1rem - 3px);
+}
+
+.technique-item__badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: var(--clr-muted, #e5e7eb);
+  color: var(--clr-text-muted, #6b7280);
+  flex-shrink: 0;
+}
+
+.technique-item__badge--basic {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.technique-item__badge--advanced {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.technique-item__badge--safety {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.technique-item__badge--risk {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.technique-item__name {
+  font-weight: 500;
+  color: var(--clr-text, #1f2937);
+  flex-grow: 1;
+}
+
+.technique-item__arrow {
+  color: var(--clr-text-muted, #9ca3af);
+  font-size: 0.875rem;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.technique-item:hover .technique-item__arrow,
+.technique-item.is-active .technique-item__arrow {
+  opacity: 1;
+}
+
+/* Pravá část - detail panel */
+.technique-detail {
+  border: 1px solid var(--clr-border, #e0e0e0);
+  border-radius: 8px;
+  background: var(--clr-surface, #fff);
+  padding: 1.5rem;
+  position: sticky;
+  top: 5rem;
+  max-height: calc(100vh - 7rem);
+  overflow-y: auto;
+}
+
+.technique-detail__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--clr-text-muted, #9ca3af);
+  text-align: center;
+}
+
+.technique-detail__placeholder-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+}
+
+.technique-detail__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--clr-text, #1f2937);
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.technique-detail__subtitle {
+  font-size: 0.875rem;
+  color: var(--clr-text-muted, #6b7280);
+  margin: 0 0 1.25rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--clr-border, #e0e0e0);
+}
+
+.technique-detail__section {
+  margin-bottom: 1.25rem;
+}
+
+.technique-detail__section:last-child {
+  margin-bottom: 0;
+}
+
+.technique-detail__section-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--clr-text-muted, #6b7280);
+  margin: 0 0 0.5rem 0;
+}
+
+.technique-detail__description {
+  color: var(--clr-text, #374151);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.technique-detail__example {
+  background: var(--clr-code-bg, #1e293b);
+  color: var(--clr-code-text, #e2e8f0);
+  padding: 1rem;
+  border-radius: 6px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+  margin: 0;
+}
+
+/* Content templates (hidden, used by JS) */
+.technique-content {
+  display: none;
+}
+
+/* Responsive - na mobilu stack vertikálně */
+@media (max-width: 900px) {
+  .technique-explorer {
+    grid-template-columns: 1fr;
+  }
+  
+  .technique-detail {
+    position: static;
+    max-height: none;
+  }
+}
+
+/* Animation for content switch */
+.technique-detail__body {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

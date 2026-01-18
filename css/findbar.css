@@ -1,0 +1,80 @@
+/* Find bar styles */
+/* Smaller font for the search area so the input isn't huge due to header font-size */
+.find {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.5em; /* halves the 2em header size for the search controls */
+  letter-spacing: normal; /* avoid spaced-out input text */
+}
+
+/* Rounded search input for dark header */
+.find input[type="search"] {
+  width: min(46vw, 420px);
+  padding: 10px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
+  color: var(--brand-white);
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.find input[type="search"]::placeholder { 
+  color: rgba(255,255,255,0.8);
+  font-family: "Funnel Display", sans-serif;
+ }
+
+.find input[type="search"]:focus {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.45);
+  font-family: "Funnel Display", sans-serif;
+}
+
+/* Controls: counter + buttons */
+.find-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#find-count {
+  font-size: 0.95em;
+  opacity: 0.9;
+}
+
+/* Ghost buttons to match dark header */
+.find-controls button {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: transparent;
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px 8px;
+  line-height: 1;
+  cursor: pointer;
+}
+.find-controls button:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.45);
+}
+
+/* Highlight styles inside .content */
+mark.find-highlight {
+  background: var(--brand-yellow); /* yellow highlight */
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+mark.find-highlight.current {
+  outline: 1px solid var(--brand-dark); /* emphasize current match */
+  background: var(--brand-yellow);
+}
+
+/* Visually hidden label for accessibility */
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px,1px,1px,1px);
+  clip-path: inset(50%);
+  height: 1px; width: 1px; overflow: hidden; white-space: nowrap;
+}

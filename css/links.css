@@ -1,0 +1,238 @@
+/* ============================================
+   LINK STYLES
+   Elegant, accessible link design
+   ============================================ */
+
+/* Base link styles */
+a {
+  color: var(--brand-dark);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Underline effect */
+a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: var(--brand-yellow);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+a:hover::after,
+a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Hover state */
+a:hover {
+  color: var(--brand-dark);
+}
+
+/* Focus state for accessibility */
+a:focus-visible {
+  outline: 2px solid var(--brand-yellow);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Visited links - subtle difference */
+a:visited {
+  color: #1a2332;
+}
+
+/* Active state */
+a:active {
+  color: var(--brand-dark);
+}
+
+/* ============================================
+   LINK VARIANTS
+   ============================================ */
+
+/* External link with icon */
+a[target="_blank"]::before,
+a[rel*="external"]::before {
+  content: '↗';
+  display: inline-block;
+  margin-right: 4px;
+  font-size: 0.85em;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+a[target="_blank"]:hover::before,
+a[rel*="external"]:hover::before {
+  opacity: 1;
+}
+
+/* Inline link variant - minimal styling */
+.link--inline {
+  font-weight: 500;
+  border-bottom: 1px solid rgba(3, 8, 21, 0.15);
+}
+
+.link--inline::after {
+  display: none;
+}
+
+.link--inline:hover {
+  border-bottom-color: var(--brand-yellow);
+}
+
+
+/* Subtle link - minimal visual emphasis */
+.link--subtle {
+  color: rgba(3, 8, 21, 0.7);
+  font-size: 0.95em;
+}
+
+.link--subtle:hover {
+  color: var(--brand-dark);
+}
+
+/* Large font link */
+.link--large {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+/* ============================================
+   SPECIAL CONTEXTS
+   ============================================ */
+
+/* Links in navigation */
+nav a {
+  font-weight: 500;
+}
+
+nav a::after {
+  bottom: -4px;
+  height: 3px;
+}
+
+/* Links in reference cards (override default) */
+.reference-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--brand-dark);
+  font-weight: 600;
+  padding: 8px 16px;
+  border: 2px solid var(--brand-dark);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.reference-card__link::after {
+  display: none;
+}
+
+.reference-card__link::before {
+  content: '→';
+  transition: transform 0.2s ease;
+}
+
+.reference-card__link:hover {
+  background: var(--brand-dark);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.reference-card__link:hover::before {
+  transform: translateX(2px);
+}
+
+/* Links in tables */
+.data-table a {
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: rgba(3, 8, 21, 0.2);
+  text-underline-offset: 3px;
+}
+
+.data-table a::after {
+  display: none;
+}
+
+.data-table a:hover {
+  text-decoration-color: var(--brand-yellow);
+}
+
+/* Links in dark sections */
+.section--dark a {
+  color: #ffffff;
+}
+
+.section--dark a::after {
+  background: var(--brand-yellow);
+}
+
+.section--dark a:hover {
+  color: #ffffff;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Skip to content link (for keyboard users) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--brand-dark);
+  color: #ffffff;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 10000;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Ensure sufficient contrast */
+@media (prefers-contrast: high) {
+  a::after {
+    height: 3px;
+  }
+  
+  a:focus-visible {
+    outline-width: 3px;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  a,
+  a::after,
+  a::before {
+    transition: none;
+  }
+  
+  .link--button:hover,
+  .link--button-secondary:hover,
+  .link--arrow:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .link--button,
+  .link--button-secondary {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}

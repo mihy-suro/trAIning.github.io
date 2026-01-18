@@ -1,0 +1,294 @@
+<!-- PROMPTING -->
+<section id="prompting">
+  <div class="section section--muted">
+    <h1 class="section__title">Jak na kvalitní prompt</h1>
+
+    <div class="section__body">
+
+      <!-- 1) ÚVOD -->
+      <h2>1) Proč záleží na promptování</h2>
+      <p>
+        LLM není „telepat" – bez kontextu hádá, co chceš. Představ si ho jako velmi schopného,
+        ale juniorního asistenta: má obrovské znalosti, je rychlý a ochotný, ale neví nic o tvém
+        konkrétním kontextu, preferencích ani o tom, co považuješ za „dobrý výsledek". Když mu
+        řekneš jen „udělej mi prezentaci", dostaneš něco – ale pravděpodobně ne to, co jsi čekal.
+        Když mu vysvětlíš účel, publikum, strukturu a příklady toho, co chceš, výsledek bude
+        nesrovnatelně lepší.
+      </p>
+      <p>
+        Prompt je proto v praxi tvoje <strong>programovací rozhraní</strong>: když ho napíšeš jasně,
+        model má méně prostoru si domýšlet, drží formát a snáz se dá kontrolovat.
+      </p>
+      <p>
+        <strong>Prompt engineering</strong> znamená navrhovat a ladit prompty tak, aby výstupy byly
+        kvalitní, konzistentní a auditovatelné – a ideálně i levnější a rychlejší díky menšímu počtu iterací.
+        V praxi to znamená předem si ujasnit několik věcí: co přesně má být výstupem a k čemu bude použit,
+        pro koho se píše (jazyk, úroveň, tón), jaká data modelu dáváš (a co je mimo scope),
+        v jakém formátu chceš odpověď (JSON, tabulka, odrážky, struktura sekcí) a jak poznáš,
+        že je výstup správný (kritéria kvality, citace zdrojů, možnost říct „nevím").
+      </p>
+
+      <!-- 2) SYSTEM VS USER PROMPT -->
+      <h2>2) Systémový vs. uživatelský prompt</h2>
+      <p>
+        Většina chatovacích rozhraní a API rozlišuje dva typy promptů, které mají různou roli:
+      </p>
+      <ul class="list">
+        <li>
+          <strong>Systémový prompt (system)</strong> – nastavuje kontext, roli a pravidla chování modelu.
+          Definuje „kdo model je" a jak se má chovat napříč celou konverzací. Typicky obsahuje:
+          roli (např. „Jsi právní asistent"), omezení (co nesmí dělat), formát odpovědí a bezpečnostní pravidla.
+          Uživatel ho obvykle nevidí.
+        </li>
+        <li>
+          <strong>Uživatelský prompt (user)</strong> – konkrétní dotaz nebo úkol od uživatele.
+          Mění se s každou zprávou a obsahuje to, co chce uživatel právě teď vyřešit.
+        </li>
+      </ul>
+      <p>
+        <strong>Proč to rozlišovat?</strong> Systémový prompt je stabilní základ – nastavíš ho jednou
+        a platí pro celou session. Uživatelský prompt se mění. Když chceš konzistentní chování
+        (tón, formát, bezpečnost), dej pravidla do system. Konkrétní úkoly patří do user.
+      </p>
+      <p>
+        <strong>Příklad:</strong>
+      </p>
+      <pre class="technique-detail__example" style="margin: 0 0 1rem 0;">[SYSTEM]
+Jsi asistent pro HR oddělení. Odpovídej profesionálně a stručně.
+Nepoužívej žargon. Pokud si nejsi jistý, řekni to.
+
+[USER]
+Jak správně napsat výpověď z pracovního poměru?</pre>
+      <p style="color: var(--clr-text-muted, #6b7280); font-size: 0.9rem;">
+        <em>Tip:</em> Ne všechna rozhraní systémový prompt podporují (např. základní ChatGPT web).
+        V API (OpenAI, Anthropic, Azure) je to standardní součást requestu.
+      </p>
+
+      <!-- 3) PROMPTOVACÍ METODY -->
+      <h2>3) Promptovací metody</h2>
+
+      <p>
+        Klikněte na metodu vlevo pro zobrazení detailního popisu a ukázkového promptu.
+      </p>
+
+      <div class="technique-explorer">
+        <!-- Levá část: seznam metod -->
+        <div class="technique-list">
+          <div class="technique-list__header">Metody</div>
+          
+          <!-- ZÁKLADNÍ -->
+          <div class="technique-item" data-technique="clear" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--basic">basic</span>
+            <span class="technique-item__name">Buď jasný a konkrétní</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+          
+          <div class="technique-item" data-technique="format" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--basic">basic</span>
+            <span class="technique-item__name">Specifikuj formát výstupu</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+          
+          <div class="technique-item" data-technique="shot" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--basic">basic</span>
+            <span class="technique-item__name">Zero-shot / One-shot / Few-shot</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+          
+          <div class="technique-item" data-technique="role" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--basic">basic</span>
+            <span class="technique-item__name">Role / system prompt</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+          
+          <!-- POKROČILÉ -->
+          <div class="technique-item" data-technique="xml" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--advanced">advanced</span>
+            <span class="technique-item__name">XML tagy</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+          
+          <div class="technique-item" data-technique="cot" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--advanced">advanced</span>
+            <span class="technique-item__name">Chain of Thought (CoT)</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+          
+          <div class="technique-item" data-technique="consistency" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--advanced">advanced</span>
+            <span class="technique-item__name">Konzistence (prefill, řetězení)</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+          
+          <div class="technique-item" data-technique="tot" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--advanced">advanced</span>
+            <span class="technique-item__name">Tree of Thoughts + Reflexe</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+          
+          <!-- BEZPEČNOST -->
+          <div class="technique-item" data-technique="out" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--safety">safety</span>
+            <span class="technique-item__name">Dej modelu „out"</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+          
+          <div class="technique-item" data-technique="hallucinations" tabindex="0">
+            <span class="technique-item__badge technique-item__badge--safety">safety</span>
+            <span class="technique-item__name">Méně halucinací</span>
+            <span class="technique-item__arrow">→</span>
+          </div>
+        </div>
+        
+        <!-- Pravá část: detail panel -->
+        <div class="technique-detail">
+          <div class="technique-detail__placeholder">
+            <div class="technique-detail__placeholder-icon">👈</div>
+            <p>Vyberte metodu ze seznamu<br>pro zobrazení detailů a ukázky promptu</p>
+          </div>
+        </div>
+        
+        <!-- Skryté obsahy technik (data pro JS) -->
+        <div class="technique-content" data-technique="clear"
+          data-description="Jasná a konkrétní formulace promptu výrazně zvyšuje kvalitu výstupu. Uveďte účel, publikum a definici úspěchu. Model má pak méně prostoru si domýšlet a drží se zadání."
+          data-when="Skoro vždy – hlavně když model tápe nebo dává obecné odpovědi."
+          data-example="Shrň následující text pro laiky do 5 bodů.
+Zdůrazni hlavní rizika.
+Maximální délka: 900 znaků.
+Formát: číslované odrážky.
+Pokud něco není v textu jasné, napiš 'není uvedeno'."></div>
+        
+        <div class="technique-content" data-technique="format"
+          data-description="Specifikace formátu výstupu zajišťuje konzistenci a usnadňuje další zpracování. Definujte strukturu (nadpisy, odrážky, tabulky) i délku."
+          data-when="Když chceš konzistenci (reporty, exporty, šablony) nebo automatizované zpracování."
+          data-example="Vrať výstup jako:
+1) Nadpis (max 10 slov)
+2) 3 odrážky 'Proč' (důvody)
+3) 3 odrážky 'Jak' (postup)
+4) Sekce 'Nejistoty' – co nelze rozhodnout bez dalších informací"></div>
+        
+        <div class="technique-content" data-technique="shot"
+          data-description="Zero-shot = jen instrukce, One-shot = 1 ukázka vstup→výstup, Few-shot = 3-5 ukázek včetně edge-cases. Příklady učí styl spolehlivěji než abstraktní pravidla."
+          data-when="Když potřebuješ specifický styl, klasifikaci nebo strukturu výstupu."
+          data-example="Klasifikuj sentiment recenzí jako POZITIVNÍ, NEGATIVNÍ nebo NEUTRÁLNÍ.
+
+Příklady:
+Vstup: 'Skvělý produkt, doporučuji!'
+Výstup: POZITIVNÍ
+
+Vstup: 'Nic moc, čekal jsem víc.'  
+Výstup: NEGATIVNÍ
+
+Vstup: 'Dorazilo včas.'
+Výstup: NEUTRÁLNÍ
+
+Nyní klasifikuj: '{recenze}'"></div>
+        
+        <div class="technique-content" data-technique="role"
+          data-description="Přiřazení role modelu nastaví perspektivu, tón a úroveň expertízy. Role patří do system promptu, konkrétní úkol do user zprávy."
+          data-when="Když chceš konzistentní tón a 'optiku' odborníka."
+          data-example="[SYSTEM]
+Jsi seniorní analytik compliance s 15 lety praxe v bankovnictví.
+Piš stručně a profesionálně.
+Používej odrážky pro přehlednost.
+Vždy označ nejistoty a předpoklady.
+
+[USER]
+Zhodnoť rizika v následující smlouvě..."></div>
+        
+        <div class="technique-content" data-technique="xml"
+          data-description="XML tagy oddělují instrukce, kontext a data. Model pak méně plete části promptu a výstup jde lépe parsovat. Skvělé pro složité prompty."
+          data-when="Pro strukturované prompty, oddělení instrukcí od dat, parseovatelné výstupy."
+          data-example="<instructions>
+Z textu v <source> vytáhni 5 hlavních rizik.
+Používej jen informace ze zdroje, ne vlastní znalosti.
+</instructions>
+
+<format>
+Vrať tabulku: Riziko | Důkaz (přímá citace) | Dopad | Doporučení
+</format>
+
+<source>
+... vložený text dokumentu ...
+</source>"></div>
+        
+        <div class="technique-content" data-technique="cot"
+          data-description="Chain of Thought dává modelu prostor postupovat krokově. Pro složité úlohy (analýza, matematika, logika) explicitně požaduj myšlenkový postup oddělený od výsledku."
+          data-when="Pro složité úlohy vyžadující analýzu, plánování nebo multi-step uvažování."
+          data-example="<instructions>
+Vyřeš následující úlohu.
+Nejprve uvažuj krok za krokem v <thinking>.
+Pak dej čistý výsledek v <answer>.
+</instructions>
+
+<problem>
+Firma má 3 pobočky. Praha má 2x více zaměstnanců než Brno.
+Ostrava má o 15 méně než Brno. Celkem je 215 zaměstnanců.
+Kolik zaměstnanců má každá pobočka?
+</problem>"></div>
+        
+        <div class="technique-content" data-technique="consistency"
+          data-description="Pro konzistentní výstupy: specifikuj formát, použij prefill (předvyplň začátek odpovědi), dej příklady, rozděl složité úlohy na kroky (chain prompts)."
+          data-when="Když potřebuješ opakovatelné, konzistentní výstupy napříč více dotazy."
+          data-example="Analyzuj dokument a vrať strukturovaný výstup.
+
+[PREFILL - předvyplň začátek odpovědi]
+Assistant: {
+  &quot;summary&quot;: &quot;
+
+[Očekávaný formát]
+{
+  &quot;summary&quot;: &quot;...&quot;,
+  &quot;key_points&quot;: [&quot;...&quot;],
+  &quot;risks&quot;: [&quot;...&quot;],
+  &quot;confidence&quot;: 0.0-1.0
+}"></div>
+        
+        <div class="technique-content" data-technique="tot"
+          data-description="Tree of Thoughts generuje více kandidátních řešení, hodnotí je a iteruje. Reflexion přidává učení z vlastních chyb. Vhodné pro optimalizaci a návrh."
+          data-when="Pro úlohy s hledáním v prostoru možností (plán, návrh, strategie, optimalizace)."
+          data-example="Navrhni řešení pro [problém].
+
+Postup:
+1) Vymysli 3 různé přístupy
+2) Pro každý uveď:
+   - Výhody a nevýhody
+   - Hlavní rizika  
+   - Kdy by selhal
+3) Vyber nejlepší přístup a zdůvodni proč
+4) Uveď 2 alternativy jako fallback
+5) Reflektuj: co by změnilo tvé rozhodnutí?"></div>
+        
+        <div class="technique-content" data-technique="out"
+          data-description="Povolení modelu říct 'nevím' snižuje riziko vymýšlení. Definuj, co má udělat při nejistotě – jaké informace chybí, jaký je confidence level."
+          data-when="Když hrozí domýšlení faktů, nekompletní data nebo vysoké riziko chyby."
+          data-example="Odpověz na otázku pouze na základě poskytnutého textu.
+
+Pravidla:
+- Pokud si nejsi jistý, napiš 'Nevím' a uveď, co bys potřeboval doplnit
+- Pokud tvrzení nejde podložit citací z textu, netvrď ho
+- U každé odpovědi uveď confidence: HIGH / MEDIUM / LOW
+- Pokud je confidence LOW, vysvětli proč"></div>
+        
+        <div class="technique-content" data-technique="hallucinations"
+          data-description="Snížení halucinací: vyžaduj citace, povol 'nevím', omez na zdroje ('používej jen informace z podkladů'), pro kritické věci použij více běhů (Best-of-N)."
+          data-when="Pro fakticky kritické úlohy kde jsou halucinace nepřijatelné."
+          data-example="Analyzuj dokument a odpověz na otázky.
+
+STRIKTNÍ PRAVIDLA:
+1) Používej POUZE informace z přiloženého dokumentu
+2) Každé tvrzení musí mít citaci: [str. X] nebo přímý citát
+3) Pokud informace není v dokumentu, napiš: 'NENÍ V DOKUMENTU'
+4) Nepoužívej vlastní znalosti ani nedoplňuj chybějící kontext
+5) Na konci uveď: 'Ověřeno proti zdroji: ANO/ČÁSTEČNĚ/NE'"></div>
+      </div>
+
+      <p style="margin-top: 1.5rem; color: var(--clr-text-muted, #6b7280); font-size: 0.9rem;">
+        Toto je základní přehled nejběžnějších metod. Pro hlubší studium doporučujeme
+        <a href="https://www.promptingguide.ai/techniques" target="_blank" rel="noopener">Prompting Guide</a>,
+        který nabízí detailní vysvětlení a další pokročilé přístupy.
+      </p>
+
+    </div>
+  </div>
+</section>

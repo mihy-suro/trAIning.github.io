@@ -1,0 +1,86 @@
+
+/* Inline wrapper so it fits naturally within text flow */
+.info {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: 1;
+}
+
+/* The small round icon button */
+.info__trigger {
+  appearance: none;
+  display: inline;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  cursor: help;
+}
+
+.info__word {
+  font-size: inherit;
+  font-weight: bold;
+  padding: 0 2px;
+  background: var(--brand-dark);
+  border-radius: 9999px;
+  color: var(--brand-yellow);
+  cursor: help;
+  font-size: inherit;
+  padding: 0 0.5em;
+}
+
+/* Focus ring for accessibility */
+.info__trigger:focus-visible {
+  outline: 2px solid #0969da;
+  outline-offset: 2px;
+}
+
+/* Tooltip panel */
+.info__tooltip {
+  position: absolute;
+  z-index: 1000;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+  background: var(--tooltip-bg);
+  color: var(--tooltip-fg);
+  box-shadow: var(--tooltip-shadow);
+  border: 1px solid var(--tooltip-border);
+  font-size: 0.9em;
+  line-height: 1.35;
+  pointer-events: none; /* avoid trapping mouse */
+  opacity: 0;
+  transform: translate(-50%, -6px) scale(0.98);
+  transition: opacity 120ms ease, transform 120ms ease;
+  /* default placement: top, centered */
+  left: 50%;
+  bottom: calc(100% + 8px);
+}
+
+
+
+/* Tooltip arrow */
+.info__tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: var(--tooltip-bg) transparent transparent transparent;
+}
+
+
+/* Visible state toggled by JS with [data-open="true"] */
+.info[data-open="true"] .info__tooltip {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+/* Ensure hidden attribute actually hides if present */
+.info__tooltip[hidden] {
+  display: none !important;
+}
