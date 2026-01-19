@@ -166,6 +166,26 @@
     document.dispatchEvent(new CustomEvent('pagesLoaded'));
     
     console.log('Page loader: pagesLoaded event dispatched');
+
+    // Re-typeset MathJax for dynamically loaded content
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      console.log('Page loader: running MathJax typeset...');
+      window.MathJax.typesetPromise().then(() => {
+        console.log('Page loader: MathJax typeset complete');
+      }).catch((err) => {
+        console.warn('Page loader: MathJax typeset error:', err);
+      });
+    } else if (window.MathJax && window.MathJax.startup) {
+      // MathJax not fully loaded yet, wait for it
+      window.MathJax.startup.promise.then(() => {
+        console.log('Page loader: MathJax ready, running typeset...');
+        return window.MathJax.typesetPromise();
+      }).then(() => {
+        console.log('Page loader: MathJax typeset complete');
+      }).catch((err) => {
+        console.warn('Page loader: MathJax typeset error:', err);
+      });
+    }
   }
 
   // Spusť po načtení DOM

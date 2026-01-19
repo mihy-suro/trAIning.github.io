@@ -77,6 +77,31 @@
           </div>
         </div>
 
+        <!-- Poznámka: Chinchilla scaling laws -->
+        <div class="collapsible" data-collapsible>
+          <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-chinchilla" id="collapsible-button-chinchilla">
+          <b>VÍCE:</b> Všechno řídí činčily!
+          </button>
+
+          <div class="collapsible__panel" id="collapsible-panel-chinchilla" role="region" aria-labelledby="collapsible-button-chinchilla" hidden>
+            <p>
+              <strong>Chinchilla scaling laws</strong> popisují optimální vztah mezi velikostí modelu (počet parametrů) a množstvím trénovacích dat (počet tokenů) pro daný výpočetní rozpočet. Studie DeepMind ukázala, že pro dosažení co nejlepšího výkonu by počet trénovacích tokenů měl být asi 20× větší než počet parametrů modelu – tedy model s 1 mld. parametrů by měl být trénován na zhruba 20 mld. tokenů.
+            </p>
+            <p>
+              V matematické formě se Chinchilla scaling laws často vyjadřují skrze souvislost mezi výpočetními náklady $C$, počtem parametrů $N$ a počtem trénovacích tokenů $D$:
+            </p>
+            <p style="text-align: center; font-size: 1.2em;">
+              $$C \approx C_0 \cdot N \cdot D$$
+            </p>
+            <p>
+              kde $C_0$ je konstanta převádějící počet operací na náklady. Po optimalizaci se zjistí, že optimální kombinace $N$ a $D$ minimalizuje chybovou funkci modelu pro daný rozpočet.
+            </p>
+            <p>
+              Chinchilla tím zpochybnila dřívější představu, že větší model = lepší model, a místo toho doporučuje vyvážený poměr parametrů a dat pro efektivnější učení.
+            </p>
+          </div>
+        </div>
+
         <!-- Poznámka: Overfitting a double descent -->
         <div class="collapsible" data-collapsible>
           <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-overfitting" id="collapsible-button-overfitting">
@@ -464,6 +489,22 @@
           <li>model může být kreativní,</li>
           <li>ale zároveň se může i „utrhnout ze řetězu".</li>
         </ul>
+
+        <!-- Obrázek: Nastavení teploty v Google AI Studio -->
+        <figure class="image-card image-card--thumbnail">
+          <div class="image-card__frame">
+            <div class="thumbnail" data-full="img/teplota.png">
+              <img src="img/teplota.png" alt="Nastavení Temperature a Top P v Google AI Studio" loading="lazy" decoding="async"/>
+            </div>
+          </div>
+          <figcaption class="image-card__caption">
+            <h3 class="image-card__title">Nastavení Temperature a Top P</h3>
+            <p class="image-card__meta">
+              Klikněte pro zvětšení.
+            </p>
+          </figcaption>
+        </figure>
+
         <p>
           V některých LLM nástrojích má uživatel možnost pravidla této ruské rulety ovlivnit explicitním nastavením parametrů jako je teplota, top-k nebo top-p.
         </p>

@@ -60,3 +60,30 @@
 /* Optional: edge-to-edge, smaller cards */
 .image-card--small { max-width: 480px; }
 .image-card--wide  { max-width: 960px; }
+.image-card--thumbnail { 
+  max-width: 150px;
+  width: 150px;
+  float: right;
+  margin: 0 0 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.image-card--thumbnail .image-card__frame {
+  padding-top: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.image-card--thumbnail .image-card__caption {
+  padding: 4px 0;
+  background: transparent;
+  border: none;
+}
+.image-card--thumbnail .image-card__title {
+  font-size: 0.8rem;
+  text-align: center;
+}
+.image-card--thumbnail .image-card__meta {
+  font-size: 0.75rem;
+  text-align: center;
+}

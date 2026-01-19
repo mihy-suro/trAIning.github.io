@@ -1,286 +1,263 @@
 <!-- PROMPTING -->
 <section id="prompting">
   <div class="section section--muted">
-    <h1 class="section__title">Jak na kvalitní prompt</h1>
+    <h1 class="section__title">Jak pracovat s LLMs</h1>
 
     <div class="section__body">
 
+      <!-- PROMPTOVÁNÍ -->
+      <h2>Promptování</h2>
+
       <!-- 1) ÚVOD -->
-      <h2>1) Proč záleží na promptování</h2>
+      <h3>1) Proč záleží na promptování</h3>
       <p>
-        LLM není „telepat" – bez kontextu hádá, co chceš. Představ si ho jako velmi schopného,
-        ale juniorního asistenta: má obrovské znalosti, je rychlý a ochotný, ale neví nic o tvém
-        konkrétním kontextu, preferencích ani o tom, co považuješ za „dobrý výsledek". Když mu
-        řekneš jen „udělej mi prezentaci", dostaneš něco – ale pravděpodobně ne to, co jsi čekal.
-        Když mu vysvětlíš účel, publikum, strukturu a příklady toho, co chceš, výsledek bude
-        nesrovnatelně lepší.
+        LLM není „telepat" – bez kontextu hádá, co po něm chcete. Představte si ho jako velmi schopného,
+        ale juniorního asistenta: má obrovské znalosti, je rychlý a ochotný, ale neví nic o vašem
+        konkrétním kontextu, preferencích ani o tom, co považujete za „dobrý výsledek". Když mu
+        řeknete jen „udělej mi prezentaci", nepočítejte s žádoucím výsledkem. Když mu vysvětlíte
+        kontext toho, co po něm chcete, bude výsledek nesrovnatelně lepší.
       </p>
       <p>
-        Prompt je proto v praxi tvoje <strong>programovací rozhraní</strong>: když ho napíšeš jasně,
-        model má méně prostoru si domýšlet, drží formát a snáz se dá kontrolovat.
-      </p>
-      <p>
-        <strong>Prompt engineering</strong> znamená navrhovat a ladit prompty tak, aby výstupy byly
-        kvalitní, konzistentní a auditovatelné – a ideálně i levnější a rychlejší díky menšímu počtu iterací.
-        V praxi to znamená předem si ujasnit několik věcí: co přesně má být výstupem a k čemu bude použit,
-        pro koho se píše (jazyk, úroveň, tón), jaká data modelu dáváš (a co je mimo scope),
-        v jakém formátu chceš odpověď (JSON, tabulka, odrážky, struktura sekcí) a jak poznáš,
-        že je výstup správný (kritéria kvality, citace zdrojů, možnost říct „nevím").
+        Prompt je proto v praxi vaše <strong>programovací rozhraní</strong>: když ho napíšete jasně,
+        model má méně prostoru si domýšlet. <strong>Prompt engineering</strong> znamená navrhovat
+        a ladit prompty tak, aby výstupy byly kvalitní a konzistentní a ideálně i levnější díky
+        menšímu počtu iterací. V praxi to znamená předem si ujasnit několik věcí: co přesně má být
+        výstupem a k čemu bude použit, pro koho se píše (jazyk, úroveň, tón), jaká data modelu dáváte,
+        v jakém formátu chcete odpověď (JSON, tabulka, odrážky, ...) a jak poznáte, že je výstup
+        správný (kritéria kvality, citace zdrojů, možnost říct „nevím").
       </p>
 
-      <!-- 2) SYSTEM VS USER PROMPT -->
-      <h2>2) Systémový vs. uživatelský prompt</h2>
-      <p>
-        Většina chatovacích rozhraní a API rozlišuje dva typy promptů, které mají různou roli:
-      </p>
-      <ul class="list">
-        <li>
-          <strong>Systémový prompt (system)</strong> – nastavuje kontext, roli a pravidla chování modelu.
-          Definuje „kdo model je" a jak se má chovat napříč celou konverzací. Typicky obsahuje:
-          roli (např. „Jsi právní asistent"), omezení (co nesmí dělat), formát odpovědí a bezpečnostní pravidla.
-          Uživatel ho obvykle nevidí.
-        </li>
-        <li>
-          <strong>Uživatelský prompt (user)</strong> – konkrétní dotaz nebo úkol od uživatele.
-          Mění se s každou zprávou a obsahuje to, co chce uživatel právě teď vyřešit.
-        </li>
-      </ul>
-      <p>
-        <strong>Proč to rozlišovat?</strong> Systémový prompt je stabilní základ – nastavíš ho jednou
-        a platí pro celou session. Uživatelský prompt se mění. Když chceš konzistentní chování
-        (tón, formát, bezpečnost), dej pravidla do system. Konkrétní úkoly patří do user.
-      </p>
-      <p>
-        <strong>Příklad:</strong>
-      </p>
-      <pre class="technique-detail__example" style="margin: 0 0 1rem 0;">[SYSTEM]
-Jsi asistent pro HR oddělení. Odpovídej profesionálně a stručně.
-Nepoužívej žargon. Pokud si nejsi jistý, řekni to.
-
-[USER]
-Jak správně napsat výpověď z pracovního poměru?</pre>
-      <p style="color: var(--clr-text-muted, #6b7280); font-size: 0.9rem;">
-        <em>Tip:</em> Ne všechna rozhraní systémový prompt podporují (např. základní ChatGPT web).
-        V API (OpenAI, Anthropic, Azure) je to standardní součást requestu.
-      </p>
-
-      <!-- 3) PROMPTOVACÍ METODY -->
-      <h2>3) Promptovací metody</h2>
+      <!-- 3) TECHNIKY PROMPTOVÁNÍ -->
+      <h3>3) Techniky promptování</h3>
 
       <p>
-        Klikněte na metodu vlevo pro zobrazení detailního popisu a ukázkového promptu.
+        Klikněte na techniku pro zobrazení detailního popisu a ukázkového promptu.
       </p>
 
-      <div class="technique-explorer">
-        <!-- Levá část: seznam metod -->
-        <div class="technique-list">
-          <div class="technique-list__header">Metody</div>
-          
-          <!-- ZÁKLADNÍ -->
-          <div class="technique-item" data-technique="clear" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--basic">basic</span>
-            <span class="technique-item__name">Buď jasný a konkrétní</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-          
-          <div class="technique-item" data-technique="format" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--basic">basic</span>
-            <span class="technique-item__name">Specifikuj formát výstupu</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-          
-          <div class="technique-item" data-technique="shot" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--basic">basic</span>
-            <span class="technique-item__name">Zero-shot / One-shot / Few-shot</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-          
-          <div class="technique-item" data-technique="role" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--basic">basic</span>
-            <span class="technique-item__name">Role / system prompt</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-          
-          <!-- POKROČILÉ -->
-          <div class="technique-item" data-technique="xml" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--advanced">advanced</span>
-            <span class="technique-item__name">XML tagy</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-          
-          <div class="technique-item" data-technique="cot" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--advanced">advanced</span>
-            <span class="technique-item__name">Chain of Thought (CoT)</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-          
-          <div class="technique-item" data-technique="consistency" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--advanced">advanced</span>
-            <span class="technique-item__name">Konzistence (prefill, řetězení)</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-          
-          <div class="technique-item" data-technique="tot" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--advanced">advanced</span>
-            <span class="technique-item__name">Tree of Thoughts + Reflexe</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-          
-          <!-- BEZPEČNOST -->
-          <div class="technique-item" data-technique="out" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--safety">safety</span>
-            <span class="technique-item__name">Dej modelu „out"</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-          
-          <div class="technique-item" data-technique="hallucinations" tabindex="0">
-            <span class="technique-item__badge technique-item__badge--safety">safety</span>
-            <span class="technique-item__name">Méně halucinací</span>
-            <span class="technique-item__arrow">→</span>
-          </div>
-        </div>
-        
-        <!-- Pravá část: detail panel -->
-        <div class="technique-detail">
-          <div class="technique-detail__placeholder">
-            <div class="technique-detail__placeholder-icon">👈</div>
-            <p>Vyberte metodu ze seznamu<br>pro zobrazení detailů a ukázky promptu</p>
-          </div>
-        </div>
-        
-        <!-- Skryté obsahy technik (data pro JS) -->
-        <div class="technique-content" data-technique="clear"
-          data-description="Jasná a konkrétní formulace promptu výrazně zvyšuje kvalitu výstupu. Uveďte účel, publikum a definici úspěchu. Model má pak méně prostoru si domýšlet a drží se zadání."
-          data-when="Skoro vždy – hlavně když model tápe nebo dává obecné odpovědi."
-          data-example="Shrň následující text pro laiky do 5 bodů.
+      <!-- ZÁKLADNÍ TECHNIKY -->
+      <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--clr-text-muted, #6b7280);">Základní techniky</h4>
+
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="technique-clear" id="technique-btn-clear">
+          <span class="technique-badge technique-badge--basic">basic</span> Buďte jasní a konkrétní
+        </button>
+        <div class="collapsible__panel" id="technique-clear" role="region" aria-labelledby="technique-btn-clear" hidden>
+          <p><strong>Kdy použít:</strong> Skoro vždy a zejména když model tápe nebo dává příliš obecné odpovědi.</p>
+          <p>Jasná a konkrétní formulace promptu výrazně zvyšuje kvalitu výstupu. Uveďte účel a publikum. Model má pak menší prostor si domýšlet zadání.</p>
+          <pre class="technique-detail__example">Shrň následující text pro laiky do 5 bodů.
 Zdůrazni hlavní rizika.
 Maximální délka: 900 znaků.
 Formát: číslované odrážky.
-Pokud něco není v textu jasné, napiš 'není uvedeno'."></div>
-        
-        <div class="technique-content" data-technique="format"
-          data-description="Specifikace formátu výstupu zajišťuje konzistenci a usnadňuje další zpracování. Definujte strukturu (nadpisy, odrážky, tabulky) i délku."
-          data-when="Když chceš konzistenci (reporty, exporty, šablony) nebo automatizované zpracování."
-          data-example="Vrať výstup jako:
-1) Nadpis (max 10 slov)
-2) 3 odrážky 'Proč' (důvody)
-3) 3 odrážky 'Jak' (postup)
-4) Sekce 'Nejistoty' – co nelze rozhodnout bez dalších informací"></div>
-        
-        <div class="technique-content" data-technique="shot"
-          data-description="Zero-shot = jen instrukce, One-shot = 1 ukázka vstup→výstup, Few-shot = 3-5 ukázek včetně edge-cases. Příklady učí styl spolehlivěji než abstraktní pravidla."
-          data-when="Když potřebuješ specifický styl, klasifikaci nebo strukturu výstupu."
-          data-example="Klasifikuj sentiment recenzí jako POZITIVNÍ, NEGATIVNÍ nebo NEUTRÁLNÍ.
+Pokud něco není v textu jasné, napiš 'není uvedeno'.</pre>
+        </div>
+      </div>
+
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="technique-format" id="technique-btn-format">
+          <span class="technique-badge technique-badge--basic">basic</span> Specifikujte formát výstupu
+        </button>
+        <div class="collapsible__panel" id="technique-format" role="region" aria-labelledby="technique-btn-format" hidden>
+          <p><strong>Kdy použít:</strong> Když chcete konzistenci nebo automatizované zpracování.</p>
+          <p>Specifikace struktury pomáhá modelu držet se očekávaného formátu. Pokud výstup dále kopírujete, je vhodné explicitně uvést i formát zápisu (např. Markdown). Model pak použije správné nadpisy, seznamy a strukturu bez nutnosti ručních úprav.</p>
+          <pre class="technique-detail__example">Vrať výstup v Markdown formátu:
+
+1) Nadpis (H2, max 10 slov)
+2) Sekce „Proč" – 3 odrážky (důvody)
+3) Sekce „Jak" – 3 odrážky (postup)
+4) Sekce „Nejistoty" – co nelze rozhodnout bez dalších informací</pre>
+        </div>
+      </div>
+
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="technique-shot" id="technique-btn-shot">
+          <span class="technique-badge technique-badge--basic">basic</span> Zero-shot / One-shot / Few-shot
+        </button>
+        <div class="collapsible__panel" id="technique-shot" role="region" aria-labelledby="technique-btn-shot" hidden>
+          <p><strong>Kdy použít:</strong> Když potřebujete konzistentní interpretaci, klasifikaci nebo strukturovaný výstup z nejednoznačného textu.</p>
+          <p>Rozdíl je v tom, zda modelu jen řeknete, co má dělat (zero-shot), nebo mu to ukážete na jednom příkladu (one-shot) nebo několika příkladech (few-shot). Příklady učí model rozhodovací logiku spolehlivěji než obecná pravidla, proto je few-shot vhodný zejména u hraničních případů.</p>
+          <pre class="technique-detail__example">Na základě textového popisu z laboratorního nebo provozního deníku
+urči, zda záznam popisuje:
+
+STANDARDNÍ_PRŮBĚH
+ODCHYLKU
+ZÁVAŽNÝ_PROBLÉM
 
 Příklady:
-Vstup: 'Skvělý produkt, doporučuji!'
-Výstup: POZITIVNÍ
 
-Vstup: 'Nic moc, čekal jsem víc.'  
-Výstup: NEGATIVNÍ
+Vstup: "Měření proběhlo standardně, bez pozorovaných komplikací."
+Výstup: STANDARDNÍ_PRŮBĚH
 
-Vstup: 'Dorazilo včas.'
-Výstup: NEUTRÁLNÍ
+Vstup: "Během přípravy vzorku došlo ke krátkému zdržení, které však nemělo vliv na výsledek."
+Výstup: ODCHYLKA
 
-Nyní klasifikuj: '{recenze}'"></div>
-        
-        <div class="technique-content" data-technique="role"
-          data-description="Přiřazení role modelu nastaví perspektivu, tón a úroveň expertízy. Role patří do system promptu, konkrétní úkol do user zprávy."
-          data-when="Když chceš konzistentní tón a 'optiku' odborníka."
-          data-example="[SYSTEM]
-Jsi seniorní analytik compliance s 15 lety praxe v bankovnictví.
-Piš stručně a profesionálně.
-Používej odrážky pro přehlednost.
-Vždy označ nejistoty a předpoklady.
+Vstup: "Vzorek byl při manipulaci pravděpodobně kontaminován a výsledky nelze považovat za validní."
+Výstup: ZÁVAŽNÝ_PROBLÉM
 
-[USER]
-Zhodnoť rizika v následující smlouvě..."></div>
-        
-        <div class="technique-content" data-technique="xml"
-          data-description="XML tagy oddělují instrukce, kontext a data. Model pak méně plete části promptu a výstup jde lépe parsovat. Skvělé pro složité prompty."
-          data-when="Pro strukturované prompty, oddělení instrukcí od dat, parseovatelné výstupy."
-          data-example="<instructions>
-Z textu v <source> vytáhni 5 hlavních rizik.
-Používej jen informace ze zdroje, ne vlastní znalosti.
-</instructions>
+Nyní klasifikuj:
+Vstup: "{záznam}"
+Výstup:</pre>
+        </div>
+      </div>
 
-<format>
-Vrať tabulku: Riziko | Důkaz (přímá citace) | Dopad | Doporučení
-</format>
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="technique-role" id="technique-btn-role">
+          <span class="technique-badge technique-badge--basic">basic</span> Používejte role / systémový prompt
+        </button>
+        <div class="collapsible__panel" id="technique-role" role="region" aria-labelledby="technique-btn-role" hidden>
+          <p><strong>Kdy použít:</strong> Když chcete konzistentní tón nebo úroveň odbornosti napříč odpověďmi.</p>
+          <p>Role (systémový prompt) nastavuje chování modelu po celou dobu konverzace, takže nemusíte opakovat stejné instrukce v každém promptu a model si je „pamatuje".</p>
+          <p>K podobnému účelu lze dnes v ChatGPT využít i vlastní modely (Custom GPTs) s nahranými dokumenty. Takový model může mít jako referenční kontext například normy, metodiky, manuály, interní reporty nebo jiné odborné podklady – čímž z něj uděláte dlouhodobě kontextově kvalifikovaného specialistu.</p>
+          
+          <p style="margin-top: 1rem;"><strong>Kde se to nastavuje:</strong></p>
+          <ul class="list" style="margin-bottom: 1rem;">
+            <li>V konverzačních rozhraních (např. webových chatech) bývá možnost zadat pokročilé instrukce / systémové chování v rámci nastavení konverzace nebo Custom Instructions.</li>
+            <li>V API se role nastavuje explicitně jako samostatná zpráva typu <code>system</code>, oddělená od uživatelských dotazů.</li>
+            <li>V Custom GPT můžete nahrát vlastní dokumenty a nastavit je jako kontext pro daný GPT.</li>
+          </ul>
+          
+          <pre class="technique-detail__example">Jsi specialista na gama spektrometrii s hlubokou znalostí principů měření,
+kalibrace, detekce a interpretace spekter radionuklidů.
+Odpovídej věcně, přesně a konzistentně se standardy radiační ochrany
+a best practices v spektrometrii.
+Vycházej z normativních materiálů, metodik a interních manuálů,
+pokud jsou k dispozici.
+Pokud si nejsi jistý, uveď to explicitně a popiš, jaké informace chybí k rozhodnutí.</pre>
+        </div>
+      </div>
 
-<source>
-... vložený text dokumentu ...
-</source>"></div>
-        
-        <div class="technique-content" data-technique="cot"
-          data-description="Chain of Thought dává modelu prostor postupovat krokově. Pro složité úlohy (analýza, matematika, logika) explicitně požaduj myšlenkový postup oddělený od výsledku."
-          data-when="Pro složité úlohy vyžadující analýzu, plánování nebo multi-step uvažování."
-          data-example="<instructions>
-Vyřeš následující úlohu.
-Nejprve uvažuj krok za krokem v <thinking>.
-Pak dej čistý výsledek v <answer>.
-</instructions>
+      <!-- POKROČILÉ TECHNIKY -->
+      <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--clr-text-muted, #6b7280);">Pokročilé techniky</h4>
 
-<problem>
-Firma má 3 pobočky. Praha má 2x více zaměstnanců než Brno.
-Ostrava má o 15 méně než Brno. Celkem je 215 zaměstnanců.
-Kolik zaměstnanců má každá pobočka?
-</problem>"></div>
-        
-        <div class="technique-content" data-technique="consistency"
-          data-description="Pro konzistentní výstupy: specifikuj formát, použij prefill (předvyplň začátek odpovědi), dej příklady, rozděl složité úlohy na kroky (chain prompts)."
-          data-when="Když potřebuješ opakovatelné, konzistentní výstupy napříč více dotazy."
-          data-example="Analyzuj dokument a vrať strukturovaný výstup.
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="technique-xml" id="technique-btn-xml">
+          <span class="technique-badge technique-badge--advanced">advanced</span> Používejte strukturování pomocí tagů (XML)
+        </button>
+        <div class="collapsible__panel" id="technique-xml" role="region" aria-labelledby="technique-btn-xml" hidden>
+          <p><strong>Kdy použít:</strong> U složitějších promptů, kde je potřeba jasně oddělit instrukce, data a formát výstupu.</p>
+          <p>Strukturování pomocí tagů snižuje riziko záměny kontextu a zvyšuje spolehlivost odpovědí. Tagy si můžete vymyslet libovolně (např. <code>&lt;instructions&gt;</code>, <code>&lt;data&gt;</code>, <code>&lt;schema&gt;</code>, <code>&lt;output_format&gt;</code>). Nejde o standardní XML, ale o logické oddělení částí promptu.</p>
+          <pre class="technique-detail__example">&lt;instructions&gt;
+Shrň následující text tak, aby:
+- výstup obsahoval 5 stručných bodů,
+- každý bod byl max. 120 znaků,
+- byly odděleny podle témat,
+- obsahoval krátký nadpis pro každý bod.
+&lt;/instructions&gt;
 
-[PREFILL - předvyplň začátek odpovědi]
-Assistant: {
-  &quot;summary&quot;: &quot;
+&lt;data&gt;
+{dlouhý_text}
+&lt;/data&gt;
 
-[Očekávaný formát]
+&lt;output_format&gt;
 {
-  &quot;summary&quot;: &quot;...&quot;,
-  &quot;key_points&quot;: [&quot;...&quot;],
-  &quot;risks&quot;: [&quot;...&quot;],
-  &quot;confidence&quot;: 0.0-1.0
-}"></div>
-        
-        <div class="technique-content" data-technique="tot"
-          data-description="Tree of Thoughts generuje více kandidátních řešení, hodnotí je a iteruje. Reflexion přidává učení z vlastních chyb. Vhodné pro optimalizaci a návrh."
-          data-when="Pro úlohy s hledáním v prostoru možností (plán, návrh, strategie, optimalizace)."
-          data-example="Navrhni řešení pro [problém].
+  "summary": [
+    {
+      "heading": "…",
+      "point": "…"
+    }
+  ]
+}
+&lt;/output_format&gt;</pre>
+        </div>
+      </div>
 
-Postup:
-1) Vymysli 3 různé přístupy
-2) Pro každý uveď:
-   - Výhody a nevýhody
-   - Hlavní rizika  
-   - Kdy by selhal
-3) Vyber nejlepší přístup a zdůvodni proč
-4) Uveď 2 alternativy jako fallback
-5) Reflektuj: co by změnilo tvé rozhodnutí?"></div>
-        
-        <div class="technique-content" data-technique="out"
-          data-description="Povolení modelu říct 'nevím' snižuje riziko vymýšlení. Definuj, co má udělat při nejistotě – jaké informace chybí, jaký je confidence level."
-          data-when="Když hrozí domýšlení faktů, nekompletní data nebo vysoké riziko chyby."
-          data-example="Odpověz na otázku pouze na základě poskytnutého textu.
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="technique-cot" id="technique-btn-cot">
+          <span class="technique-badge technique-badge--advanced">advanced</span> Používejte Chain of Thought (krokové uvažování)
+        </button>
+        <div class="collapsible__panel" id="technique-cot" role="region" aria-labelledby="technique-btn-cot" hidden>
+          <p><strong>Kdy použít:</strong> Pro úlohy vyžadující analýzu a plánování.</p>
+          <p>Model postupuje krok za krokem, což zvyšuje úspěšnost u složitějších úloh. Chain of Thought neznamená jen přidat jednu větu typu „uvažuj krok za krokem", ale jasně oddělit logické fáze úvahy od samotného výsledku, aby bylo možné snadno pochopit a ověřit, jak model dospěl ke své odpovědi.</p>
+          <pre class="technique-detail__example">Vyřeš následující úlohu v několika krocích:
 
-Pravidla:
-- Pokud si nejsi jistý, napiš 'Nevím' a uveď, co bys potřeboval doplnit
-- Pokud tvrzení nejde podložit citací z textu, netvrď ho
-- U každé odpovědi uveď confidence: HIGH / MEDIUM / LOW
-- Pokud je confidence LOW, vysvětli proč"></div>
-        
-        <div class="technique-content" data-technique="hallucinations"
-          data-description="Snížení halucinací: vyžaduj citace, povol 'nevím', omez na zdroje ('používej jen informace z podkladů'), pro kritické věci použij více běhů (Best-of-N)."
-          data-when="Pro fakticky kritické úlohy kde jsou halucinace nepřijatelné."
-          data-example="Analyzuj dokument a odpověz na otázky.
+1) Nejprve si definuj všechny relevantní informace ze zadání.
+2) Poté postupně analyzuj každý dílčí aspekt úlohy
+   a napiš krátké odůvodnění pro každý krok.
+3) Na základě analýzy navrhni konkrétní řešení.
+4) Nakonec uveď **pouze finální výsledek** bez kroků.
 
-STRIKTNÍ PRAVIDLA:
-1) Používej POUZE informace z přiloženého dokumentu
-2) Každé tvrzení musí mít citaci: [str. X] nebo přímý citát
-3) Pokud informace není v dokumentu, napiš: 'NENÍ V DOKUMENTU'
-4) Nepoužívej vlastní znalosti ani nedoplňuj chybějící kontext
-5) Na konci uveď: 'Ověřeno proti zdroji: ANO/ČÁSTEČNĚ/NE'"></div>
+Úloha:
+Máš soubor laboratorních záznamů s následujícími problémy:
+- krátkodobé zvýšení pozadí,
+- nejasné události v rámci provozu,
+- drobné odchylky od standardních hodnot.
+
+Urči pro každý případ:
+a) zda se jedná o běžnou odchylku, potenciální riziko, nebo incident,
+b) jaké důvody a logické kroky vedly k tomuto závěru,
+c) popiš, jaké informace bys dále potřeboval ověřit.
+
+Struktura odpovědi:
+- **Krokové uvažování:** postupná analýza s odůvodněním
+- **Finální rozhodnutí:** krátký souhrn klasifikací bez detailního odůvodnění</pre>
+        </div>
+      </div>
+
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="technique-consistency" id="technique-btn-consistency">
+          <span class="technique-badge technique-badge--advanced">advanced</span> Zajišťujte konzistenci (prefill, řetězení)
+        </button>
+        <div class="collapsible__panel" id="technique-consistency" role="region" aria-labelledby="technique-btn-consistency" hidden>
+          <p><strong>Kdy použít:</strong> Když potřebujete stabilní a opakovatelné výstupy napříč více dotazy nebo v rámci delší práce.</p>
+          <p>Konzistence se dosahuje kombinací pevného formátu, rozdělení úlohy do kroků a předvyplnění výstupu (prefill). Na rozdíl od pouhé specifikace formátu model v tomto případě nedostává instrukci formát vytvořit, ale má doplnit již připravenou strukturu. To výrazně snižuje variabilitu odpovědí a usnadňuje další zpracování.</p>
+          <pre class="technique-detail__example">- Kontext:
+  1)
+- Shrnutí:
+  1)
+  2)
+  3)
+- Doporučení:
+  1)
+  2)
+  3)
+
+Text:
+"{vložený_text}"
+
+Doplň hodnoty podle textu.
+Nepiš nic jiného mimo tuto strukturu.</pre>
+        </div>
+      </div>
+
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="technique-tot" id="technique-btn-tot">
+          <span class="technique-badge technique-badge--advanced">advanced</span> Používejte více variant a reflexi (Tree of Thoughts)
+        </button>
+        <div class="collapsible__panel" id="technique-tot" role="region" aria-labelledby="technique-btn-tot" hidden>
+          <p><strong>Kdy použít:</strong> Když není jasné, jaký přístup je nejlepší, nebo když řešíte problém s více možnými cestami.</p>
+          <p>Místo snahy dostat z modelu jednu správnou odpověď je často efektivnější nechat ho navrhnout více variant, každou z nich krátce zhodnotit a teprve potom se rozhodnout. Model je silný v paralelním generování alternativ. Často se ukáže, že nejlepší řešení vznikne kombinací více přístupů.</p>
+          <p><strong>Tree of Thoughts znamená:</strong></p>
+          <ul class="list" style="margin-bottom: 1rem;">
+            <li>rozvětvit řešení do několika směrů,</li>
+            <li>každou variantu krátce reflektovat (výhody, rizika),</li>
+            <li>vědomě vybrat nebo upravit další krok.</li>
+          </ul>
+          <pre class="technique-detail__example">Navrhni 3 různé varianty řešení následujícího problému.
+
+U každé varianty:
+- stručně popiš přístup,
+- uveď hlavní výhody a nevýhody,
+- naznač, v jakém kontextu by byla vhodná.
+
+Nakonec:
+- varianty porovnej,
+- navrhni, zda je lepší jednu z nich zvolit,
+  nebo kombinovat prvky z více variant.</pre>
+        </div>
+      </div>
+
+      <!-- BEZPEČNOSTNÍ TECHNIKY -->
+      <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--clr-text-muted, #6b7280);">Bezpečnost a spolehlivost</h4>
+
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="technique-out" id="technique-btn-out">
+          <span class="technique-badge technique-badge--safety">safety</span> Dejte modelu možnost „nevím"
+        </button>
+        <div class="collapsible__panel" id="technique-out" role="region" aria-labelledby="technique-btn-out" hidden>
+          <p><strong>Kdy použít:</strong> Když pracujete s neúplnými daty nebo hrozí domýšlení faktů.</p>
+          <p>Explicitní možnost přiznat nejistotu snižuje riziko halucinací.</p>
+          <pre class="technique-detail__example">Pokud nemáš dost informací, odpověz „nelze rozhodnout"
+a uveď, jaké informace chybí.</pre>
+        </div>
       </div>
 
       <p style="margin-top: 1.5rem; color: var(--clr-text-muted, #6b7280); font-size: 0.9rem;">
@@ -288,6 +265,155 @@ STRIKTNÍ PRAVIDLA:
         <a href="https://www.promptingguide.ai/techniques" target="_blank" rel="noopener">Prompting Guide</a>,
         který nabízí detailní vysvětlení a další pokročilé přístupy.
       </p>
+
+      <!-- DALŠÍ TIPY PRO EFEKTIVNÍ PRÁCI S LLM -->
+      <h2>Další tipy pro efektivní práci s LLM</h2>
+
+      <!-- Tip: Efektivní využití kontextového okna -->
+      <h3>Efektivní využití kontextového okna</h3>
+      <p>
+        Začal model v průběhu konverzace ztrácet nit a blábolit? Může jít o důsledek přetíženého kontextu – zkrátka jste do kontextového okna napsali tolik různých věcí, že jste milého chatbota zmátli a udělali z něj žvatlajícího idiota.
+      </p>
+      <p>
+        Proto je efektivní brát konverzaci jako dočasný pracovní prostor. Pokud se práce protáhne nebo výrazně změní směr, je lepší chat vědomě ukončit a pokračovat v novém s krátkým, cíleným shrnutím.
+      </p>
+      <p>
+        Shrnutí neslouží jako archiv, ale jako destilace toho, co je pro další krok podstatné: cíl, aktuální stav a klíčová rozhodnutí. Detaily, varianty a slepé uličky je vhodné zahodit. V novém chatu pak přenášíš rozhodnutí, ne historii.
+      </p>
+      <p>
+        💡 <strong>Tip:</strong> Jeden chat = jedno téma. Při změně cíle nebo fáze práce založ nový.
+      </p>
+      <p>
+        ⚠️ <strong>Častá chyba:</strong> Kopírování dlouhé historie místo krátkého shrnutí.
+      </p>
+      <p>
+        Pamatuj, že do kontextového okna se započítávají i odpovědi samotného LLM, nejen tvoje vstupy.
+      </p>
+
+      <!-- Info bublina: Příklad promptu pro přenesení práce -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-context-prompt" id="collapsible-button-context-prompt">
+        <b>VÍCE:</b> Příklad promptu pro přenesení práce do nové konverzace
+        </button>
+
+        <div class="collapsible__panel" id="collapsible-panel-context-prompt" role="region" aria-labelledby="collapsible-button-context-prompt" hidden>
+          <pre class="technique-detail__example" style="margin: 0;">Shrň dosavadní konverzaci do strukturovaného dokumentu,
+který bude sloužit jako startovní kontext pro nový chat.
+
+Představ si, že shrnutí předáváš kolegovi,
+který konverzaci neviděl a má na ni plynule navázat.
+
+Požadavky:
+- 5–7 bodů
+- ke každému bodu krátké vysvětlení (max. 50 slov)
+- jasně uveď cíl, aktuální stav, klíčová rozhodnutí a další krok
+- zachovej všechny informace nutné k pokračování
+- vynech detaily, varianty a slepé uličky
+
+Výstup:
+- strukturovaný text (číslované body)
+- bez historie a bez omáčky
+- připravený k přímému vložení do nového chatu</pre>
+        </div>
+      </div>
+
+      <!-- Tip: Postupujte po krocích -->
+      <h3>Postupujte po krocích a nechte si výstup zkontrolovat</h3>
+      <p>
+        Nesnažte se vyřešit celý úkol jedním promptem. LLM je váš nový kolega v kanceláři a tak k němu přistupujte. Stejně jako u člověka je příjemnější (a efektivnější) postupovat po krocích: nejdřív návrh, potom kritika a teprve nakonec finální verze. Každý krok má jiný cíl a dává modelu jasnější zadání.
+      </p>
+      <p>
+        Užitečný postup je nechat model „sám sobě oponovat". Po vytvoření návrhu si vyžádejte kritické zhodnocení (slabá místa, rizika, nejasnosti). U důležitějších výstupů se vyplatí použít druhý model nebo nový chat jako nezávislého recenzenta – podobně jako když si necháte práci projít jiným kolegou.
+      </p>
+      <p>
+        💡 <strong>Tip:</strong> Představte si, že zadáváte práci juniornímu asistentovi: návrh → připomínky → oprava → finální verze.
+      </p>
+
+      <!-- Info bublina: Ukázkový prompt návrh-kritika-oprava -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-review-prompt" id="collapsible-button-review-prompt">
+        <b>VÍCE:</b> Ukázkový prompt: návrh → kritika → oprava
+        </button>
+
+        <div class="collapsible__panel" id="collapsible-panel-review-prompt" role="region" aria-labelledby="collapsible-button-review-prompt" hidden>
+          <pre class="technique-detail__example" style="margin: 0;">1) Navrhni implementační plán integrace algoritmu v souboru `alg.py`
+   do existující webové aplikace.
+
+   Zaměř se zejména na:
+   - ověřování a sanitaci uživatelských vstupů
+   - chybové stavy a jejich ošetření
+   - hranice odpovědnosti mezi frontendem a backendem
+
+   V této fázi se zaměř jen strukturu a logiku řešení.
+
+2) Nyní se chovej jako zkušený softwarový architekt.
+   Projdi si výše uvedený plán jako návrh od kolegy a kriticky zhodnoť:
+   - slabá místa návrhu
+   - bezpečnostní a provozní rizika
+   - nejasnosti nebo chybějící rozhodnutí
+
+   Buď konkrétní a věcný.
+
+3) Na základě této oponentury navrhni upravenou verzi implementačního plánu.
+   Zachovej části, které fungují, a změň pouze problematické body.
+   U každé změny stručně vysvětli důvod úpravy.</pre>
+        </div>
+      </div>
+
+      <!-- Tip: Pozitivní instrukce -->
+      <h3>Pozitivní instrukce fungují lépe</h3>
+      <p>
+        Při zadávání úkolů je obvykle vhodnější říkat, co má model udělat, než čemu se má vyhnout. Negativní instrukce („nedělej", „nezmiňuj", „vyhni se") bývají nejednoznačné a model si je může vyložit příliš široce nebo přehnaně opatrně, což často vede k neúplnému nebo zvláštně omezenému výstupu.
+      </p>
+      <p>
+        Pozitivně formulované instrukce dávají modelu jasný cíl: jak má výstup vypadat, jaký má mít rozsah nebo na co se má zaměřit. Tam, kde je potřeba stanovit jasné hranice, dává smysl pozitivní zadání doplnit o konkrétní a úzký zákaz – hlavní směr by ale měl vždy určovat popis požadovaného výsledku.
+      </p>
+
+      <!-- Info bublina: Nesprávný prompt -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-negative-prompt" id="collapsible-button-negative-prompt">
+        <b>⚠️ Nesprávný prompt</b>
+        </button>
+
+        <div class="collapsible__panel" id="collapsible-panel-negative-prompt" role="region" aria-labelledby="collapsible-button-negative-prompt" hidden>
+          <pre class="technique-detail__example" style="margin: 0;">Neodpovídej příliš dlouze.
+Nezabíhej do detailů.
+Nezmiňuj vedlejší souvislosti.</pre>
+        </div>
+      </div>
+
+      <!-- Info bublina: Správný prompt -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-positive-prompt" id="collapsible-button-positive-prompt">
+        <b>✅ Správný prompt</b>
+        </button>
+
+        <div class="collapsible__panel" id="collapsible-panel-positive-prompt" role="region" aria-labelledby="collapsible-button-positive-prompt" hidden>
+          <pre class="technique-detail__example" style="margin: 0;">Shrň téma jednou větou.
+Zaměř se pouze na hlavní myšlenku.
+Odpověď udrž stručnou a věcnou.</pre>
+        </div>
+      </div>
+
+      <!-- Tip: Kontrola výstupu -->
+      <h3>Kontrola výstupu</h3>
+      <p>
+        Výstupy LLM nejsou ověřené závěry, ale pracovní návrhy. Model generuje pravděpodobný text, ne potvrzená fakta. Proto je důležité ověřit klíčová fakta a logiku manuálně. LLM vám s tím ale může pomoci, pokud ho k tomu už během řešení instruujete.
+      </p>
+
+      <!-- Info bublina: Jak promptovat kontrolu výsledku -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-verify-prompt" id="collapsible-button-verify-prompt">
+        <b>VÍCE:</b> Jak promptovat kontrolu výsledku
+        </button>
+
+        <div class="collapsible__panel" id="collapsible-panel-verify-prompt" role="region" aria-labelledby="collapsible-button-verify-prompt" hidden>
+          <pre class="technique-detail__example" style="margin: 0;">Projdi výstup a u každého bodu uveď:
+- na jakém předpokladu stojí
+- co je podloženo fakty/zdroji
+- co je nejisté a mělo by se ověřit</pre>
+        </div>
+      </div>
 
     </div>
   </div>

@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="css/technique-explorer.css">
   <link rel="stylesheet" href="css/tokenizer.css">
   <link rel="stylesheet" href="css/glossary-accordion.css">
+  <link rel="stylesheet" href="css/lightbox.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap&subset=latin-ext" rel="stylesheet">
@@ -33,8 +34,24 @@
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']]
       },
+      options: {
+        // Process all elements including hidden ones
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        processHtmlClass: 'tex2jax_process',
+        ignoreHtmlClass: 'tex2jax_ignore'
+      },
       svg: {
         fontCache: 'global'
+      },
+      startup: {
+        // Typeset entire document including hidden elements
+        ready: function() {
+          MathJax.startup.defaultReady();
+          MathJax.startup.promise.then(function() {
+            // Re-typeset to catch any hidden content
+            MathJax.typesetPromise();
+          });
+        }
       }
     };
   </script>
@@ -51,6 +68,7 @@
   <script src="js/technique-explorer.js" defer></script>
   <script src="js/tokenizer.js" defer></script>
   <script src="js/glossary-accordion.js" defer></script>
+  <script src="js/lightbox.js" defer></script>
   <script src="js/page-loader.js" defer></script>
 </head>
 
@@ -83,7 +101,7 @@
         <li><a href="#introduction">♟ Úvod</a></li>
         <li><a href="#basics">🧩 Jak jazykové modely fungují</a></li>
         <li><a href="#glossary">📊 Základní pojmy</a></li>
-        <li><a href="#prompting">✒️ Jak na kvalitní prompt</a></li>
+        <li><a href="#prompting">✒️ Jak pracovat s LLMs</a></li>
         <li><a href="#usage">💻 Jak jazykové modely využít</a></li>
         <li><a href="#safety">🦺 Bezpečnost a etika</a></li>
         <li><a href="#models">📓 Přehled vybraných modelů</a></li>
