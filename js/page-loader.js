@@ -15,7 +15,6 @@
     'usage': 'pages/usage.html',
     'safety': 'pages/safety.html',
     'models': 'pages/models.html',
-    'usecases': 'pages/usecases.html',
     'resources': 'pages/resources.html'
   };
 

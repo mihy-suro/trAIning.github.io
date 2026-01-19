@@ -3,69 +3,377 @@
   <div class="section section--muted">
     <h1 class="section__title">Jak jazykové modely využít</h1>
     <div class="section__body">
+
+      <!-- Intro -->
       <p>
-        Generativní umělá inteligence může výrazně zjednodušit a zefektivnit různorodé činnosti, které výzkumné organizace běžně vykonávají — 
-        od rešerší a dokumentace až po komunikaci či přípravu podkladů k projektům. Nejde o náhradu odborné práce, ale o nástroj, 
-        který dokáže ušetřit čas, zpřesnit formulace, usnadnit orientaci v rozsáhlých datech a podpořit kreativní i analytické procesy.
+        Dobře, zní to všechno zajímavě, ale k čemu to bude v každodenní praxi? Stručná odpověď zní: záleží na vás. 
+        Každý má jiné potřeby, pracovní návyky a očekávání, a univerzální „správný" způsob použití LLM neexistuje. 
+        Skutečnou přidanou hodnotu objevíte až ve chvíli, kdy si nástroj sami vyzkoušíte a začnete ho zapojovat do vlastních úloh.
+      </p>
+      <p>
+        Cílem této kapitoly proto není dát vyčerpávající návod, ale nabídnout inspiraci. Níže uvádíme několik typických způsobů, 
+        jak lze jazykové modely využít v praxi – jako výchozí body, od kterých se můžete odrazit a dále je přizpůsobit svému stylu práce.
       </p>
 
+      <!-- Rychlejší orientace v informacích -->
       <h1>Rychlejší orientace v informacích</h1>
-      <p>Výzkum často začíná hledáním relevantních zdrojů a porozuměním tomu, co je o tématu již známo. Generativní modely mohou pomoci: </p>
+      <p>
+        Jednou z nejpřímočařejších a zároveň nejužitečnějších aplikací LLM je rychlá orientace v rozsáhlých textech. 
+        Typicky vás zajímá konkrétní informace, ale nemáte čas ani chuť se prokousávat stovkami stran manuálů. 
+        Situace je o to horší, pokud ještě neznáte přesnou odbornou terminologii a proto vám nepomůže ani jindy oblíbené vyhledávání v PDF.
+      </p>
+      <p>
+        V takových případech mohou LLM fungovat jako čtecí a orientační asistent, který dokumenty přečte za vás 
+        a vy se jich pak můžete ptát vlastními slovy na to, co vás skutečně zajímá.
+      </p>
+      <p><b>Typické použití:</b></p>
       <ul>
-        <li>shrnout dlouhé články či studie do několika klíčových bodů,</li>
-        <li>porovnat různé dokumenty nebo najít rozdíly mezi verzemi,</li>
-        <li>navrhnout strukturu rešerše nebo prezentovat možnosti dalšího studia.</li>
+        <li>shrnutí dlouhých článků, studií nebo norem do několika klíčových bodů,</li>
+        <li>porovnání více dokumentů nebo verzí téhož textu a identifikace rozdílů,</li>
+        <li>rychlé zmapování tématu a návrh struktury rešerše či dalšího studia.</li>
       </ul>
+      <p>
+        Použít lze jak obecné modely (např. ChatGPT), tak specializované nástroje pracující přímo s nahranými dokumenty 
+        (např. Google NotebookLM). Obecné modely lépe pracují se širším kontextem a nejasnými dotazy, zatímco specializované 
+        nástroje odpovídají striktně na základě poskytnutých podkladů a mají tak menší sklon k halucinacím.
+      </p>
+      <p>
+        Užitečné je i převádění informací do jiného formátu, například do stručných poznámek, myšlenkových map, 
+        studijních materiálů nebo testových otázek (např. při přípravě na zkoušky typu ZOZ). Některé nástroje zvládnou 
+        i audio či video shrnutí pro pasivní poslech.
+      </p>
+      <p>
+        LLM s přístupem k internetu lze využít také pro úvodní rešerše, zejména když vstupujete do zcela nového tématu 
+        a nevíte, kde začít. Nástroje typu Perplexity dokážou rychle navrhnout relevantní zdroje pro základní přehled. 
+        Stále ale platí, že model neumí spolehlivě posoudit kvalitu zdrojů a finální orientace je tak na vás. 
+        Úspora času díky eliminaci balastu je však výrazná.
+      </p>
+      <p>
+        Další silnou stránkou je editorská a kontrolní práce: LLM dokáže odhalit vnitřní nekonzistence v rozsáhlých textech. 
+        Duplicity, chybné odkazy, rozpory v definicích nebo nejednotné pojmy napříč kapitolami – s tím vším vám LLM editor může pomoci.
+      </p>
 
-      <p>Díky tomu lze rychleji získat první představu o tématu, která se pak dá manuálně ověřit a dopracovat.</p>
+      <!-- Collapsible: Prompt pro orientaci v dokumentu -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-usage-orientace" id="collapsible-button-usage-orientace">
+          <b>VÍCE:</b> Pomoc s orientací v rozsáhlém dokumentu – prompt
+        </button>
+        <div class="collapsible__panel" id="collapsible-panel-usage-orientace" role="region" aria-labelledby="collapsible-button-usage-orientace" hidden>
+          <pre class="prompt-example">
+Máš k dispozici následující dokument / soubor textů.
+Tvým cílem je pomoci mi se v něm rychle zorientovat.
 
+Výstup strukturovat následovně:
+
+1) Přehled dokumentu
+   - 3–5 vět shrnujících účel a hlavní zaměření dokumentu.
+
+2) Struktura obsahu
+   - seznam hlavních kapitol nebo témat,
+   - u každého 1 věta popisující, čemu se věnuje.
+
+3) Slovníček pojmů
+   - 5–10 klíčových pojmů nebo zkratek,
+   - ke každému stručné vysvětlení (1–2 věty),
+   - pouze pojmy, které se skutečně v textu vyskytují.
+
+4) Doporučení ke čtení
+   - 2–3 konkrétní části dokumentu,
+     které jsou nejrelevantnější pro téma:
+     {konkrétní téma / otázka},
+   - krátké zdůvodnění volby.
+
+Použij věcný a srozumitelný jazyk.
+Zachovej terminologii použitou v dokumentu.
+          </pre>
+        </div>
+      </div>
+
+      <!-- Podpora při psaní textů -->
       <h1>Podpora při psaní odborných i administrativních textů</h1>
-      <p>LLMs umějí generovat čitelné návrhy textů, které lze následně upravit podle potřeby. Pomoci mohou například při:</p>
+      <p>
+        Generování textů je jednou z nejpřirozenějších schopností jazykových modelů. V praxi je ale většinou nechceme 
+        používat tak, že by „psaly za nás od nuly". Mnohem častější a užitečnější je situace, kdy máme hrubý náčrt, 
+        poznámky nebo neuhlazený text a potřebujeme jej převést do čitelné, strukturované a stylisticky konzistentní podoby.
+      </p>
+      <p>
+        Typickým příkladem mohou být například zápisky z porady. Během jednání si člověk zapisuje body, které se objevují 
+        v různém pořadí a zápis přirozeně odráží chaotickou dynamiku diskuze. Skáče se mezi tématy, lidé se vracejí 
+        k už probraným bodům, některé informace jsou nedořečené. Výsledkem je neuspořádaný text, který je sice věrný 
+        průběhu porady, ale špatně čitelný a těžko se v něm orientuje.
+      </p>
+      <p>
+        Tento „salátový" zápis lze modelu předložit a požádat ho, aby jej převedl do strukturovaného dokumentu, 
+        což zabere jen okamžik.
+      </p>
+      <p>
+        Stejný princip funguje i u dalších typů textů kde často začínáme neuspořádaným tokem myšlenek, poznámkami, 
+        náčrty argumentů, nedotaženými formulacemi. LLM může tento surový materiál opakovaně převádět do čitelnějších 
+        a koherentnějších verzí, které pak dál rozvíjíme a zpřesňujeme. V několika iteracích tak vznikne slušný první draft, 
+        který slouží jako základ pro finální zpracování.
+      </p>
+      <p>
+        Důležité je vnímat LLM jako editor, nikoli jako autora. Model pomáhá s jazykem, strukturou a čitelností, 
+        zatímco odpovědnost za obsah, význam a správnost zůstává na vás. V tomto pojetí dokáže psaní výrazně zefektivnit: 
+        místo řešení formulací se můžete soustředit na to, co chcete sdělit, ne jak přesně to napsat.
+      </p>
 
-      <ul>
-        <li>formulaci úvodů, závěrů či anotací k výstupům,</li>
-        <li>přeformulování technické pasáže do srozumitelnějšího jazyka,</li>
-        <li>tvorbě dopisů, interních sdělení, popisů pracovních postupů,</li>
-        <li>přípravě kostry projektu nebo návrhu struktury zprávy.</li>
-      </ul>
+      <!-- Collapsible: Jak AI ovlivňuje psaní -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-usage-psani-vliv" id="collapsible-button-usage-psani-vliv">
+          <b>VÍCE:</b> Jak AI ovlivňuje psaní?
+        </button>
+        <div class="collapsible__panel" id="collapsible-panel-usage-psani-vliv" role="region" aria-labelledby="collapsible-button-usage-psani-vliv" hidden>
+          <p>
+            Výzkumy ukazují, že pokud lidé používají generativní nástroje jako podpůrný prostředek a výstupy následně 
+            aktivně upravují a přizpůsobují, výsledné texty bývají přesnější, lépe strukturované a stylisticky vyrovnanější [1].
+          </p>
+          <p>
+            Současně ale existují práce, které naznačují, že nadměrné spoléhání se na generovaný text může postupně 
+            snižovat vlastní zapojení do procesu psaní, paměťové ukotvení obsahu a schopnost samostatně formulovat 
+            koherentní text bez asistence [2].
+          </p>
+          <p>
+            Odborníci proto doporučují používat tyto nástroje vědomě a reflektovaně, nikoli mechanicky jako náhradu vlastního myšlení.
+          </p>
+          <p class="reference-small">
+            [1] Tao, T. et al. (2024). "Impact of ChatGPT on ESL Students' Academic Writing Skills: A Mixed Methods Intervention Study." 
+            <i>Smart Learning Environments</i>. 
+            <a href="https://link.springer.com/article/10.1186/s40561-024-00295-9" target="_blank" rel="noopener noreferrer">odkaz</a>
+          </p>
+          <p class="reference-small">
+            [2] Kosmyna, A., et al. (2025). "Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task." 
+            <i>arXiv preprint</i>. 
+            <a href="https://arxiv.org/abs/2506.08872v1" target="_blank" rel="noopener noreferrer">odkaz</a>
+          </p>
+        </div>
+      </div>
 
-      <p>Nejde o finální text, ale o první návrh, který urychlí práci a umožní soustředit se na odborný obsah.</p>
+      <!-- Collapsible: Zápisky z porady -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-usage-porada" id="collapsible-button-usage-porada">
+          <b>VÍCE:</b> Zápisky z porady – prompt
+        </button>
+        <div class="collapsible__panel" id="collapsible-panel-usage-porada" role="region" aria-labelledby="collapsible-button-usage-porada" hidden>
+          <pre class="prompt-example">
+Z následujících neuspořádaných poznámek z porady
+vytvoř strukturovaný zápis.
 
+Postup:
+- seskup související informace,
+- odstraň duplicity a slovní vatu,
+- zachovej význam a rozhodnutí.
+
+Výstup strukturovat do sekcí:
+1) Stručné shrnutí
+2) Přijatá rozhodnutí
+3) Úkoly (kdo / co / do kdy, pokud je uvedeno)
+4) Otevřené otázky / další kroky
+
+Nevymýšlej informace, které v poznámkách nejsou.
+Použij věcný, neutrální tón.
+
+Poznámky:
+{vložený_text}
+          </pre>
+        </div>
+      </div>
+
+      <!-- Podpora analýzy dat -->
       <h1>Podpora analýzy dat a technických úkolů</h1>
-      <p>Generativní AI dnes zvládá nejen text, ale i práci s tabulkami, kódem nebo vizualizacemi. To umožňuje:</p>
-
+      <p>
+        Generativní AI dnes nepracuje jen s textem, ale dokáže asistovat i při analýze dat. V některých prostředích 
+        má model k dispozici i doplňkové nástroje (např. Python interpreter), díky nimž může přímo spouštět výpočty 
+        nebo generovat vizualizace.
+      </p>
+      <p>
+        Z praktického hlediska je ale často bezpečnější a efektivnější jiný přístup: místo toho, abyste modelu svěřovali 
+        celá data nebo ho nechali „počítat za vás", je výhodné dát mu ukázková data nebo popis struktury dat a nechat ho 
+        navrhnout kód či postup, který s daty má pracovat. Vlastní výpočty pak provádíte ve svém prostředí (R, Python, Excel, 
+        specializovaný software).
+      </p>
+      <p>Tento způsob práce má několik výhod:</p>
       <ul>
-        <li>převést tabulkové hodnoty do slovního shrnutí,</li>
-        <li>vysvětlit statistické metody nebo pomoci s interpretací výsledků,</li>
-        <li>generovat ukázkové skripty (např. v Pythonu či R) pro analýzu dat,</li>
-        <li>přiřadit data kategorie nebo identifikovat opakující se vzorce.</li>
+        <li>máte plnou kontrolu nad výpočtem a jeho reprodukovatelností,</li>
+        <li>snížíte riziko chyb a nečekaného chování,</li>
+        <li>jasně oddělíte instrukce, data a exekuci.</li>
       </ul>
+      <p>
+        V tomto kontextu je užitečné vnímat LLM spíše jako technického konzultanta, který pomáhá navrhnout postup – 
+        nikoli jako nástroj, který má sám provádět výpočty bez lidské kontroly.
+      </p>
 
-      <p>Zkušený analytik tak může AI použít jako pomocníka při navrhování postupů nebo rychlém prototypování řešení.</p>
+      <!-- Collapsible: Technický konzultant -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-usage-techkonzultant" id="collapsible-button-usage-techkonzultant">
+          <b>VÍCE:</b> Technický konzultant – prompt
+        </button>
+        <div class="collapsible__panel" id="collapsible-panel-usage-techkonzultant" role="region" aria-labelledby="collapsible-button-usage-techkonzultant" hidden>
+          <pre class="prompt-example">
+&lt;Role&gt;
+Vystupuj jako technický konzultant, programátor
+se specializací na analýzu experimentálních dat,
+statistiku a návrh datových workflow.
+&lt;/Role&gt;
 
-      <h1>Tvorba nápadů, hypotéz a scénářů</h1>
-      <p>Generativní modely umějí navrhovat alternativní úhly pohledu, hypotézy či postupy řešení. Může to být užitečné zejména v raných fázích projektu, kdy se hledají:</p>
+&lt;Cíl&gt;
+Navrhnout postup a připravit skript pro identifikaci
+odlehlých hodnot (outlierů) v laboratorních měřeních
+aktivit radionuklidů.
+&lt;/Cíl&gt;
 
-      <ul>
-        <li>různé scénáře vývoje,</li>
-        <li>možné intervenční strategie,</li>
-        <li>rizikové faktory nebo související jevy,</li>
-        <li>návrhy experimentálních designů.</li>
-      </ul>
+&lt;Vstupní_data&gt;
+Vstupem je CSV soubor s tabulkovými daty.
+Cesta k souboru bude předávána jako parametr skriptu.
 
-      <p>AI zde neplní roli „autora výzkumu", ale může napomoci kreativnímu myšlení a rozšířit repertoár nápadů, které stojí za to prověřit.</p>
+Orientační rozsah dat:
+- jednotky až desítky tisíc řádků,
+- desítky lokalit,
+- několik radionuklidů,
+- opakovaná měření jednoho vzorku.
+&lt;/Vstupní_data&gt;
 
-      <h1>Zefektivnění rutinních úkolů</h1>
-      <p>Mnoho času ve výzkumné praxi zabírají administrativní činnosti. AI může pomoci například:</p>
+&lt;Struktura_dat&gt;
+Sloupce CSV souboru:
+- sample_id        (identifikátor vzorku)
+- location         (kód lokality)
+- measurement_date (datum měření)
+- nuclide          (např. Cs-137, K-40, Ra-226)
+- value            (naměřená aktivita)
+- unit             (Bq/kg)
+- method           (Gamma-spec nebo ICP-MS)
+- mdc              (minimální detekovatelná aktivita, Bq/kg)
+&lt;/Struktura_dat&gt;
 
-      <ul>
-        <li>převést poznámky z porady do strukturovaného zápisu,</li>
-        <li>vytvořit seznam úkolů nebo harmonogram z nestrukturovaného textu,</li>
-        <li>doplnit chybějící části dokumentace,</li>
-        <li>přepsat nahrávku do textové podoby.</li>
-      </ul>
+&lt;Dummy_data&gt;
+sample_id,location,measurement_date,nuclide,value,unit,method,mdc
+S001,LOC_A,2024-01-05,Cs-137,3.2,Bq/kg,Gamma-spec,0.8
+S001,LOC_A,2024-01-06,Cs-137,3.1,Bq/kg,Gamma-spec,0.8
+S002,LOC_A,2024-01-05,Cs-137,&lt;0.8,Bq/kg,Gamma-spec,0.8
+S003,LOC_B,2024-01-05,Cs-137,2.7,Bq/kg,Gamma-spec,0.9
+S004,LOC_A,2024-01-05,K-40,410,Bq/kg,Gamma-spec,15
+&lt;/Dummy_data&gt;
 
-      <p>Nejde o dramatické změny, ale o soubor malých úspor, které se v součtu významně projeví.</p>
+&lt;Požadavky&gt;
+1) Navrhni postup načtení a předzpracování dat:
+   - parametrizace cesty k CSV souboru,
+   - převod datových typů,
+   - základní kontrola konzistence.
+
+2) Zacházení s chybějícími hodnotami (NA):
+   - vysvětli zvolenou strategii (např. vyřazení,
+     imputace nebo oddělené zpracování),
+   - uveď, pro které sloupce je jaký přístup vhodný.
+
+3) Zacházení s cenzorovanými hodnotami:
+   - hodnoty typu "&lt; MDC" považuj za nedetekované,
+   - navrhni jejich reprezentaci pro další analýzu
+     (např. 0.5 × MDC nebo samostatný flag),
+   - zohledni dopad na detekci outlierů.
+
+4) Detekce outlierů:
+   - použij metodu IQR v rámci skupin
+     (location, nuclide, method),
+   - vysvětli volbu prahů.
+
+5) Připrav ukázkový skript v Pythonu
+   (pandas + scikit-learn), který:
+   - načte CSV soubor z parametru,
+   - provede předzpracování,
+   - označí outliery,
+   - vytvoří stručný souhrnný report.
+&lt;/Požadavky&gt;
+
+&lt;Výstup&gt;
+- popis navrženého postupu,
+- okomentovaný ukázkový skript,
+- jasné oddělení kroků analýzy,
+- důraz na reprodukovatelnost a rozšiřitelnost.
+&lt;/Výstup&gt;
+          </pre>
+        </div>
+      </div>
+
+      <!-- Virtuální oponent -->
+      <h1>Virtuální oponent</h1>
+      <p>
+        Generativní modely umějí navrhovat různé alternativní úhly pohledu a varianty řešení, což je zvlášť užitečné 
+        v raných fázích projektu nebo při hledání inspirace. Můžete je využít nejen pro generování nápadů, ale i jako 
+        virtuálního oponenta — tedy někoho, kdo vám představí kritické argumenty nebo alternativní scénáře, které jste 
+        sami nemuseli zvážit.
+      </p>
+      <p>
+        V tomto kontextu AI neplní roli „autora výzkumu" a nemá nahradit tvůrčí a kritické myšlení člověka. Může však 
+        rozšířit repertoár nápadů a scénářů, které stojí za to prověřit, a pomoci odhalit slabiny či rizika vašich prvotních návrhů.
+      </p>
+
+      <!-- Collapsible: Přísný oponent -->
+      <div class="collapsible" data-collapsible>
+        <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-usage-oponent" id="collapsible-button-usage-oponent">
+          <b>VÍCE:</b> Přísný oponent – prompt
+        </button>
+        <div class="collapsible__panel" id="collapsible-panel-usage-oponent" role="region" aria-labelledby="collapsible-button-usage-oponent" hidden>
+          <pre class="prompt-example">
+&lt;Role&gt;
+Vystupuj jako odborný oponent grantové žádosti
+se specializací na:
+- analýzu gama spekter,
+- zpracování experimentálních dat,
+- pokročilé metody strojového učení
+  (neuronové sítě, statistiku, data mining).
+
+Tvým cílem je poskytnout věcný, kritický a technicky
+ukotvený pohled odpovídající roli odborného recenzenta.
+&lt;/Role&gt;
+
+&lt;Cíl&gt;
+Posoudit návrh metody pro detekci radionuklidu Cs-137
+na vysokém přirozeném pozadí pomocí speciálně navržené
+neuronové sítě z hlediska jeho předpokladů, robustnosti
+a použitelnosti.
+&lt;/Cíl&gt;
+
+&lt;Podklady&gt;
+- Popis algoritmu a architektury neuronové sítě je uveden
+  v dokumentu „algoritmus.md".
+- Rešerše aktuálního stavu poznání je uvedena v souboru „reserse.md".
+- Opírej se o funkční a koncepční popis metody
+  a o informace obsažené v rešerši.
+&lt;/Podklady&gt;
+
+&lt;Úkol&gt;
+1) Popiš klíčové metodické a datové předpoklady,
+   na kterých je návrh založen.
+
+2) U každého předpokladu vysvětli:
+   - proč je důležitý pro funkčnost metody,
+   - v jakých situacích může být jeho platnost omezená,
+   - jaký dopad by to mělo na stabilitu a interpretaci výsledků.
+
+3) Věnuj zvláštní pozornost:
+   - citlivosti stanovení Cs-137 při vysokém a proměnlivém
+     přírodním pozadí,
+   - stabilitě výstupů při změnách spektrálního tvaru pozadí,
+   - míře, do jaké navržený model generalizuje
+     mimo trénovací data.
+
+4) Strukturovaně popiš identifikované oblasti rizika
+   v těchto kategoriích:
+   - metodická,
+   - datová,
+   - související s praktickou aplikací
+     (nasazení, validace, interpretace výsledků).
+&lt;/Úkol&gt;
+
+&lt;Výstup&gt;
+- strukturovaný a věcný oponentský posudek,
+- zaměřený na identifikaci potenciálních slabých míst,
+- formulovaný konkrétně a technicky,
+- vhodný jako podklad pro další odbornou diskusi.
+&lt;/Výstup&gt;
+          </pre>
+        </div>
+      </div>
 
     </div>
   </div>
