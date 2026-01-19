@@ -337,37 +337,6 @@
               Ačkoli je vstupní text rozdělen na tokeny, model při trénování i při generování odpovědí zohledňuje širší kontext celé sekvence, nikoli pouze lokální návaznost jednotlivých tokenů.
             </p>
 
-            <h3>Vyzkoušejte si tokenizaci</h3>
-
-            <p>
-              Následující příklad ukazuje, jak je krátký český text rozdělen na tokeny pomocí tokenizéru modelu LLaMA 3:
-            </p>
-
-            <!-- Tokenizer Demo -->
-            <div id="tokenizer-demo" class="tokenizer-demo">
-              <textarea class="tokenizer-demo__input" placeholder="Napište nebo vložte text...">Ahoj, jak se máš? Dnes je krásný den!</textarea>
-              
-              <div class="tokenizer-demo__results">
-                <div class="tokenizer-demo__stats">
-                  <div class="tokenizer-demo__stat">
-                    <span class="tokenizer-demo__stat-value">0</span>
-                    <span class="tokenizer-demo__stat-label">tokenů</span>
-                  </div>
-                  <div class="tokenizer-demo__stat">
-                    <span class="tokenizer-demo__stat-value">0</span>
-                    <span class="tokenizer-demo__stat-label">znaků</span>
-                  </div>
-                  <div class="tokenizer-demo__stat">
-                    <span class="tokenizer-demo__stat-value">0</span>
-                    <span class="tokenizer-demo__stat-label">tokenu na znak</span>
-                  </div>
-                </div>
-                <div class="tokenizer-demo__visual"></div>
-                <div class="tokenizer-demo__tokens"></div>
-                <p class="tokenizer-demo__note">Tokeny jsou zde zobrazeny jako barevné bloky. Jiný model by mohl tentýž text rozdělit odlišně a výsledný počet tokenů by se mohl lišit.</p>
-              </div>
-            </div>
-
             <h3>Kolik tokenů má text?</h3>
 
             <p>
@@ -405,28 +374,6 @@
             <p>
               Embeddingy tvoří základ porozumění významu textu a navazujících schopností jazykových modelů, jako je porovnávání podobnosti, práce s kontextem, vyhledávání relevantních informací nebo techniky typu RAG. Bez nich by model pracoval pouze s posloupností symbolů, nikoli s významem.
             </p>
-
-            <!-- Historické okénko: word2vec -->
-            <div class="collapsible" data-collapsible>
-              <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-embeddings-history" id="collapsible-button-embeddings-history">
-              <b>VÍCE:</b> Historické okénko: word2vec
-              </button>
-
-              <div class="collapsible__panel" id="collapsible-panel-embeddings-history" role="region" aria-labelledby="collapsible-button-embeddings-history" hidden>
-                <p>
-                  Myšlenka reprezentovat slova jako body ve vícerozměrném prostoru se výrazně prosadila kolem roku 2013 
-                  díky modelu <b>word2vec</b>, jehož hlavním autorem byl Tomáš Mikolov (tehdy Google Research). 
-                  Model ukázal, že pouhým sledováním kontextu slov v rozsáhlých textech lze zachytit významové vztahy 
-                  bez ručně definovaných pravidel.
-                </p>
-
-                <p>
-                  Modely typu word2vec pracovaly se statickými embeddingy, kde mělo každé slovo jednu pevnou reprezentaci. 
-                  Moderní jazykové modely tento princip rozšiřují o kontextové embeddingy, u nichž se význam slova mění podle okolního textu, 
-                  ale základní myšlenka zůstává stejná.
-                </p>
-              </div>
-            </div>
           </div>
         </article>
 

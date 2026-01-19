@@ -319,28 +319,74 @@
 
         <!-- Jak chápe text -->
         <section id="JakChapeText"> </section>
-        <h1>Jak LLM "chápe" text</h1>
-        <p>Aby mohl model pracovat s textem, potřebuje převést slova do matematické formy. Každý token se proto transformuje do <b>vektorové reprezentace</b> – číselného „otisku", 
-          který nese informaci o významu a kontextu. Tyto vektory existují v prostoru o vysoké dimenzi (např. 1 024 nebo 4 096 rozměrů). </p>
-        <p>V tomto prostoru platí několik zajímavých vlastností:</p>
+        <h1>Jak LLM „chápe" text</h1>
+        <p>
+          Když člověk čte text, pracuje s významem. Chápe slova, věty, souvislosti a čte mezi řádky. Jazykový model tohle neumí a proto si musí text nejdřív předžvýkat do podoby, které jeho křemíkový mozek rozumí. Jinak by si nepřečetl ani Babičku.
+        </p>
+        <p>
+          Prvním krokem je tokenizace. Text se rozdělí na malé kousky – takzvané <a href="#Tokeny">tokeny</a>. Ty často neodpovídají celým slovům, ale může jít o část slova, interpunkci, mezeru nebo jejich kombinaci. Každému tokenu odpovídá jednoznačná číselná hodnota, takže výsledkem už není text, ale posloupnost čísel. A právě s touhle číselnou verzí jazyka model dál pracuje.
+        </p>
 
+        <h3>Jak to vidí model: vyzkoušejte si tokenizaci</h3>
+        <p>
+          Nevěříte, že model „nevidí" slova, ale jen tokeny? Zkuste si to sami. Zadejte libovolnou větu a podívejte se, na jaké tokeny ji model rozdělí. Často to nejsou kousky, které by člověka napadly na první dobrou.
+        </p>
+
+        <!-- Tokenizer Demo -->
+        <div id="tokenizer-demo" class="tokenizer-demo">
+          <textarea class="tokenizer-demo__input" placeholder="Napište nebo vložte text...">„Dejte na všecko pozor, ohlídněte se po drůbeži!" přikazuje babička. Sultán chce Adelce se lichotit, čuchá k věncům, které nese v ruce, ale ona zdvihá obě ruce vzhůru a babička odhání ho řkouc: „Nevidíš, ty hloupý, že je Adelka družičkou?"</textarea>
+          
+          <div class="tokenizer-demo__results">
+            <div class="tokenizer-demo__stats">
+              <div class="tokenizer-demo__stat">
+                <span class="tokenizer-demo__stat-value">0</span>
+                <span class="tokenizer-demo__stat-label">tokenů</span>
+              </div>
+              <div class="tokenizer-demo__stat">
+                <span class="tokenizer-demo__stat-value">0</span>
+                <span class="tokenizer-demo__stat-label">znaků</span>
+              </div>
+              <div class="tokenizer-demo__stat">
+                <span class="tokenizer-demo__stat-value">0</span>
+                <span class="tokenizer-demo__stat-label">tokenu na znak</span>
+              </div>
+            </div>
+            <div class="tokenizer-demo__visual"></div>
+            <div class="tokenizer-demo__tokens"></div>
+            <p class="tokenizer-demo__note">Poznámka: Každý model má vlastní tokenizér. Stejný text tak může být různými modely rozdělen na odlišný počet tokenů.</p>
+          </div>
+        </div>
+
+        <p>
+          Samotná čísla by ale byla dost neužitečná, takže přichází další krok: <a href="#Embeddingy">embeddingy</a>. Každému tokenu je přiřazena souřadnice ve vektorovém prostoru o velmi vysoké dimenzi (řádově tisíce rozměrů). Tento vektor funguje jako číselný otisk významu a kontextu.
+        </p>
+        <p>
+          Existují i specializované embeddingové modely, jejichž jediným úkolem je převádět text do tohoto vektorového prostoru. Ať už jde o samostatný model nebo součást LLM, výsledkem je prostor, ve kterém jsou vektory uspořádány tak, že významově podobné tokeny leží blízko sebe, zatímco nesouvisející pojmy jsou daleko.
+        </p>
+        <p>
+          V tomto vektorovém prostoru pak začnou platit zajímavé věci:
+        </p>
         <ul>
-          <li>Blízká slova mají podobný význam.</li>
-          <li>Rozdíly vektoru mohou reprezentovat vztahy:<br>
-              <i>vektor(král) – vektor(muži) + vektor(žena) ≈ vektor(královna)</i></li>
-          <li>Model „rozumí" jazyku tím, že operuje v tomto vektorovém prostoru a hledá další pravděpodobné pokračování textu.</li>
+          <li>tokeny s podobným významem leží blízko sebe,</li>
+          <li>rozdíly mezi vektory mohou reprezentovat vztahy,</li>
+          <li>jazyk se mění v geometrii.</li>
         </ul>
 
         <p>
-          LLMs negenerují věty podle plánovaného významu. Prostě predikují další token podle pravděpodobností.
-          Přestože to zní mechanicky, kombinace vysoké dimenzionality, velkých dat a sofistikované architektury vede ke zdánlivě „chápavému" chování.
+          Pokud máme k dispozici vektory, můžeme s nimi pracovat podobně jako v běžné geometrii – sčítat je, odečítat a porovnávat jejich směr a vzdálenost. Právě díky tomu se v embeddingovém prostoru objevují konzistentní významové vztahy. Klasický (a dnes už legendární) příklad je:
+        </p>
+        <p style="text-align: center; font-size: 1.1em; font-weight: bold;">
+          vektor(král) − vektor(muž) + vektor(žena) ≈ vektor(královna)
+        </p>
+        <p>
+          Model samozřejmě netuší, co je monarchie nebo pohlaví. Jen se z dat naučil, že určitý významový rozdíl se v tomto prostoru chová jako konzistentní směr. Podobné „směry" odpovídají různým aspektům významu – například roli, pohlaví, časovému zasazení nebo míře abstrakce.
         </p>
 
         <!-- Vzdálenosti slov v prostoru - Notecard-->
         <div class="section section--note">
           <h3 class="section__title section__title--note">Vzdálenosti slov v prostoru</h3>
 
-          <p>U moderních LLMs se dá měřit „podobnost" slov jako vzdálenost mezi jejich vektory. Například vektorově jsou si blízko páry jako:</p>
+          <p>Podobně jsou si blízké pojmy jako:</p>
           <ul>
             <li>král — královna,</li>
             <li>auto — vozidlo,</li>
@@ -352,13 +398,141 @@
             <li>kočka — kvark,</li>
             <li>matematika — banán.</li>
           </ul>
-        
+        </div>
+
+        <p>
+          Důležité je, že u moderních LLM není význam slova pevně daný. Stejné slovo má jinou reprezentaci podle kontextu – „klíč" ve větě „ztratil jsem klíč od dveří" a „houslový klíč" skončí na úplně jiných místech v prostoru.
+        </p>
+
+        <h3>Chápe to tedy model jako člověk?</h3>
+        <p>
+          Ne. LLM nepracuje s významem ani záměrem. Nemá plán, neví, „o čem mluví", a nic si nepředstavuje. Dělá jednu jedinou věc: predikuje další token, který je v daném kontextu nejpravděpodobnější.
+        </p>
+        <p>
+          Zní to banálně – skoro jako chytrý našeptávač. Jenže kombinace:
+        </p>
+        <ul>
+          <li>obrovského množství dat,</li>
+          <li>vysoké dimenzionality embeddingů,</li>
+          <li>a sofistikované architektury (transformery, attention)</li>
+        </ul>
+        <p>
+          vede k chování, které velmi přesvědčivě připomíná porozumění. A překvapivě často to stačí.
+        </p>
+
+        <!-- Historické okénko: word2vec -->
+        <div class="collapsible" data-collapsible>
+          <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-word2vec" id="collapsible-button-word2vec">
+          <b>VÍCE:</b> Historické okénko: word2vec a Tomáš Mikolov
+          </button>
+
+          <div class="collapsible__panel" id="collapsible-panel-word2vec" role="region" aria-labelledby="collapsible-button-word2vec" hidden>
+            <p>
+              Myšlenka reprezentovat slova jako body ve vícerozměrném prostoru se výrazně prosadila kolem roku 2013 díky modelu <b>word2vec</b>, jehož hlavním autorem byl Tomáš Mikolov (tehdy Google Research). Word2vec ukázal, že pouhým sledováním kontextu slov ve velkých textech lze zachytit významové vztahy – bez ručně definovaných pravidel nebo slovníků.
+            </p>
+            <p>
+              Tehdejší modely pracovaly se statickými embeddingy, kde mělo každé slovo jednu pevnou reprezentaci. Moderní jazykové modely tuto myšlenku rozšiřují o kontextové embeddingy, kde se význam slova mění podle okolního textu. Základní princip ale zůstává stejný: význam vzniká z dat a projevuje se geometricky.
+            </p>
+          </div>
         </div>
 
         <!-- Jak LLM vybírá další slovo -->
         <section id="JakVybiraSlovo"> </section>
         <h1>Jak LLM vybírá další slovo</h1>
-        <p><i>Tato sekce bude doplněna později.</i></p>
+        <p>
+          Když jazykový model generuje text, nehledá jedno jediné „správné" slovo, které by mělo následovat. V každém kroku nejprve prožene vstup přes attention mechanismy a neuronovou síť a na jejich základě vytvoří pravděpodobnostní rozdělení nad všemi tokeny, které má ve svém slovníku.
+        </p>
+        <p>
+          Výsledkem tedy není odpověď typu „tady je další slovo", ale spíš něco jako:
+        </p>
+        <p style="margin-left: 2em; font-style: italic;">
+          „Těchto deset tokenů dává smysl, tyhle tři jsou hodně pravděpodobné, pár dalších by se ještě dalo zkousnout a zbytek je spíš nesmysl."
+        </p>
+        <p>
+          Teprve z tohoto rozdělení se jeden token vybere a právě způsob, jakým se vybírá, má zásadní vliv na to, jak budou odpovědi modelu působit.
+        </p>
+
+        <h3>Nejde o výběr, ale o losování</h3>
+        <p>
+          Často se říká, že LLM produkují „nejpravděpodobnější" pokračování textu. To ale není úplně přesné. Jazykový model si v každém kroku vytvoří pravděpodobnostní rozdělení možných pokračování a z něj losuje další token. Tokeny s vyšší pravděpodobností mají větší šanci, že budou vybrány, ale není to žádná jistota.
+        </p>
+        <p>
+          Díky tomu:
+        </p>
+        <ul>
+          <li>odpovědi nejsou pokaždé úplně stejné,</li>
+          <li>model může být kreativní,</li>
+          <li>ale zároveň se může i „utrhnout ze řetězu".</li>
+        </ul>
+        <p>
+          V některých LLM nástrojích má uživatel možnost pravidla této ruské rulety ovlivnit explicitním nastavením parametrů jako je teplota, top-k nebo top-p.
+        </p>
+
+        <h3>Teplota: jak moc se může model odvázat</h3>
+        <p>
+          <a href="#Temperature">Teplota</a> (temperature) určuje, jak moc se model při losování drží těch nejpravděpodobnějších možností.
+        </p>
+        <ul>
+          <li><strong>Nízká teplota → model hraje na jistotu</strong><br>
+          Vybírá hlavně nejpravděpodobnější tokeny. Výstupy jsou konzistentní, opatrné a často trochu… nudné.</li>
+          <li><strong>Vyšší teplota → model víc experimentuje</strong><br>
+          Do hry se dostávají i méně pravděpodobné tokeny. Text může být kreativnější, originálnější, ale často taky úplně mimo.</li>
+        </ul>
+
+        <!-- Info bublina: Proč se tomu říká teplota -->
+        <div class="collapsible" data-collapsible>
+          <button class="collapsible__toggle" aria-expanded="false" aria-controls="collapsible-panel-teplota" id="collapsible-button-teplota">
+          <b>VÍCE:</b> Proč se tomu říká „teplota" (a kdo se tu vlastně zahřívá)
+          </button>
+
+          <div class="collapsible__panel" id="collapsible-panel-teplota" role="region" aria-labelledby="collapsible-button-teplota" hidden>
+            <p>
+              Při generování textu jazykový model nejprve spočítá pro každý možný další token skóre (tzv. logit), které vyjadřuje, jak dobře daný token zapadá do kontextu. Tato skóre se následně převádějí na pravděpodobnosti pomocí funkce zvané <em>softmax</em>:
+            </p>
+            <p style="text-align: center; font-size: 1.2em;">
+              $$P(\text{token}_i) = \frac{e^{z_i / T}}{\sum_j e^{z_j / T}}$$
+            </p>
+            <p>
+              kde \(z_i\) je skóre (logit) tokenu, \(T\) je teplota a jmenovatel zajišťuje, že součet všech pravděpodobností je roven 1. Softmax se aplikuje na konci každého generačního kroku. Neuronová síť nejprve vypočítá surová skóre pro všechny tokeny ve slovníku a softmax je převede na pravděpodobnostní rozdělení, ze kterého se následně jeden token vybere (vzorkováním). Právě v tomto kroku se uplatňuje teplota i další parametry generování.
+            </p>
+            <p>
+              Tvar této rovnice není náhodný – exponenciální člen je stejný jako v <em>Boltzmannově rozdělení</em> ze statistické fyziky. Tam teplota určuje, jak snadno systém přechází do méně pravděpodobných (vyšších energetických) stavů. U jazykových modelů hraje teplota stejnou roli: určuje, jak snadno model sáhne po méně pravděpodobném tokenu.
+            </p>
+            <p>
+              <strong>Co se stane při velmi nízké teplotě?</strong><br>
+              Při \(T \to 0\) se rozdíly mezi skóre v exponenciále extrémně zesílí, takže téměř veškerá pravděpodobnost „spadne" na jediný nejlépe hodnocený token. Losování se tím pádem prakticky změní v deterministický výběr a model pokaždé řekne to samé.
+            </p>
+            <p>
+              <strong>Stručně:</strong>
+            </p>
+            <ul>
+              <li>nízká teplota → jistota, opakovatelnost, minimum překvapení,</li>
+              <li>vyšší teplota → rozmanitost, kreativita, ale i větší riziko nesmyslů.</li>
+            </ul>
+            <p>
+              <em>Jazykový model se při vyšší teplotě skutečně nezahřívá. To, co se zahřívá, je datacentrum, ve kterém běží... a někdy docela dost.</em> 🔥
+            </p>
+          </div>
+        </div>
+
+        <h3>Top-k a top-p: z jak velkého klobouku losujeme</h3>
+        <p>
+          Další parametry říkají, z kolika možností vůbec smí model vybírat.
+        </p>
+        <ul>
+          <li><strong>Top-k:</strong> model si vezme k nejpravděpodobnějších tokenů a losuje jen z nich.<br>
+          <span style="color: var(--clr-text-muted, #6b7280); font-size: 0.9em;">(Např. „vybírej jen z 50 nejlepších návrhů.")</span></li>
+          <li><strong>Top-p (nucleus sampling):</strong> model vybírá z takového počtu tokenů, aby jejich součet pravděpodobností dosáhl určité hranice (např. 90 %).</li>
+        </ul>
+        <p>
+          Oba přístupy mají stejný cíl: odříznout extrémně nepravděpodobné nesmysly, aniž by model musel jet úplně „na kolejích".
+        </p>
+        <p>
+          Kromě toho lze podobný efekt často dosáhnout již instrukcí v promptu – například tím, že v zadání řeknete modelu „buď co nejvíc kreativní" nebo „drž se přesně zadání a odpovídej podle této šablony". Modely, které jsou trénovány následovat pokyny, obvykle takto formulované preference respektují a chování podle nich přizpůsobí.
+        </p>
+        <p>
+          <strong>Model sám o sobě není kreativní ani opatrný. To, jak se chová, je přímý důsledek toho, jak mu nastavíme pravidla losování.</strong>
+        </p>
 
     </div>
 
