@@ -7,18 +7,12 @@
       <h2>Základní generativní modely (foundation models)</h2>
 
       <p>
-        Základní generativní modely (foundation models) jsou velké předtrénované modely umělé inteligence, které tvoří základ většiny dnešních generativních nástrojů. Nejsou navrženy pro jediný úkol, ale tak, aby pracovaly s širokým spektrem vstupů — od textu přes obrázky až po multimodální úlohy.
+        Základní generativní modely (foundation models) jsou velké předtrénované LLMs, které tvoří základ většiny dnešních generativních nástrojů. Nejsou navrženy pro jediný úkol, ale tak, aby pracovaly s širokým spektrem vstupů od textu přes obrázky až po multimodální úlohy.
       </p>
 
       <p>
-        Většina těchto modelů je provozovaná u výrobce jako služba (hostovaná cloudově); uživatel k nim přistupuje přes webové rozhraní nebo API, ale nemá přímý přístup k trénovacím datům či vnitřnímu fungování – fungují tedy typicky jako „black box".
+        Většina těchto modelů je provozovaná u výrobce jako služba (hostovaná cloudově); uživatel k nim přistupuje přes webové rozhraní nebo API, ale nemá přímý přístup k trénovacím datům či vnitřnímu fungování. Poskytovatelé často nabízejí více variant jednoho modelu podle výkonu, ceny nebo zaměření.
       </p>
-
-      <p>
-        Poskytovatelé často nabízejí více variant jednoho modelu podle výkonu, ceny nebo zaměření. Některé modely lze také stáhnout a provozovat lokálně (např. rodina modelů LLaMA), což je blíže open-source přístupu.
-      </p>
-
-      <h3>Přehled vybraných základních generativních modelů</h3>
 
       <div class="table-wrapper">
         <table class="data-table data-table--striped data-table--compact">
@@ -31,32 +25,32 @@
           </thead>
           <tbody>
             <tr>
-              <td><a href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a></td>
+              <td><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a></td>
               <td>OpenAI</td>
               <td>Webové rozhraní a API; více variant modelu s různou úrovní schopností.</td>
             </tr>
             <tr>
-              <td><a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Google Gemini</a></td>
+              <td><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">Google Gemini</a></td>
               <td>Google</td>
               <td>Web a API; multimodální model s různými generacemi pro různé úlohy.</td>
             </tr>
             <tr>
-              <td><a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Claude</a></td>
+              <td><a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude</a></td>
               <td>Anthropic</td>
               <td>Web a API; různé varianty modelu podle výkonu a ceny (např. Opus, Sonnet).</td>
             </tr>
             <tr>
-              <td><a href="https://www.mistral.ai/" target="_blank" rel="noopener noreferrer">Le Chat (Mistral)</a></td>
+              <td><a href="https://mistral.ai/" target="_blank" rel="noopener noreferrer">Mistral</a></td>
               <td>Mistral AI</td>
               <td>Webové rozhraní i API; evropský poskytovatel s kombinací uzavřených i otevřenějších modelů.</td>
             </tr>
             <tr>
-              <td><a href="https://www.microsoft.com/en-us/ai/copilot" target="_blank" rel="noopener noreferrer">Microsoft Copilot</a></td>
-              <td>Microsoft</td>
-              <td>Integrované AI asistenty v Office/Windows/GitHub.</td>
+              <td><a href="https://x.ai" target="_blank" rel="noopener noreferrer">Grok</a></td>
+              <td>X AI</td>
+              <td>Webové rozhraní, API a integrace v síti X; modely s přístupem k datům v reálném čase a důrazem na nekonvenční projev.</td>
             </tr>
             <tr>
-              <td><a href="https://ai.meta.com/" target="_blank" rel="noopener noreferrer">Meta LLaMA</a></td>
+              <td><a href="https://www.llama.com/" target="_blank" rel="noopener noreferrer">LLaMA</a></td>
               <td>Meta</td>
               <td>Modely, které lze stáhnout a provozovat lokálně i v cloudu; základ pro open-source varianty.</td>
             </tr>
@@ -69,7 +63,7 @@
       <h2>Open-source generativní modely</h2>
 
       <p>
-        Open-source generativní modely jsou jazykové (a často i multimodální) modely, jejichž váhy jsou veřejně dostupné a které je možné stáhnout a provozovat mimo infrastrukturu výrobce. Na rozdíl od základních generativních modelů (foundation models) nejsou tyto modely provozovány výhradně jako cloudová služba a uživatel nad nimi má výrazně větší kontrolu.
+        Nechcete platit předplatné Elonu Muskovi a jeho kamarádům? Dobrá zpráva, můžete jít cestou Open-source modelů, jejichž váhy/parametry jsou veřejně dostupné a které je možné stáhnout a provozovat mimo infrastrukturu výrobce. Na rozdíl od základních LLM nejsou tyto modely provozovány výhradně jako cloudová služba a uživatel nad nimi má výrazně větší kontrolu.
       </p>
 
       <p>Open-source modely lze spouštět:</p>
@@ -87,8 +81,6 @@
         Důležitou roli v open-source ekosystému hraje platforma Hugging Face, která slouží jako centrální repozitář modelů, nástrojů a komunitních úprav.
       </p>
 
-      <h3>Přehled vybraných open-source generativních modelů</h3>
-
       <div class="table-wrapper">
         <table class="data-table data-table--striped data-table--compact">
           <thead>
@@ -100,221 +92,250 @@
           </thead>
           <tbody>
             <tr>
-              <td><a href="https://ai.meta.com/llama/" target="_blank" rel="noopener noreferrer">Meta LLaMA</a></td>
+              <td><a href="https://github.com/facebookresearch/llama" target="_blank" rel="noopener noreferrer">LLaMA</a></td>
               <td>Meta</td>
-              <td>Základní open-source modely; lze stáhnout a provozovat lokálně nebo na serveru.</td>
+              <td>Silná open-weight rodina modelů; základ pro mnoho komunitních variant, vhodná pro lokální i serverový provoz.</td>
             </tr>
             <tr>
-              <td><a href="https://www.mistral.ai/" target="_blank" rel="noopener noreferrer">Mistral Models</a></td>
+              <td><a href="https://huggingface.co/mistralai" target="_blank" rel="noopener noreferrer">Mistral Large 3</a></td>
               <td>Mistral AI</td>
-              <td>Menší a střední open-source modely optimalizované pro efektivní běh.</td>
+              <td>Efektivní evropské modely; vysoký poměr výkon / nároky s některými variantami MoE pro lepší škálovatelnost.</td>
             </tr>
             <tr>
-              <td><a href="https://ai.google.dev/gemma" target="_blank" rel="noopener noreferrer">Gemma</a></td>
+              <td><a href="https://huggingface.co/google" target="_blank" rel="noopener noreferrer">Gemma</a></td>
               <td>Google</td>
-              <td>Open-source modely od Google, vhodné pro lokální i cloudové použití.</td>
+              <td>Otevřené modely od Google; dobrý kompromis mezi kvalitou a provozními nároky.</td>
             </tr>
             <tr>
-              <td><a href="https://mistral.ai/news/mixtral-of-experts/" target="_blank" rel="noopener noreferrer">Mixtral</a></td>
-              <td>Mistral AI</td>
-              <td>Mixture-of-Experts model kombinující výkon a efektivitu.</td>
+              <td><a href="https://huggingface.co/qwen" target="_blank" rel="noopener noreferrer">Qwen</a></td>
+              <td>Alibaba</td>
+              <td>Rychle se rozvíjející open-weight modely s dobrým výkonem v kódu i matematice.</td>
             </tr>
             <tr>
-              <td><a href="https://www.microsoft.com/en-us/research/project/phi/" target="_blank" rel="noopener noreferrer">Phi</a></td>
+              <td><a href="https://huggingface.co/deepseek-ai/" target="_blank" rel="noopener noreferrer">DeepSeek</a></td>
+              <td>DeepSeek AI</td>
+              <td>Modely zaměřené na reasoning, matematiku a programování; často vysoko v open-source benchmarkech.</td>
+            </tr>
+            <tr>
+              <td><a href="https://huggingface.co/microsoft" target="_blank" rel="noopener noreferrer">Phi-3</a></td>
               <td>Microsoft</td>
-              <td>Menší jazykové modely určené pro výzkum a efektivní běh.</td>
+              <td>Menší, efektivní modely vhodné pro edge zařízení, výzkum a embedded scénáře.</td>
             </tr>
             <tr>
-              <td><a href="https://falconllm.tii.ae/" target="_blank" rel="noopener noreferrer">Falcon</a></td>
-              <td>TII (UAE)</td>
-              <td>Open-source modely zaměřené na obecné jazykové úlohy.</td>
+              <td><a href="https://github.com/ibm-granite" target="_blank" rel="noopener noreferrer">Granite models</a></td>
+              <td>IBM</td>
+              <td>Open-source rodina generativních modelů s enterprise orientací; modely pro generování i analýzu kódu, vysvětlování a další úlohy.</td>
             </tr>
             <tr>
-              <td><a href="https://huggingface.co/" target="_blank" rel="noopener noreferrer">Hugging Face</a></td>
+              <td><a href="https://huggingface.co" target="_blank" rel="noopener noreferrer">Hugging Face Hub</a></td>
               <td>Komunita</td>
-              <td>Repozitář open-source modelů, nástrojů a datasetů.</td>
+              <td>Centrální repozitář tisíců open-source modelů, datasetů a nástrojů; výchozí místo pro vyhledávání, stahování a hodnocení modelů.</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h3>Praktická poznámka k provozu</h3>
-
-      <p>Při lokálním provozu open-source modelů platí, že:</p>
-      <ul>
-        <li>menší modely lze spustit i na běžném notebooku,</li>
-        <li>větší modely vyžadují výkonnější hardware (zejména GPU a paměť),</li>
-        <li>výkon a kvalita odpovědí jsou úzce svázány s velikostí modelu.</li>
-      </ul>
-
-      <p>
-        Open-source modely se často používají tam, kde je klíčová kontrola nad daty, možnost offline provozu nebo integrace do interních systémů. V praxi se také často kombinují s technikami jako <a href="#RAG">RAG</a>, aby se kompenzovaly omezenější znalosti modelu.
-      </p>
-
       <hr>
 
-      <h2>Nástroje pro práci s dokumenty, rešerše a znalostní práci</h2>
+      <h2>Nástroje pro práci s dokumenty a rešeršemi</h2>
 
       <p>
-        Tato skupina nástrojů je určena pro práci s textovými dokumenty, odbornými zdroji a znalostmi. Typicky slouží k vyhledávání informací, shrnování obsahu, kladení dotazů nad dokumenty nebo orientaci v rozsáhlých textech. Využívají moderní jazykové modely a často pracují přímo s dodanými zdroji, nikoli jen s obecnými znalostmi modelu.
+        Tato skupina nástrojů je určena pro práci s textovými dokumenty, odbornými zdroji a znalostmi. Typicky slouží k vyhledávání informací, shrnování obsahu, kladení dotazů nad dokumenty nebo orientaci v rozsáhlých textech. Využívají moderní jazykové modely, často postavené na základních generativních modelech (foundation models).
       </p>
 
-      <p>Tyto nástroje jsou vhodné zejména pro:</p>
-      <ul>
-        <li>práci s interními dokumenty (směrnice, metodiky, manuály),</li>
-        <li>rešerše odborné a vědecké literatury,</li>
-        <li>rychlou orientaci v rozsáhlých textech,</li>
-        <li>podporu rozhodování založenou na konkrétních zdrojích.</li>
-      </ul>
-
-      <h3>Přehled vybraných nástrojů</h3>
+      <p>
+        Zatímco samotné základní modely již umožňují pracovat s dodanými zdroji, při složitější práci „už samotný chat nestačí". Tyto nástroje se proto na dokumentovou práci přímo specializují a nabízejí strukturované workflow, citace zdrojů, práci s více dokumenty, historii dotazů a další funkce, které výrazně usnadňují práci a zvyšují efektivitu.
+      </p>
 
       <div class="table-wrapper">
         <table class="data-table data-table--striped data-table--compact">
           <thead>
             <tr>
               <th style="width: 25%;">Nástroj</th>
-              <th>Typ</th>
               <th>K čemu slouží</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><a href="https://notebooklm.google/" target="_blank" rel="noopener noreferrer">NotebookLM</a></td>
-              <td>Webová aplikace</td>
-              <td>Práce s vlastními dokumenty; dotazy nad texty, shrnutí, vysvětlení a orientace v obsahu.</td>
+              <td>Práce s vlastními dokumenty; dotazy nad texty, shrnutí, vysvětlování a orientace v obsahu.</td>
             </tr>
             <tr>
               <td><a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer">Perplexity AI</a></td>
-              <td>Webová aplikace</td>
-              <td>Vyhledávání odpovědí s odkazy na zdroje; kombinace vyhledávání a generativních odpovědí.</td>
+              <td>Vyhledávání odpovědí s citacemi zdrojů; kombinace vyhledávače a LLM.</td>
             </tr>
             <tr>
               <td><a href="https://elicit.com/" target="_blank" rel="noopener noreferrer">Elicit</a></td>
-              <td>Webová aplikace</td>
-              <td>Podpora literárních rešerší a strukturované shrnutí odborných zdrojů.</td>
+              <td>Podpora literárních rešerší; strukturované shrnutí vědeckých článků a odpovědi založené na studiích.</td>
             </tr>
             <tr>
               <td><a href="https://scite.ai/" target="_blank" rel="noopener noreferrer">Scite</a></td>
-              <td>Webová aplikace</td>
-              <td>Analýza vědeckých citací a jejich kontextu.</td>
+              <td>Analýza vědeckých citací a jejich kontextu (podporující / vyvracející tvrzení).</td>
             </tr>
             <tr>
               <td><a href="https://consensus.app/" target="_blank" rel="noopener noreferrer">Consensus</a></td>
-              <td>Webová aplikace</td>
-              <td>Vyhledávání odpovědí ve vědeckých studiích a přehledech.</td>
+              <td>Vyhledávání odpovědí přímo ve vědeckých studiích a systematických přehledech.</td>
             </tr>
             <tr>
               <td><a href="https://www.humata.ai/" target="_blank" rel="noopener noreferrer">Humata</a></td>
-              <td>Webová aplikace</td>
-              <td>Dotazování nad PDF dokumenty a technickými texty.</td>
+              <td>Dotazování nad PDF dokumenty, technickými a odbornými texty.</td>
             </tr>
             <tr>
               <td><a href="https://askyourpdf.com/" target="_blank" rel="noopener noreferrer">AskYourPDF</a></td>
-              <td>Webová aplikace</td>
-              <td>Práce s jednotlivými dokumenty (PDF) pomocí dotazů a shrnutí.</td>
+              <td>Práce s jednotlivými PDF dokumenty pomocí dotazů a automatických shrnutí.</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h3>Poznámka k použití</h3>
-
-      <p>
-        Tyto nástroje jsou obvykle jednodušší na použití než vlastní technická řešení a hodí se tam, kde není potřeba budovat vlastní infrastrukturu. Uživatel pracuje přímo s dokumenty nebo odkazy na zdroje a získává odpovědi založené na konkrétním obsahu.
-      </p>
-
-      <p>
-        V případě potřeby hlubší integrace nebo práce s větším objemem dat se tyto nástroje často nahrazují nebo doplňují vlastními řešeními postavenými na stejných principech.
-      </p>
-
       <hr>
 
-      <h2>Specializované nástroje</h2>
+      <h2>Specializované nástroje AI</h2>
 
       <p>
-        Tato skupina zahrnuje AI nástroje určené pro konkrétní typy úloh, jako je práce s textem, překlady, přepis řeči nebo generování obrazového a audiovizuálního obsahu. Na rozdíl od obecných generativních modelů jsou tyto nástroje optimalizovány pro jeden účel a obvykle se používají „hotově", bez potřeby složitého nastavování.
+        Nástroje zaměřené na specifické úkoly, od překladů a přepisu řeči po generování obrázků, videí či grafiky. V přehledu jsou zahrnuty běžně používané, v Evropě dostupné služby, od komerčních po open-source varianty.
       </p>
-
-      <h3>Přehled specializovaných nástrojů</h3>
 
       <div class="table-wrapper">
         <table class="data-table data-table--striped data-table--compact">
           <thead>
             <tr>
-              <th style="width: 20%;">Oblast</th>
-              <th style="width: 25%;">Nástroj</th>
-              <th>K čemu slouží</th>
+              <th style="width: 15%;">Oblast</th>
+              <th style="width: 18%;">Nástroj</th>
+              <th>Popis využití</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td rowspan="4"><b>Text a jazyk</b></td>
-              <td><a href="https://www.deepl.com/" target="_blank" rel="noopener noreferrer">DeepL</a></td>
-              <td>Kontextové překlady textů mezi jazyky.</td>
+              <td rowspan="4"><b>Překlady</b></td>
+              <td><a href="https://www.deepl.com/translator" target="_blank" rel="noopener noreferrer">DeepL</a></td>
+              <td>Velmi kvalitní AI překladač založený na neurálních sítích. Podporuje 30+ jazyků a vyniká zejména u evropských jazykových párů. Často používán pro překlady e-mailů, odborných textů i smluv, kde je důležitá stylistika a přesnost.</td>
             </tr>
             <tr>
-              <td><a href="https://quillbot.com/" target="_blank" rel="noopener noreferrer">QuillBot</a></td>
-              <td>Parafrázování a změna stylu textu.</td>
+              <td><a href="https://libretranslate.com" target="_blank" rel="noopener noreferrer">LibreTranslate</a></td>
+              <td>Open-source překladač provozovatelný offline na vlastním serveru. Využívá modely Argos, podporuje cca 25 jazyků (vč. češtiny). Nabízí základní kvalitu překladu bez nutnosti odesílat data externím službám a je vhodný pro citlivé texty a vývojáře.</td>
             </tr>
             <tr>
-              <td><a href="https://www.grammarly.com/" target="_blank" rel="noopener noreferrer">Grammarly</a></td>
-              <td>Kontrola gramatiky, stylistiky a tónu textu.</td>
+              <td><a href="https://translate.google.com" target="_blank" rel="noopener noreferrer">Google Translate</a></td>
+              <td>Nejrozšířenější online překladač s podporou 100+ jazyků. Využívá rozsáhlé neurální modely trénované na velkém množství dat. Silný v dostupnosti, integraci (prohlížeče, Android) a rychlém „hrubém" překladu.</td>
             </tr>
             <tr>
-              <td><a href="https://languagetool.org/" target="_blank" rel="noopener noreferrer">LanguageTool</a></td>
-              <td>Jazyková korektura a stylistická kontrola (open-source).</td>
+              <td><a href="https://www.microsoft.com/translator" target="_blank" rel="noopener noreferrer">Microsoft Translator</a></td>
+              <td>Cloudová překladová služba dostupná přes web, Office 365 i API. Podporuje překlady textů i dokumentů ve více než 70 jazycích. Často používaná v enterprise prostředí a firemních aplikacích.</td>
             </tr>
             <tr>
-              <td rowspan="3"><b>Přepis řeči / audio</b></td>
+              <td rowspan="3"><b>Přepis řeči</b></td>
               <td><a href="https://openai.com/research/whisper" target="_blank" rel="noopener noreferrer">Whisper</a></td>
-              <td>Přepis mluvené řeči do textu, vícejazyčná transkripce.</td>
+              <td>Open-source model pro rozpoznávání řeči, trénovaný na stovkách tisíc hodin multilingválních dat. Zvládá přepis řeči do textu, automatickou detekci jazyka i překlad řeči. Často slouží jako backend pro přepisovací aplikace.</td>
             </tr>
             <tr>
-              <td><a href="https://otter.ai/" target="_blank" rel="noopener noreferrer">Otter.ai</a></td>
-              <td>Automatické přepisy schůzek a rozhovorů.</td>
+              <td><a href="https://otter.ai" target="_blank" rel="noopener noreferrer">Otter.ai</a></td>
+              <td>Cloudová služba pro přepis schůzek a rozhovorů v reálném čase. Umí rozpoznávat mluvčí, vytvářet shrnutí a integruje se s nástroji jako Zoom nebo Google Meet. Zaměřená na produktivitu a meetingy.</td>
             </tr>
             <tr>
-              <td><a href="https://elevenlabs.io/" target="_blank" rel="noopener noreferrer">ElevenLabs</a></td>
-              <td>Generování realistického hlasu z textu (text-to-speech).</td>
+              <td><a href="https://elevenlabs.com" target="_blank" rel="noopener noreferrer">ElevenLabs</a></td>
+              <td>Platforma pro generování řeči (text-to-speech) s velmi přirozenou intonací. Umožňuje klonování hlasu a tvorbu hlasových stop pro videa, audioknihy nebo hry. Čeština je zatím podporována omezeně.</td>
             </tr>
             <tr>
-              <td rowspan="5"><b>Obraz a video</b></td>
+              <td rowspan="3"><b>Generování obrazu</b></td>
+              <td><a href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer">Midjourney</a></td>
+              <td>AI služba pro generování obrazů z textu s důrazem na vizuální estetiku. Ovládá se přes Discord a je oblíbená mezi designéry a ilustrátory pro koncept art, ilustrace a kreativní experimenty.</td>
+            </tr>
+            <tr>
               <td><a href="https://openai.com/dall-e" target="_blank" rel="noopener noreferrer">DALL·E</a></td>
-              <td>Generování obrázků z textových popisů.</td>
+              <td>Text-to-image model integrovaný do ChatGPT. Umožňuje generovat obrázky z přirozeného popisu bez složitého promptování. Vhodný pro ilustrace, marketing a rychlé vizuální prototypy.</td>
             </tr>
             <tr>
-              <td><a href="https://www.midjourney.com/" target="_blank" rel="noopener noreferrer">Midjourney</a></td>
-              <td>Umělecké a stylizované generování obrazů.</td>
+              <td><a href="https://stability.ai" target="_blank" rel="noopener noreferrer">Stable Diffusion</a></td>
+              <td>Open-source model pro generování obrázků, který lze provozovat lokálně. Existuje řada variant a komunitních rozšíření (inpainting, outpainting, stylové modely). Vhodný pro on-premise použití a experimentování.</td>
             </tr>
             <tr>
-              <td><a href="https://stability.ai/" target="_blank" rel="noopener noreferrer">Stable Diffusion</a></td>
-              <td>Open-source generování obrazů.</td>
+              <td rowspan="2"><b>Video a audio</b></td>
+              <td><a href="https://runwayml.com" target="_blank" rel="noopener noreferrer">Runway</a></td>
+              <td>Nástroj pro generování a editaci videí pomocí AI. Modely typu Gen-2 umožňují vytvářet krátké videoklipy z textu nebo obrázků. Používán v kreativní produkci, reklamě a experimentálním videu.</td>
             </tr>
             <tr>
-              <td><a href="https://runwayml.com/" target="_blank" rel="noopener noreferrer">Runway</a></td>
-              <td>Generování a editace videí pomocí AI.</td>
+              <td><a href="https://www.synthesia.io" target="_blank" rel="noopener noreferrer">Synthesia</a></td>
+              <td>Platforma pro tvorbu videí s virtuálními avatary. Uživatel zadá text a systém vygeneruje video, kde avatar text namluví. Vhodné pro e-learning, interní školení a marketing bez natáčení.</td>
             </tr>
             <tr>
-              <td><a href="https://www.synthesia.io/" target="_blank" rel="noopener noreferrer">Synthesia</a></td>
-              <td>Generování videí s virtuálními avatary a mluveným textem.</td>
+              <td rowspan="2"><b>Prezentace a grafika</b></td>
+              <td><a href="https://www.canva.com" target="_blank" rel="noopener noreferrer">Canva</a></td>
+              <td>Online grafický nástroj kombinující šablony s generativní AI. Funkce jako Magic Design a Magic Write umožňují rychlou tvorbu prezentací, letáků a příspěvků na sociální sítě.</td>
+            </tr>
+            <tr>
+              <td><a href="https://gamma.app" target="_blank" rel="noopener noreferrer">Gamma</a></td>
+              <td>AI nástroj pro tvorbu prezentací, dokumentů a jednoduchých webů z textového zadání. Automaticky navrhuje strukturu, obsah i design. Vhodný pro rychlé přehledy a reporty.</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h3>Poznámka k použití</h3>
+      <hr>
 
-      <p>Specializované nástroje jsou vhodné zejména tehdy, když:</p>
-      <ul>
-        <li>řešíme jednu konkrétní úlohu (překlad, přepis, korektura),</li>
-        <li>chceme rychlý a předvídatelný výsledek,</li>
-        <li>nechceme pracovat s obecnými prompty v chatu.</li>
-      </ul>
+      <h2>Nástroje AI pro programování a vývoj aplikací</h2>
 
       <p>
-        V praxi se často kombinují se základními generativními modely – např. model pomůže s návrhem obsahu a specializovaný nástroj s jeho finální úpravou.
+        Oblasti programování jsme se v tomto dokumentu dosud explicitně nevěnovali, a to přesto, že právě zde bude pravděpodobně největší počet uživatelů AI v ústavu. Vycházíme z předpokladu, že kdo programuje, ten se zpravidla už orientuje v používaných nástrojích a vývojovém ekosystému a aktivně sleduje jeho vývoj.
       </p>
+      <p>
+        Níže proto uvádíme tuto sekci spíše pro úplnost a orientační přehled, nikoli jako detailní návod či doporučení konkrétního workflow.
+      </p>
+      <p>
+        Pokud by se někdo chtěl s AI nástroji pro programování teprve seznámit nebo začít, doporučujeme obrátit se na svého lokálního „kódovacího guru“ na oddělení a ideálně mu koukat přes rameno při práci, v této oblasti je praktická zkušenost výrazně cennější než obecné návody.
+      </p>
+      <p>
+        Nicméně v případě většího zájmu nebo silné poptávky lze tuto sekci v budoucnu rozšířit a doplnit.
+      </p>
+
+      <div class="table-wrapper">
+        <table class="data-table data-table--striped data-table--compact">
+          <thead>
+            <tr>
+              <th style="width: 20%;">Nástroj</th>
+              <th>Integrace</th>
+              <th>Popis využití</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">GitHub Copilot</a></td>
+              <td>IDE plugin / CLI</td>
+              <td>Generativní AI asistent pro kódování, doplňování kódu a návrhy přímo v editoru (VS Code, JetBrains, Visual Studio atd.). Poskytuje kontextové návrhy kódu a dokumentace a zahrnuje i Copilot CLI pro použití v terminálu.</td>
+            </tr>
+            <tr>
+              <td><a href="https://cursor.so/" target="_blank" rel="noopener noreferrer">Cursor</a></td>
+              <td>AI-native editor</td>
+              <td>Samostatný AI-orientovaný editor/IDE s hlubší podporou multi-file refaktorace, konverzačního ovládání a navigace v celé codebase (nikoli jen autocomplete).</td>
+            </tr>
+            <tr>
+              <td><a href="https://geminicli.com/" target="_blank" rel="noopener noreferrer">Gemini CLI</a></td>
+              <td>CLI AI coding assistant</td>
+              <td>Terminálový AI agent od Google, který poskytuje přístup k modelu Gemini přímo v CLI – generování kódu, vysvětlování chyb, opravy, refaktorace a další úlohy pomocí přirozeného jazyka. Je open-source a zaměřený na vývojáře v terminálu.</td>
+            </tr>
+            <tr>
+              <td><a href="https://jules.google/" target="_blank" rel="noopener noreferrer">Google Jules</a></td>
+              <td>Autonomní AI agent</td>
+              <td>Asynchronní AI nástroj od Google, který může pracovat v pozadí na úkolech (např. opravování bugů, generování kódu, refaktorace, pull requesty) bez přímého zásahu uživatele. Podporuje integrace s GitHub Actions a má CLI rozhraní („Jules Tools“).</td>
+            </tr>
+            <tr>
+              <td><a href="https://claude.com/product/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a></td>
+              <td>CLI / chat-based assistant</td>
+              <td>AI kódovací asistent od Anthropic vhodný pro analýzu kódu, refaktoraci, review a generování kódu v CLI nebo přes chat rozhraní.</td>
+            </tr>
+            <tr>
+              <td><a href="https://github.com/paul-gauthier/aider" target="_blank" rel="noopener noreferrer">Aider</a></td>
+              <td>CLI AI assistant</td>
+              <td>Terminálový AI asistent pro programování: generuje a opravuje kód, poskytuje refaktoraci a odpovídá na dotazy nad codebase přímo z příkazové řádky (AI pomocník pro práce bez IDE).</td>
+            </tr>
+            <tr>
+              <td><a href="https://firebase.google.com/" target="_blank" rel="noopener noreferrer">Firebase</a></td>
+              <td>Backend platforma / cloud IDE</td>
+              <td>Platforma od Google pro vývoj webových a mobilních aplikací (BaaS). Poskytuje backendové služby (auth, databáze, hosting, cloud functions) a AI-asistovaný vývoj přes Firebase Studio a Gemini in Firebase.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <hr>
 

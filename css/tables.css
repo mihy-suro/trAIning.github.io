@@ -229,3 +229,26 @@
   outline: 2px solid var(--brand-yellow);
   outline-offset: -2px;
 }
+
+/* Row group highlighting for tables with rowspan categories */
+/* Level 1: Light highlight for entire section */
+.data-table tbody tr.row-group-highlight {
+  background: rgba(255, 193, 7, 0.08) !important;
+}
+
+/* Level 2: Stronger highlight for hovered row within section */
+.data-table tbody tr.row-group-highlight.row-active {
+  background: rgba(255, 193, 7, 0.20) !important;
+}
+
+.data-table tbody tr.row-group-highlight td[rowspan] {
+  background: rgba(255, 193, 7, 0.12);
+}
+
+/* Category cell styling */
+.data-table td[rowspan] {
+  vertical-align: middle;
+  background: rgba(3, 8, 21, 0.02);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}

@@ -9,9 +9,8 @@
       <h2>Promptování</h2>
 
       <!-- 1) ÚVOD -->
-      <h3>1) Proč záleží na promptování</h3>
       <p>
-        LLM není „telepat" – bez kontextu hádá, co po něm chcete. Představte si ho jako velmi schopného,
+        LLM není „telepat" a bez kontextu hádá, co po něm chcete. Představte si ho jako velmi schopného,
         ale juniorního asistenta: má obrovské znalosti, je rychlý a ochotný, ale neví nic o vašem
         konkrétním kontextu, preferencích ani o tom, co považujete za „dobrý výsledek". Když mu
         řeknete jen „udělej mi prezentaci", nepočítejte s žádoucím výsledkem. Když mu vysvětlíte
@@ -28,11 +27,6 @@
       </p>
 
       <!-- 3) TECHNIKY PROMPTOVÁNÍ -->
-      <h3>3) Techniky promptování</h3>
-
-      <p>
-        Klikněte na techniku pro zobrazení detailního popisu a ukázkového promptu.
-      </p>
 
       <!-- ZÁKLADNÍ TECHNIKY -->
       <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--clr-text-muted, #6b7280);">Základní techniky</h4>
@@ -106,7 +100,7 @@ Výstup:</pre>
         <div class="collapsible__panel" id="technique-role" role="region" aria-labelledby="technique-btn-role" hidden>
           <p><strong>Kdy použít:</strong> Když chcete konzistentní tón nebo úroveň odbornosti napříč odpověďmi.</p>
           <p>Role (systémový prompt) nastavuje chování modelu po celou dobu konverzace, takže nemusíte opakovat stejné instrukce v každém promptu a model si je „pamatuje".</p>
-          <p>K podobnému účelu lze dnes v ChatGPT využít i vlastní modely (Custom GPTs) s nahranými dokumenty. Takový model může mít jako referenční kontext například normy, metodiky, manuály, interní reporty nebo jiné odborné podklady – čímž z něj uděláte dlouhodobě kontextově kvalifikovaného specialistu.</p>
+          <p>K podobnému účelu lze dnes v ChatGPT využít i vlastní modely (Custom GPTs) s nahranými dokumenty. Takový model může mít jako referenční kontext například normy, metodiky, manuály, interní reporty nebo jiné odborné podklady a stane se tak dlouhodobě kontextově kvalifikovaným specialistou.</p>
           
           <p style="margin-top: 1rem;"><strong>Kde se to nastavuje:</strong></p>
           <ul class="list" style="margin-bottom: 1rem;">
@@ -272,22 +266,22 @@ a uveď, jaké informace chybí.</pre>
       <!-- Tip: Efektivní využití kontextového okna -->
       <h3>Efektivní využití kontextového okna</h3>
       <p>
-        Začal model v průběhu konverzace ztrácet nit a blábolit? Může jít o důsledek přetíženého kontextu – zkrátka jste do kontextového okna napsali tolik různých věcí, že jste milého chatbota zmátli a udělali z něj žvatlajícího idiota.
+        Začal model v průběhu konverzace ztrácet nit a blábolit? Může jít o důsledek přetíženého kontextu. Zkrátka jste do kontextového okna napsali tolik různých věcí, že jste milého chatbota zmátli a udělali z něj žvatlajícího idiota.
       </p>
       <p>
         Proto je efektivní brát konverzaci jako dočasný pracovní prostor. Pokud se práce protáhne nebo výrazně změní směr, je lepší chat vědomě ukončit a pokračovat v novém s krátkým, cíleným shrnutím.
       </p>
       <p>
-        Shrnutí neslouží jako archiv, ale jako destilace toho, co je pro další krok podstatné: cíl, aktuální stav a klíčová rozhodnutí. Detaily, varianty a slepé uličky je vhodné zahodit. V novém chatu pak přenášíš rozhodnutí, ne historii.
+        Shrnutí neslouží jako archiv, ale jako destilace toho, co je pro další krok podstatné: cíl, aktuální stav a klíčová rozhodnutí. Detaily, varianty a slepé uličky je vhodné zahodit. V novém chatu pak přenášíte rozhodnutí, ne historii.
       </p>
       <p>
-        💡 <strong>Tip:</strong> Jeden chat = jedno téma. Při změně cíle nebo fáze práce založ nový.
+        💡 <strong>Tip:</strong> Jeden chat = jedno téma. Při změně cíle nebo fáze práce založte nový.
       </p>
       <p>
         ⚠️ <strong>Častá chyba:</strong> Kopírování dlouhé historie místo krátkého shrnutí.
       </p>
       <p>
-        Pamatuj, že do kontextového okna se započítávají i odpovědi samotného LLM, nejen tvoje vstupy.
+        Pamatujte, že do kontextového okna se započítávají i odpovědi samotného LLM, nejen vaše vstupy.
       </p>
 
       <!-- Info bublina: Příklad promptu pro přenesení práce -->
@@ -323,7 +317,7 @@ Výstup:
         Nesnažte se vyřešit celý úkol jedním promptem. LLM je váš nový kolega v kanceláři a tak k němu přistupujte. Stejně jako u člověka je příjemnější (a efektivnější) postupovat po krocích: nejdřív návrh, potom kritika a teprve nakonec finální verze. Každý krok má jiný cíl a dává modelu jasnější zadání.
       </p>
       <p>
-        Užitečný postup je nechat model „sám sobě oponovat". Po vytvoření návrhu si vyžádejte kritické zhodnocení (slabá místa, rizika, nejasnosti). U důležitějších výstupů se vyplatí použít druhý model nebo nový chat jako nezávislého recenzenta – podobně jako když si necháte práci projít jiným kolegou.
+        Užitečný postup je nechat model „sám sobě oponovat". Po vytvoření návrhu si vyžádejte kritické zhodnocení (slabá místa, rizika, nejasnosti). U důležitějších výstupů se vyplatí použít druhý model nebo nový chat jako nezávislého recenzenta, podobně jako když si necháte práci projít jiným kolegou.
       </p>
       <p>
         💡 <strong>Tip:</strong> Představte si, že zadáváte práci juniornímu asistentovi: návrh → připomínky → oprava → finální verze.
@@ -366,7 +360,7 @@ Výstup:
         Při zadávání úkolů je obvykle vhodnější říkat, co má model udělat, než čemu se má vyhnout. Negativní instrukce („nedělej", „nezmiňuj", „vyhni se") bývají nejednoznačné a model si je může vyložit příliš široce nebo přehnaně opatrně, což často vede k neúplnému nebo zvláštně omezenému výstupu.
       </p>
       <p>
-        Pozitivně formulované instrukce dávají modelu jasný cíl: jak má výstup vypadat, jaký má mít rozsah nebo na co se má zaměřit. Tam, kde je potřeba stanovit jasné hranice, dává smysl pozitivní zadání doplnit o konkrétní a úzký zákaz – hlavní směr by ale měl vždy určovat popis požadovaného výsledku.
+        Pozitivně formulované instrukce dávají modelu jasný cíl: jak má výstup vypadat, jaký má mít rozsah nebo na co se má zaměřit. Tam, kde je potřeba stanovit jasné hranice, dává smysl pozitivní zadání doplnit o konkrétní a úzký zákaz. Hlavní směr by ale měl vždy určovat popis požadovaného výsledku.
       </p>
 
       <!-- Info bublina: Nesprávný prompt -->
